@@ -208,7 +208,7 @@ const Index = () => {
 
           <div className="relative h-[600px]">
             {/* Network Nodes */}
-            {[...Array(6)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute"
@@ -216,8 +216,8 @@ const Index = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.2 }}
                 style={{
-                  left: `${15 + (i % 3) * 35}%`,
-                  top: `${20 + Math.floor(i / 3) * 40}%`,
+                  left: `${15 + (i % 4) * 25}%`,
+                  top: `${20 + Math.floor(i / 4) * 40}%`,
                 }}
               >
                 <motion.div
@@ -228,31 +228,48 @@ const Index = () => {
                   }}
                   transition={{ type: "spring", stiffness: 50, damping: 20 }}
                 >
-                  <div className="w-32 h-32 rounded-full bg-dark flex items-center justify-center relative">
+                  <div className="w-24 h-24 rounded-full bg-dark flex items-center justify-center relative group">
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 animate-pulse" />
-                    <GitBranch className="w-12 h-12 text-primary relative z-10" />
-                  </div>
-                  
-                  {/* Connecting Lines */}
-                  {i < 5 && (
+                    <GitBranch className="w-10 h-10 text-primary relative z-10" />
+                    
+                    {/* Connecting Lines - More Complex Pattern */}
+                    {i < 7 && (
+                      <>
+                        <motion.div
+                          className="absolute top-1/2 left-full h-px bg-gradient-to-r from-primary/50 to-secondary/50 origin-left"
+                          style={{ 
+                            width: "100px",
+                            transform: `rotate(${(i % 2) * 45}deg)`
+                          }}
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          transition={{ delay: i * 0.2 + 0.2 }}
+                        />
+                        {i % 2 === 0 && (
+                          <motion.div
+                            className="absolute top-1/2 left-full h-px bg-gradient-to-r from-primary/30 to-secondary/30 origin-left"
+                            style={{ 
+                              width: "150px",
+                              transform: `rotate(${-30}deg)`
+                            }}
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            transition={{ delay: i * 0.2 + 0.3 }}
+                          />
+                        )}
+                      </>
+                    )}
+                    
+                    {/* Value Indicators with Random Growth */}
                     <motion.div
-                      className="absolute top-1/2 left-full h-px bg-gradient-to-r from-primary/50 to-secondary/50 origin-left"
-                      style={{ width: "100px" }}
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      transition={{ delay: i * 0.2 + 0.2 }}
-                    />
-                  )}
-                  
-                  {/* Value Indicators */}
-                  <motion.div
-                    className="absolute -top-2 -right-2 bg-primary text-dark text-sm font-bold px-2 py-1 rounded-full"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: i * 0.2 + 0.4 }}
-                  >
-                    +{(i + 1) * 2.5}%
-                  </motion.div>
+                      className="absolute -top-2 -right-2 bg-primary text-dark text-sm font-bold px-2 py-1 rounded-full"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ delay: i * 0.2 + 0.4 }}
+                    >
+                      +{(Math.random() * 5 + 2).toFixed(1)}%
+                    </motion.div>
+                  </div>
                 </motion.div>
               </motion.div>
             ))}
@@ -267,6 +284,25 @@ const Index = () => {
               <div className="w-40 h-40 rounded-full bg-dark flex items-center justify-center relative">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary opacity-20 animate-pulse" />
                 <Hexagon className="w-16 h-16 text-primary relative z-10" />
+                
+                {/* Radiating Lines */}
+                {[...Array(8)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 1.5 + i * 0.1 }}
+                  >
+                    <div
+                      className="absolute top-1/2 left-1/2 h-px w-32 bg-gradient-to-r from-primary/50 to-transparent"
+                      style={{
+                        transform: `rotate(${i * 45}deg) translateX(20px)`,
+                        transformOrigin: "0 50%",
+                      }}
+                    />
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
