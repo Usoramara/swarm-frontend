@@ -1,7 +1,7 @@
-import HeroSection from "@/components/sections/HeroSection";
-import FeaturesSection from "@/components/sections/FeaturesSection";
-import AboutSection from "@/components/sections/AboutSection";
-import JoinSection from "@/components/sections/JoinSection";
+import HeroSection from "@/components/home/HeroSection";
+import FeaturesSection from "@/components/home/FeaturesSection";
+import AboutSection from "@/components/home/AboutSection";
+import NetworkSection from "@/components/home/NetworkSection";
 
 const Index = () => {
   return (
@@ -9,7 +9,7 @@ const Index = () => {
       <HeroSection />
       <FeaturesSection />
       <AboutSection />
-      <JoinSection />
+      <NetworkSection />
     </div>
   );
 };
