@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Hexagon, Brain, Bot, Shield, Cpu, Network, Coins } from "lucide-react";
+import JoinSwarmSection from "@/components/sections/JoinSwarmSection";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -186,6 +187,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Join Swarm Section */}
+      <JoinSwarmSection />
     </div>
   );
 };
