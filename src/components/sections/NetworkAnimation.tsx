@@ -51,6 +51,9 @@ export const NetworkAnimation = () => {
         {/* Inner ring nodes and connections */}
         {innerNodes.map((node, idx) => {
           const pos = getNodePosition(node.angle, node.radius);
+          const nextNode = innerNodes[(idx + 1) % innerNodes.length];
+          const nextPos = getNodePosition(nextNode.angle, nextNode.radius);
+          
           return (
             <motion.div
               key={node.id}
@@ -78,6 +81,21 @@ export const NetworkAnimation = () => {
                 whileInView={{ scaleX: 1, opacity: 1 }}
                 transition={{ delay: node.delay + 0.2, duration: 0.8 }}
               />
+
+              {/* Connection to next node */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-1 bg-gradient-to-r from-secondary/30 to-secondary/30"
+                style={{
+                  width: Math.sqrt(
+                    Math.pow(nextPos.x - pos.x, 2) + Math.pow(nextPos.y - pos.y, 2)
+                  ),
+                  transformOrigin: "left center",
+                  rotate: `${Math.atan2(nextPos.y - pos.y, nextPos.x - pos.x) * (180 / Math.PI)}deg`,
+                }}
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: node.delay + 0.3, duration: 0.8 }}
+              />
             </motion.div>
           );
         })}
@@ -85,6 +103,9 @@ export const NetworkAnimation = () => {
         {/* Middle ring nodes and connections */}
         {middleNodes.map((node, idx) => {
           const pos = getNodePosition(node.angle, node.radius);
+          const nextNode = middleNodes[(idx + 1) % middleNodes.length];
+          const nextPos = getNodePosition(nextNode.angle, nextNode.radius);
+          
           return (
             <motion.div
               key={node.id}
@@ -99,6 +120,21 @@ export const NetworkAnimation = () => {
               >
                 <Hexagon className="w-14 h-14 text-primary/90" />
               </motion.div>
+
+              {/* Connection to next node */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-1 bg-gradient-to-r from-primary/30 to-primary/30"
+                style={{
+                  width: Math.sqrt(
+                    Math.pow(nextPos.x - pos.x, 2) + Math.pow(nextPos.y - pos.y, 2)
+                  ),
+                  transformOrigin: "left center",
+                  rotate: `${Math.atan2(nextPos.y - pos.y, nextPos.x - pos.x) * (180 / Math.PI)}deg`,
+                }}
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: node.delay + 0.3, duration: 0.8 }}
+              />
             </motion.div>
           );
         })}
@@ -106,6 +142,9 @@ export const NetworkAnimation = () => {
         {/* Outer ring nodes and connections */}
         {outerNodes.map((node, idx) => {
           const pos = getNodePosition(node.angle, node.radius);
+          const nextNode = outerNodes[(idx + 1) % outerNodes.length];
+          const nextPos = getNodePosition(nextNode.angle, nextNode.radius);
+          
           return (
             <motion.div
               key={node.id}
@@ -120,6 +159,21 @@ export const NetworkAnimation = () => {
               >
                 <Hexagon className="w-12 h-12 text-primary/80" />
               </motion.div>
+
+              {/* Connection to next node */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-1 bg-gradient-to-r from-primary/20 to-primary/20"
+                style={{
+                  width: Math.sqrt(
+                    Math.pow(nextPos.x - pos.x, 2) + Math.pow(nextPos.y - pos.y, 2)
+                  ),
+                  transformOrigin: "left center",
+                  rotate: `${Math.atan2(nextPos.y - pos.y, nextPos.x - pos.x) * (180 / Math.PI)}deg`,
+                }}
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: node.delay + 0.3, duration: 0.8 }}
+              />
             </motion.div>
           );
         })}
