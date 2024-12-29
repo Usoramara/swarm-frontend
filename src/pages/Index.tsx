@@ -1,9 +1,87 @@
 import { motion } from "framer-motion";
-import { Hexagon, Brain, Bot, Shield, ChevronDown } from "lucide-react";
+import { Hexagon, Brain, Bot, Shield, ChevronDown, Vote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { ethers } from "ethers";
 
 const Index = () => {
+  const { toast } = useToast();
+  const [wallet, setWallet] = useState<string | null>(null);
+  const [proposals, setProposals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Connect wallet function
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setWallet(accounts[0]);
+        toast({
+          title: "Wallet Connected",
+          description: `Connected to ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`,
+        });
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Failed to connect wallet",
+          variant: "destructive",
+        });
+      }
+    } else {
+      toast({
+        title: "Error",
+        description: "Please install MetaMask",
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Fetch proposals
+  const fetchProposals = async () => {
+    try {
+      setIsLoading(true);
+      const { data: proposalsData, error } = await supabase
+        .from('proposals')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setProposals(proposalsData);
+    } catch (error) {
+      console.error('Error fetching proposals:', error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch proposals",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Subscribe to real-time updates
+  useEffect(() => {
+    fetchProposals();
+
+    const channel = supabase
+      .channel('proposals-changes')
+      .on('postgres_changes', 
+        { event: '*', schema: 'public', table: 'proposals' },
+        (payload) => {
+          console.log('Change received!', payload);
+          fetchProposals();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-dark">
       {/* Header */}
@@ -86,6 +164,58 @@ const Index = () => {
         >
           <ChevronDown className="text-primary w-8 h-8" />
         </motion.div>
+      </section>
+
+      {/* Governance Section */}
+      <section id="governance" className="py-20 bg-dark-lighter">
+        <div className="container mx-auto px-4">
+          <h2 className="text-h2 font-display text-center mb-12 gradient-text">
+            Decentralized Governance
+          </h2>
+
+          <div className="flex justify-center mb-8">
+            <Button
+              size="lg"
+              onClick={connectWallet}
+              className="text-lg"
+            >
+              {wallet ? `Connected: ${wallet.slice(0, 6)}...${wallet.slice(-4)}` : "Connect Wallet"}
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {proposals.map((proposal) => (
+              <Card key={proposal.id} className="glass-card hover-glow">
+                <CardContent className="p-6">
+                  <h3 className="text-h4 font-display mb-2">{proposal.title}</h3>
+                  <p className="text-gray-400 mb-4">{proposal.description}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-primary">
+                      Status: {proposal.status}
+                    </span>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        if (!wallet) {
+                          toast({
+                            title: "Error",
+                            description: "Please connect your wallet first",
+                            variant: "destructive",
+                          });
+                          return;
+                        }
+                        // Implement voting logic here
+                      }}
+                    >
+                      <Vote className="w-4 h-4 mr-2" />
+                      Vote
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Stats Section */}
