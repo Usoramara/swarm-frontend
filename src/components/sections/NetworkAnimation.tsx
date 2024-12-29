@@ -23,14 +23,27 @@ export const NetworkAnimation = () => {
       </div>
 
       <div className="relative h-[600px] max-w-5xl mx-auto">
-        {/* Central hexagon */}
+        {/* Central hexagon with continuous pulse and rotation */}
         <motion.div
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          initial={{ scale: 0, rotate: -30 }}
-          whileInView={{ scale: 1, rotate: 0 }}
-          transition={{ duration: 0.8, type: "spring" }}
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 360],
+          }}
+          transition={{
+            scale: {
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+            rotate: {
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            },
+          }}
         >
-          <Hexagon className="w-20 h-20 text-primary animate-pulse" />
+          <Hexagon className="w-20 h-20 text-primary" />
         </motion.div>
 
         {/* Orbiting hexagons */}
@@ -49,17 +62,35 @@ export const NetworkAnimation = () => {
                 scale: 0,
                 opacity: 0,
               }}
-              whileInView={{
+              animate={{
                 x: x,
                 y: y,
-                scale: 1,
-                opacity: 1,
+                scale: [0.8, 1, 0.8],
+                opacity: [0.6, 1, 0.6],
               }}
               transition={{
-                delay: node.delay,
-                duration: 1,
-                type: "spring",
-                stiffness: 60,
+                x: {
+                  duration: 30,
+                  repeat: Infinity,
+                  ease: "linear",
+                  repeatType: "reverse",
+                },
+                y: {
+                  duration: 25,
+                  repeat: Infinity,
+                  ease: "linear",
+                  repeatType: "reverse",
+                },
+                scale: {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                opacity: {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
               }}
             >
               <motion.div
@@ -75,7 +106,7 @@ export const NetworkAnimation = () => {
                 <Hexagon className="w-12 h-12 text-secondary" />
               </motion.div>
 
-              {/* Connection line */}
+              {/* Animated connection line */}
               <motion.div
                 className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary/50 to-primary/50"
                 style={{
@@ -83,39 +114,46 @@ export const NetworkAnimation = () => {
                   transformOrigin: "left center",
                   rotate: `${node.angle}deg`,
                 }}
-                initial={{ scaleX: 0, opacity: 0 }}
-                whileInView={{ scaleX: 1, opacity: 1 }}
+                animate={{ 
+                  scaleX: [0.8, 1, 0.8],
+                  opacity: [0.3, 0.8, 0.3],
+                }}
                 transition={{
-                  delay: node.delay + 0.2,
-                  duration: 0.8,
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
                 }}
               />
 
-              {/* Floating particles */}
+              {/* Floating particles with random movement */}
               <motion.div
                 className="absolute w-2 h-2 rounded-full bg-primary"
                 animate={{
+                  x: [0, 30, -30, 0],
+                  y: [0, -30, 30, 0],
                   scale: [1, 1.5, 1],
                   opacity: [0.5, 1, 0.5],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 8,
                   repeat: Infinity,
                   repeatType: "reverse",
+                  ease: "easeInOut",
                 }}
               />
             </motion.div>
           );
         })}
 
-        {/* Animated background glow */}
+        {/* Evolving background glow */}
         <motion.div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-secondary/5 to-transparent rounded-full"
+          className="absolute inset-0 bg-gradient-radial from-primary/10 via-secondary/5 to-transparent rounded-full blur-xl"
           animate={{
             scale: [1, 1.2, 1],
+            opacity: [0.3, 0.7, 0.3],
           }}
           transition={{
-            duration: 4,
+            duration: 8,
             repeat: Infinity,
             repeatType: "reverse",
             ease: "easeInOut",
