@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Hexagon, Brain, Bot, Shield, Cpu, Network, Coins } from "lucide-react";
-import JoinSwarmSection from "@/components/sections/JoinSwarmSection";
+import { 
+  Hexagon, 
+  Brain, 
+  Bot, 
+  Shield,
+  Cpu,
+  Network,
+  Coins
+} from "lucide-react";
+import NetworkSection from "@/components/sections/NetworkSection";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -76,6 +84,9 @@ const Index = () => {
           ))}
         </div>
       </section>
+
+      {/* Network Section */}
+      <NetworkSection />
 
       {/* Features Section */}
       <section className="py-20 bg-dark-lighter">
@@ -187,9 +198,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Join Swarm Section */}
-      <JoinSwarmSection />
     </div>
   );
 };
