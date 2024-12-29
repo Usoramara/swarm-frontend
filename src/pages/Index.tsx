@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Hexagon, Brain, Bot, Shield } from "lucide-react";
+import { Hexagon, Brain, Bot, Shield, Cpu, Network, Coins } from "lucide-react";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -30,21 +30,21 @@ const Index = () => {
             <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">
               SWARM
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Autonomous AI agents working together to maximize value for token holders
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+              A self-regulating, on-chain AI entity that autonomously generates returns for token holders through intelligent agent deployment
             </p>
             
             <motion.div 
-              className="flex justify-center gap-4"
+              className="flex flex-col sm:flex-row justify-center gap-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
               <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
-                Launch App
+                Connect Wallet
               </button>
               <button className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
-                Learn More
+                View Agents
               </button>
             </motion.div>
           </motion.div>
@@ -80,25 +80,25 @@ const Index = () => {
       <section className="py-20 bg-dark-lighter">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center gradient-text">
-            Powered by Collective Intelligence
+            Autonomous Value Generation
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                icon: <Brain className="w-12 h-12 mb-4 text-primary" />,
-                title: "Autonomous AI",
-                description: "Self-governing agents that operate independently",
+                icon: <Cpu className="w-12 h-12 mb-4 text-primary" />,
+                title: "AI Agents",
+                description: "Self-governing AI agents that autonomously execute value-generating strategies",
               },
               {
-                icon: <Bot className="w-12 h-12 mb-4 text-primary" />,
-                title: "Swarm Logic",
-                description: "Coordinated decision-making through collective intelligence",
+                icon: <Network className="w-12 h-12 mb-4 text-primary" />,
+                title: "On-Chain Governance",
+                description: "Decentralized decision-making through token holder voting",
               },
               {
-                icon: <Shield className="w-12 h-12 mb-4 text-primary" />,
-                title: "Secure Execution",
-                description: "Blockchain-powered security and transparency",
+                icon: <Coins className="w-12 h-12 mb-4 text-primary" />,
+                title: "Token Benefits",
+                description: "Direct returns and benefits distributed to SWARM token holders",
               },
             ].map((feature, index) => (
               <motion.div
