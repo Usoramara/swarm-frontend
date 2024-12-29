@@ -50,6 +50,9 @@ export default {
       animation: {
         "swarm-float": "swarm-float 3s ease-in-out infinite",
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

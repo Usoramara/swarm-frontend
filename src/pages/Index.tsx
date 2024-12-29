@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { NetworkAnimation } from "@/components/sections/NetworkAnimation";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -20,6 +21,7 @@ const Index = () => {
       <HeroSection mousePosition={mousePosition} />
       <FeaturesSection />
       <AboutSection />
+      <NetworkAnimation />
     </main>
   );
 };
