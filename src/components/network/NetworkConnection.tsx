@@ -11,7 +11,7 @@ export const NetworkConnection = ({
   start, 
   end, 
   delay, 
-  opacity = "30" 
+  opacity = "40"
 }: NetworkConnectionProps) => {
   const dx = end.x - start.x;
   const dy = end.y - start.y;
@@ -20,7 +20,7 @@ export const NetworkConnection = ({
 
   return (
     <motion.div
-      className={`absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary/${opacity} to-primary/${opacity}`}
+      className={`absolute left-1/2 top-1/2 h-[1px] bg-gradient-to-r from-secondary/${opacity} to-primary/${opacity}`}
       style={{
         width: distance,
         transformOrigin: "left center",

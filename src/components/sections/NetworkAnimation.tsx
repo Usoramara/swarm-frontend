@@ -12,11 +12,18 @@ export const NetworkAnimation = () => {
     radius: 180,
   }));
 
-  const outerNodes = Array.from({ length: 12 }, (_, i) => ({
-    id: `outer-${i}`,
-    angle: (i * 360) / 12,
+  const middleNodes = Array.from({ length: 6 }, (_, i) => ({
+    id: `middle-${i}`,
+    angle: ((i * 360) / 6) + 30, // Offset by 30 degrees
     delay: i * 0.3,
-    radius: 320,
+    radius: 280,
+  }));
+
+  const outerNodes = Array.from({ length: 6 }, (_, i) => ({
+    id: `outer-${i}`,
+    angle: (i * 360) / 6,
+    delay: i * 0.3,
+    radius: 380,
   }));
 
   // Helper function to calculate node positions
@@ -24,6 +31,14 @@ export const NetworkAnimation = () => {
     x: Math.cos((angle * Math.PI) / 180) * radius,
     y: Math.sin((angle * Math.PI) / 180) * radius,
   });
+
+  // Combine all nodes for easier iteration
+  const allNodes = [
+    { id: 'center', angle: 0, delay: 0, radius: 0 },
+    ...innerNodes,
+    ...middleNodes,
+    ...outerNodes
+  ];
 
   return (
     <section className="py-32 bg-dark-lighter relative overflow-hidden">
@@ -39,6 +54,27 @@ export const NetworkAnimation = () => {
       </div>
 
       <div className="relative h-[800px] max-w-7xl mx-auto">
+        {/* Render all connections first (so they appear behind nodes) */}
+        {allNodes.map((node, idx) => {
+          const startPos = getNodePosition(node.angle, node.radius);
+          
+          return allNodes.map((targetNode, targetIdx) => {
+            if (idx < targetIdx) { // Avoid duplicate connections
+              const endPos = getNodePosition(targetNode.angle, targetNode.radius);
+              return (
+                <NetworkConnection
+                  key={`${node.id}-to-${targetNode.id}`}
+                  start={startPos}
+                  end={endPos}
+                  delay={node.delay + 0.2}
+                  opacity="40" // Increased opacity for better visibility
+                />
+              );
+            }
+            return null;
+          });
+        })}
+
         {/* Central hexagon */}
         <NetworkNode
           position={{ x: 0, y: 0 }}
@@ -63,6 +99,22 @@ export const NetworkAnimation = () => {
           );
         })}
 
+        {/* Middle ring nodes */}
+        {middleNodes.map((node) => {
+          const pos = getNodePosition(node.angle, node.radius);
+          return (
+            <NetworkNode
+              key={node.id}
+              position={pos}
+              size={14}
+              color="text-primary"
+              delay={node.delay}
+              rotate={true}
+              duration={25}
+            />
+          );
+        })}
+
         {/* Outer ring nodes */}
         {outerNodes.map((node) => {
           const pos = getNodePosition(node.angle, node.radius);
@@ -71,34 +123,12 @@ export const NetworkAnimation = () => {
               key={node.id}
               position={pos}
               size={12}
-              color="text-primary/80"
+              color="text-secondary/80"
               delay={node.delay}
               rotate={true}
-              duration={25}
+              duration={30}
             />
           );
-        })}
-
-        {/* Connections between all nodes */}
-        {[...innerNodes, ...outerNodes].map((node, idx) => {
-          const startPos = getNodePosition(node.angle, node.radius);
-          
-          return [...innerNodes, ...outerNodes].map((targetNode, targetIdx) => {
-            if (idx < targetIdx) {
-              const endPos = getNodePosition(targetNode.angle, targetNode.radius);
-              
-              return (
-                <NetworkConnection
-                  key={`${node.id}-to-${targetNode.id}`}
-                  start={startPos}
-                  end={endPos}
-                  delay={node.delay + 0.2}
-                  opacity="20"
-                />
-              );
-            }
-            return null;
-          });
         })}
 
         {/* Animated background glow */}
