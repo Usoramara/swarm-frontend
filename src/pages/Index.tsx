@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Hexagon, Brain, Bot, Shield, Cpu, Network, Coins } from "lucide-react";
+import { Hexagon, Brain, Bot, Shield, Cpu, Network, Coins, GitBranch } from "lucide-react";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -183,6 +183,112 @@ const Index = () => {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Network Value Creation Section */}
+      <section className="py-24 bg-dark-lighter relative overflow-hidden">
+        <div className="absolute inset-0 swarm-grid opacity-30" />
+        
+        <div className="container mx-auto px-4 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              A Never Ending Network of <span className="gradient-text">Value Creation</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Our autonomous AI agents work together in a self-expanding network, continuously generating and distributing value to token holders.
+            </p>
+          </motion.div>
+
+          <div className="relative h-[600px]">
+            {/* Network Nodes */}
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.2 }}
+                style={{
+                  left: `${15 + (i % 3) * 35}%`,
+                  top: `${20 + Math.floor(i / 3) * 40}%`,
+                }}
+              >
+                <motion.div
+                  className="relative"
+                  animate={{
+                    x: mousePosition.x / (20 + i * 5),
+                    y: mousePosition.y / (20 + i * 5),
+                  }}
+                  transition={{ type: "spring", stiffness: 50, damping: 20 }}
+                >
+                  <div className="w-32 h-32 rounded-full bg-dark flex items-center justify-center relative">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 animate-pulse" />
+                    <GitBranch className="w-12 h-12 text-primary relative z-10" />
+                  </div>
+                  
+                  {/* Connecting Lines */}
+                  {i < 5 && (
+                    <motion.div
+                      className="absolute top-1/2 left-full h-px bg-gradient-to-r from-primary/50 to-secondary/50 origin-left"
+                      style={{ width: "100px" }}
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ delay: i * 0.2 + 0.2 }}
+                    />
+                  )}
+                  
+                  {/* Value Indicators */}
+                  <motion.div
+                    className="absolute -top-2 -right-2 bg-primary text-dark text-sm font-bold px-2 py-1 rounded-full"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ delay: i * 0.2 + 0.4 }}
+                  >
+                    +{(i + 1) * 2.5}%
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            ))}
+
+            {/* Central Hub */}
+            <motion.div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.2 }}
+            >
+              <div className="w-40 h-40 rounded-full bg-dark flex items-center justify-center relative">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary opacity-20 animate-pulse" />
+                <Hexagon className="w-16 h-16 text-primary relative z-10" />
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Value Metrics */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+            {[
+              { label: "Total Value Generated", value: "$1.2M" },
+              { label: "Active AI Agents", value: "247" },
+              { label: "Token Holder Returns", value: "+15.8%" },
+            ].map((metric, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+                className="bg-dark p-6 rounded-xl border border-primary/20"
+              >
+                <h3 className="text-gray-400 text-sm mb-2">{metric.label}</h3>
+                <p className="text-3xl font-bold gradient-text">{metric.value}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
