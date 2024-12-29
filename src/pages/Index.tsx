@@ -50,7 +50,7 @@ const Index = () => {
               transition={{ delay: 0.5 }}
             >
               <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
-                Launch App
+                Buy SWARM
               </button>
               <button className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Learn More
