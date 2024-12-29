@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Hexagon } from "lucide-react";
 
 export const NetworkAnimation = () => {
-  // Generate more nodes in multiple circular patterns
+  // Generate nodes in multiple circular patterns
   const innerNodes = Array.from({ length: 6 }, (_, i) => ({
     id: `inner-${i}`,
     angle: (i * 360) / 6,
@@ -16,6 +16,12 @@ export const NetworkAnimation = () => {
     delay: i * 0.3,
     radius: 320,
   }));
+
+  // Helper function to calculate node positions
+  const getNodePosition = (angle: number, radius: number) => ({
+    x: Math.cos((angle * Math.PI) / 180) * radius,
+    y: Math.sin((angle * Math.PI) / 180) * radius,
+  });
 
   return (
     <section className="py-32 bg-dark-lighter relative overflow-hidden">
@@ -41,48 +47,25 @@ export const NetworkAnimation = () => {
           <Hexagon className="w-24 h-24 text-primary animate-pulse" />
         </motion.div>
 
-        {/* Inner ring of hexagons */}
-        {innerNodes.map((node) => {
-          const x = Math.cos((node.angle * Math.PI) / 180) * node.radius;
-          const y = Math.sin((node.angle * Math.PI) / 180) * node.radius;
-
+        {/* Inner ring connections */}
+        {innerNodes.map((node, idx) => {
+          const pos = getNodePosition(node.angle, node.radius);
           return (
             <motion.div
               key={node.id}
               className="absolute left-1/2 top-1/2"
-              initial={{ 
-                x: 0, 
-                y: 0, 
-                scale: 0,
-                opacity: 0,
-              }}
-              whileInView={{
-                x: x,
-                y: y,
-                scale: 1,
-                opacity: 1,
-              }}
-              transition={{
-                delay: node.delay,
-                duration: 1,
-                type: "spring",
-                stiffness: 60,
-              }}
+              initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+              whileInView={{ x: pos.x, y: pos.y, scale: 1, opacity: 1 }}
+              transition={{ delay: node.delay, duration: 1, type: "spring", stiffness: 60 }}
             >
               <motion.div
-                animate={{
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
                 <Hexagon className="w-16 h-16 text-secondary" />
               </motion.div>
 
-              {/* Connection line */}
+              {/* Connections to center */}
               <motion.div
                 className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary/50 to-primary/50"
                 style={{
@@ -92,71 +75,112 @@ export const NetworkAnimation = () => {
                 }}
                 initial={{ scaleX: 0, opacity: 0 }}
                 whileInView={{ scaleX: 1, opacity: 1 }}
-                transition={{
-                  delay: node.delay + 0.2,
-                  duration: 0.8,
-                }}
+                transition={{ delay: node.delay + 0.2, duration: 0.8 }}
               />
+
+              {/* Connections to adjacent inner nodes */}
+              {innerNodes.map((targetNode, targetIdx) => {
+                if (idx < targetIdx) {
+                  const targetPos = getNodePosition(targetNode.angle, targetNode.radius);
+                  const dx = targetPos.x - pos.x;
+                  const dy = targetPos.y - pos.y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+                  return (
+                    <motion.div
+                      key={`${node.id}-to-${targetNode.id}`}
+                      className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary/30 to-primary/30"
+                      style={{
+                        width: distance,
+                        transformOrigin: "left center",
+                        rotate: `${angle}deg`,
+                      }}
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      whileInView={{ scaleX: 1, opacity: 1 }}
+                      transition={{ delay: node.delay + 0.4, duration: 0.8 }}
+                    />
+                  );
+                }
+                return null;
+              })}
             </motion.div>
           );
         })}
 
-        {/* Outer ring of hexagons */}
-        {outerNodes.map((node) => {
-          const x = Math.cos((node.angle * Math.PI) / 180) * node.radius;
-          const y = Math.sin((node.angle * Math.PI) / 180) * node.radius;
-
+        {/* Outer ring */}
+        {outerNodes.map((node, idx) => {
+          const pos = getNodePosition(node.angle, node.radius);
           return (
             <motion.div
               key={node.id}
               className="absolute left-1/2 top-1/2"
-              initial={{ 
-                x: 0, 
-                y: 0, 
-                scale: 0,
-                opacity: 0,
-              }}
-              whileInView={{
-                x: x,
-                y: y,
-                scale: 1,
-                opacity: 1,
-              }}
-              transition={{
-                delay: node.delay,
-                duration: 1,
-                type: "spring",
-                stiffness: 50,
-              }}
+              initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+              whileInView={{ x: pos.x, y: pos.y, scale: 1, opacity: 1 }}
+              transition={{ delay: node.delay, duration: 1, type: "spring", stiffness: 50 }}
             >
               <motion.div
-                animate={{
-                  rotate: [0, -360],
-                }}
-                transition={{
-                  duration: 25,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+                animate={{ rotate: [0, -360] }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
               >
                 <Hexagon className="w-12 h-12 text-primary/80" />
               </motion.div>
 
-              {/* Connection line to nearest inner node */}
-              <motion.div
-                className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-primary/30 to-secondary/30"
-                style={{
-                  width: 140,
-                  transformOrigin: "left center",
-                  rotate: `${node.angle}deg`,
-                }}
-                initial={{ scaleX: 0, opacity: 0 }}
-                whileInView={{ scaleX: 1, opacity: 1 }}
-                transition={{
-                  delay: node.delay + 0.2,
-                  duration: 0.8,
-                }}
-              />
+              {/* Connections to nearest inner nodes */}
+              {innerNodes.map((innerNode, innerIdx) => {
+                const innerPos = getNodePosition(innerNode.angle, innerNode.radius);
+                const dx = innerPos.x - pos.x;
+                const dy = innerPos.y - pos.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+                // Only connect to the two nearest inner nodes
+                const angleDiff = Math.abs(node.angle - innerNode.angle) % 360;
+                if (angleDiff <= 60 || angleDiff >= 300) {
+                  return (
+                    <motion.div
+                      key={`${node.id}-to-${innerNode.id}`}
+                      className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-primary/30 to-secondary/30"
+                      style={{
+                        width: distance,
+                        transformOrigin: "left center",
+                        rotate: `${angle}deg`,
+                      }}
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      whileInView={{ scaleX: 1, opacity: 1 }}
+                      transition={{ delay: node.delay + 0.4, duration: 0.8 }}
+                    />
+                  );
+                }
+                return null;
+              })}
+
+              {/* Connections to adjacent outer nodes */}
+              {outerNodes.map((targetNode, targetIdx) => {
+                if (idx < targetIdx && Math.abs(idx - targetIdx) <= 1) {
+                  const targetPos = getNodePosition(targetNode.angle, targetNode.radius);
+                  const dx = targetPos.x - pos.x;
+                  const dy = targetPos.y - pos.y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+                  return (
+                    <motion.div
+                      key={`${node.id}-to-${targetNode.id}`}
+                      className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-primary/20 to-secondary/20"
+                      style={{
+                        width: distance,
+                        transformOrigin: "left center",
+                        rotate: `${angle}deg`,
+                      }}
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      whileInView={{ scaleX: 1, opacity: 1 }}
+                      transition={{ delay: node.delay + 0.6, duration: 0.8 }}
+                    />
+                  );
+                }
+                return null;
+              })}
             </motion.div>
           );
         })}
