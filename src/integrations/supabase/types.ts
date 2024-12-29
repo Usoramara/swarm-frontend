@@ -9,7 +9,98 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          id: string
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          id: string
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          id?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      proposals: {
+        Row: {
+          created_at: string
+          creator_id: string | null
+          description: string
+          end_date: string
+          id: string
+          proposal_id: number
+          start_date: string
+          status: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          creator_id?: string | null
+          description: string
+          end_date: string
+          id?: string
+          proposal_id: number
+          start_date: string
+          status: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string | null
+          description?: string
+          end_date?: string
+          id?: string
+          proposal_id?: number
+          start_date?: string
+          status?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "proposals_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      token_stats: {
+        Row: {
+          circulating_supply: number
+          holder_count: number
+          id: string
+          last_updated: string
+          price_usd: number | null
+          total_supply: number
+        }
+        Insert: {
+          circulating_supply: number
+          holder_count: number
+          id?: string
+          last_updated?: string
+          price_usd?: number | null
+          total_supply: number
+        }
+        Update: {
+          circulating_supply?: number
+          holder_count?: number
+          id?: string
+          last_updated?: string
+          price_usd?: number | null
+          total_supply?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
