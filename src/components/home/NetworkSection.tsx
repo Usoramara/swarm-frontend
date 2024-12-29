@@ -20,7 +20,7 @@ const NetworkSection = () => {
         </motion.h2>
 
         <div className="relative h-[600px] rounded-3xl bg-dark overflow-hidden">
-          <div className="absolute inset-0 swarm-grid opacity-20" />
+          <div className="absolute inset-0 swarm-grid opacity-30" />
 
           <div className="absolute inset-0">
             {nodes.map((node, index) => (
@@ -47,10 +47,10 @@ const NetworkSection = () => {
                 }}
               >
                 <motion.div
-                  className="w-4 h-4 rounded-full bg-primary"
+                  className="w-6 h-6 rounded-full bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/50"
                   animate={{
                     scale: [1, 1.2, 1],
-                    opacity: [0.5, 1, 0.5],
+                    opacity: [0.7, 1, 0.7],
                   }}
                   transition={{
                     duration: 3 + Math.random() * 2,
@@ -69,9 +69,9 @@ const NetworkSection = () => {
                   .map((connectedNode) => (
                     <motion.div
                       key={`${node.id}-${connectedNode.id}`}
-                      className="absolute top-2 left-2 w-1 bg-gradient-to-r from-primary/30 to-secondary/30"
+                      className="absolute top-3 left-3 bg-gradient-to-r from-primary/50 to-secondary/50"
                       style={{
-                        height: "2px",
+                        height: "3px",
                         transformOrigin: "left center",
                         transform: `rotate(${Math.atan2(
                           connectedNode.y - node.y,
@@ -83,7 +83,7 @@ const NetworkSection = () => {
                         )}%`,
                       }}
                       animate={{
-                        opacity: [0.2, 0.5, 0.2],
+                        opacity: [0.4, 0.8, 0.4],
                       }}
                       transition={{
                         duration: 3,
@@ -96,15 +96,15 @@ const NetworkSection = () => {
             ))}
           </div>
 
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-lighter to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-dark-lighter to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-dark-lighter via-transparent to-transparent opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-dark-lighter via-transparent to-transparent opacity-90" />
         </div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-xl text-center text-gray-400 mt-8 max-w-2xl mx-auto"
+          className="text-xl text-center text-gray-300 mt-8 max-w-2xl mx-auto"
         >
           Watch as our network continuously evolves, adapts, and grows stronger
           through decentralized collaboration and collective intelligence.
