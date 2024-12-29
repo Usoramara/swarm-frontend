@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { NetworkAnimation } from "@/components/sections/NetworkAnimation";
+import { CallToActionSection } from "@/components/sections/CallToActionSection";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -22,6 +23,7 @@ const Index = () => {
       <FeaturesSection />
       <AboutSection />
       <NetworkAnimation />
+      <CallToActionSection />
     </main>
   );
 };
