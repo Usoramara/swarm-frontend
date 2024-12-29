@@ -1,33 +1,20 @@
 import { motion } from "framer-motion";
-import { NetworkNode } from "../network/NetworkNode";
-import { NetworkConnection } from "../network/NetworkConnection";
-import { NetworkBackground } from "../network/NetworkBackground";
-import { Brain, Network, Cpu } from "lucide-react";
+import { Hexagon } from "lucide-react";
 
 export const NetworkAnimation = () => {
-  // Generate nodes in multiple circular patterns for a more complex network
+  // Generate nodes in multiple circular patterns
   const innerNodes = Array.from({ length: 6 }, (_, i) => ({
     id: `inner-${i}`,
     angle: (i * 360) / 6,
-    delay: i * 0.3,
-    radius: 160,
-    icon: i % 2 === 0 ? Brain : i % 3 === 0 ? Network : Cpu
-  }));
-
-  const middleNodes = Array.from({ length: 8 }, (_, i) => ({
-    id: `middle-${i}`,
-    angle: (i * 360) / 8,
-    delay: i * 0.2,
-    radius: 280,
-    icon: i % 2 === 0 ? Network : i % 3 === 0 ? Brain : Cpu
+    delay: i * 0.4,
+    radius: 180,
   }));
 
   const outerNodes = Array.from({ length: 12 }, (_, i) => ({
     id: `outer-${i}`,
     angle: (i * 360) / 12,
-    delay: i * 0.15,
-    radius: 400,
-    icon: i % 2 === 0 ? Cpu : i % 3 === 0 ? Network : Brain
+    delay: i * 0.3,
+    radius: 320,
   }));
 
   // Helper function to calculate node positions
@@ -45,104 +32,172 @@ export const NetworkAnimation = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Ever-Growing Network
+          Growing Network
         </motion.h2>
-        <motion.p
-          className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Watch as our autonomous AI agents form an interconnected neural network,
-          collaborating and evolving together to create unprecedented value.
-        </motion.p>
       </div>
 
       <div className="relative h-[800px] max-w-7xl mx-auto">
-        {/* Render connections first so they appear behind nodes */}
-        {[...innerNodes, ...middleNodes, ...outerNodes].map((node, idx) => {
-          const startPos = getNodePosition(node.angle, node.radius);
-          
-          return [...innerNodes, ...middleNodes, ...outerNodes].map((targetNode, targetIdx) => {
-            if (idx < targetIdx) {
-              const endPos = getNodePosition(targetNode.angle, targetNode.radius);
-              
-              return (
-                <NetworkConnection
-                  key={`${node.id}-to-${targetNode.id}`}
-                  start={startPos}
-                  end={endPos}
-                  delay={node.delay + 0.2}
-                  opacity="60"
-                />
-              );
-            }
-            return null;
-          });
-        })}
+        {/* Central hexagon */}
+        <motion.div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          initial={{ scale: 0, rotate: -30 }}
+          whileInView={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8, type: "spring" }}
+        >
+          <Hexagon className="w-24 h-24 text-primary animate-pulse" />
+        </motion.div>
 
-        {/* Central node */}
-        <NetworkNode
-          position={{ x: 0, y: 0 }}
-          size={24}
-          color="text-primary"
-          delay={0}
-          pulse={true}
-          icon={Brain}
-        />
-
-        {/* Inner ring nodes */}
-        {innerNodes.map((node) => {
+        {/* Inner ring connections */}
+        {innerNodes.map((node, idx) => {
           const pos = getNodePosition(node.angle, node.radius);
           return (
-            <NetworkNode
+            <motion.div
               key={node.id}
-              position={pos}
-              size={16}
-              color="text-secondary"
-              delay={node.delay}
-              rotate={true}
-              icon={node.icon}
-            />
+              className="absolute left-1/2 top-1/2"
+              initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+              whileInView={{ x: pos.x, y: pos.y, scale: 1, opacity: 1 }}
+              transition={{ delay: node.delay, duration: 1, type: "spring", stiffness: 60 }}
+            >
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                <Hexagon className="w-16 h-16 text-secondary" />
+              </motion.div>
+
+              {/* Connections to center */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary/50 to-primary/50"
+                style={{
+                  width: node.radius,
+                  transformOrigin: "left center",
+                  rotate: `${node.angle}deg`,
+                }}
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: node.delay + 0.2, duration: 0.8 }}
+              />
+
+              {/* Connections to adjacent inner nodes */}
+              {innerNodes.map((targetNode, targetIdx) => {
+                if (idx < targetIdx) {
+                  const targetPos = getNodePosition(targetNode.angle, targetNode.radius);
+                  const dx = targetPos.x - pos.x;
+                  const dy = targetPos.y - pos.y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+                  return (
+                    <motion.div
+                      key={`${node.id}-to-${targetNode.id}`}
+                      className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary/30 to-primary/30"
+                      style={{
+                        width: distance,
+                        transformOrigin: "left center",
+                        rotate: `${angle}deg`,
+                      }}
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      whileInView={{ scaleX: 1, opacity: 1 }}
+                      transition={{ delay: node.delay + 0.4, duration: 0.8 }}
+                    />
+                  );
+                }
+                return null;
+              })}
+            </motion.div>
           );
         })}
 
-        {/* Middle ring nodes */}
-        {middleNodes.map((node) => {
+        {/* Outer ring */}
+        {outerNodes.map((node, idx) => {
           const pos = getNodePosition(node.angle, node.radius);
           return (
-            <NetworkNode
+            <motion.div
               key={node.id}
-              position={pos}
-              size={14}
-              color="text-primary/90"
-              delay={node.delay}
-              rotate={true}
-              duration={22}
-              icon={node.icon}
-            />
-          );
-        })}
+              className="absolute left-1/2 top-1/2"
+              initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+              whileInView={{ x: pos.x, y: pos.y, scale: 1, opacity: 1 }}
+              transition={{ delay: node.delay, duration: 1, type: "spring", stiffness: 50 }}
+            >
+              <motion.div
+                animate={{ rotate: [0, -360] }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              >
+                <Hexagon className="w-12 h-12 text-primary/80" />
+              </motion.div>
 
-        {/* Outer ring nodes */}
-        {outerNodes.map((node) => {
-          const pos = getNodePosition(node.angle, node.radius);
-          return (
-            <NetworkNode
-              key={node.id}
-              position={pos}
-              size={12}
-              color="text-secondary/80"
-              delay={node.delay}
-              rotate={true}
-              duration={25}
-              icon={node.icon}
-            />
+              {/* Connections to nearest inner nodes */}
+              {innerNodes.map((innerNode, innerIdx) => {
+                const innerPos = getNodePosition(innerNode.angle, innerNode.radius);
+                const dx = innerPos.x - pos.x;
+                const dy = innerPos.y - pos.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+                // Only connect to the two nearest inner nodes
+                const angleDiff = Math.abs(node.angle - innerNode.angle) % 360;
+                if (angleDiff <= 60 || angleDiff >= 300) {
+                  return (
+                    <motion.div
+                      key={`${node.id}-to-${innerNode.id}`}
+                      className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-primary/30 to-secondary/30"
+                      style={{
+                        width: distance,
+                        transformOrigin: "left center",
+                        rotate: `${angle}deg`,
+                      }}
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      whileInView={{ scaleX: 1, opacity: 1 }}
+                      transition={{ delay: node.delay + 0.4, duration: 0.8 }}
+                    />
+                  );
+                }
+                return null;
+              })}
+
+              {/* Connections to adjacent outer nodes */}
+              {outerNodes.map((targetNode, targetIdx) => {
+                if (idx < targetIdx && Math.abs(idx - targetIdx) <= 1) {
+                  const targetPos = getNodePosition(targetNode.angle, targetNode.radius);
+                  const dx = targetPos.x - pos.x;
+                  const dy = targetPos.y - pos.y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+                  return (
+                    <motion.div
+                      key={`${node.id}-to-${targetNode.id}`}
+                      className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-primary/20 to-secondary/20"
+                      style={{
+                        width: distance,
+                        transformOrigin: "left center",
+                        rotate: `${angle}deg`,
+                      }}
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      whileInView={{ scaleX: 1, opacity: 1 }}
+                      transition={{ delay: node.delay + 0.6, duration: 0.8 }}
+                    />
+                  );
+                }
+                return null;
+              })}
+            </motion.div>
           );
         })}
 
         {/* Animated background glow */}
-        <NetworkBackground />
+        <motion.div
+          className="absolute inset-0 bg-gradient-radial from-primary/10 via-secondary/5 to-transparent rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+        />
       </div>
     </section>
   );
