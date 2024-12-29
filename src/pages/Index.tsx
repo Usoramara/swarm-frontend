@@ -9,7 +9,14 @@ import {
   Network,
   Coins
 } from "lucide-react";
-import NetworkSection from "@/components/sections/NetworkSection";
+</lov-replace>
+
+<lov-search>
+      {/* Network Section */}
+      <NetworkSection />
+
+</lov-search>
+<lov-replace>
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
