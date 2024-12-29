@@ -27,7 +27,7 @@ const NetworkSection = () => {
             transition={{
               duration: 10,
               repeat: Infinity,
-              ease: "linear",
+              repeatType: "reverse",
             }}
           />
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -93,7 +93,7 @@ const NetworkSection = () => {
                   transition={{
                     duration: 20,
                     repeat: Infinity,
-                    ease: "linear",
+                    repeatType: "reverse",
                   }}
                 >
                   <item.Icon className="w-12 h-12 mb-6 text-primary" />
@@ -127,7 +127,7 @@ const NetworkSection = () => {
                   transition={{
                     duration: 4 + index,
                     repeat: Infinity,
-                    ease: "linear",
+                    repeatType: "reverse",
                     delay: index * 0.5,
                   }}
                 />
