@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
-import { Network } from "lucide-react";
+import { Hexagon } from "lucide-react";
 
 export const NetworkAnimation = () => {
-  // Generate random positions for network nodes
-  const nodes = Array.from({ length: 8 }, (_, i) => ({
+  // Generate nodes in a circular pattern
+  const nodes = Array.from({ length: 6 }, (_, i) => ({
     id: i,
-    x: `${20 + Math.random() * 60}%`,
-    y: `${20 + Math.random() * 60}%`,
-    delay: i * 0.3,
+    angle: (i * 360) / 6, // Distribute evenly in a circle
+    delay: i * 0.4,
   }));
 
   return (
@@ -24,60 +23,104 @@ export const NetworkAnimation = () => {
       </div>
 
       <div className="relative h-[600px] max-w-5xl mx-auto">
-        {/* Central node */}
+        {/* Central hexagon */}
         <motion.div
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
+          initial={{ scale: 0, rotate: -30 }}
+          whileInView={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8, type: "spring" }}
         >
-          <Network className="w-16 h-16 text-primary" />
+          <Hexagon className="w-20 h-20 text-primary animate-pulse" />
         </motion.div>
 
-        {/* Animated nodes */}
-        {nodes.map((node) => (
-          <motion.div
-            key={node.id}
-            className="absolute w-4 h-4 rounded-full bg-secondary"
-            style={{ left: node.x, top: node.y }}
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ 
-              delay: node.delay,
-              duration: 0.5,
-            }}
-          >
-            {/* Pulse effect */}
-            <motion.div
-              className="absolute inset-0 rounded-full bg-secondary"
-              initial={{ scale: 1, opacity: 0.5 }}
-              animate={{ scale: 2, opacity: 0 }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-            />
-            
-            {/* Connection line to center */}
-            <motion.div
-              className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary to-primary origin-left"
-              style={{
-                width: "100px",
-                transformStyle: "preserve-3d",
-              }}
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              transition={{ 
-                delay: node.delay + 0.2,
-                duration: 0.8,
-              }}
-            />
-          </motion.div>
-        ))}
+        {/* Orbiting hexagons */}
+        {nodes.map((node) => {
+          const radius = 180; // Distance from center
+          const x = Math.cos((node.angle * Math.PI) / 180) * radius;
+          const y = Math.sin((node.angle * Math.PI) / 180) * radius;
 
-        {/* Background glow effect */}
-        <div className="absolute inset-0 bg-gradient-radial from-primary/5 to-transparent rounded-full filter blur-xl" />
+          return (
+            <motion.div
+              key={node.id}
+              className="absolute left-1/2 top-1/2"
+              initial={{ 
+                x: 0, 
+                y: 0, 
+                scale: 0,
+                opacity: 0,
+              }}
+              whileInView={{
+                x: x,
+                y: y,
+                scale: 1,
+                opacity: 1,
+              }}
+              transition={{
+                delay: node.delay,
+                duration: 1,
+                type: "spring",
+                stiffness: 60,
+              }}
+            >
+              <motion.div
+                animate={{
+                  rotate: [0, 360],
+                }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              >
+                <Hexagon className="w-12 h-12 text-secondary" />
+              </motion.div>
+
+              {/* Connection line */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary/50 to-primary/50"
+                style={{
+                  width: radius,
+                  transformOrigin: "left center",
+                  rotate: `${node.angle}deg`,
+                }}
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                transition={{
+                  delay: node.delay + 0.2,
+                  duration: 0.8,
+                }}
+              />
+
+              {/* Floating particles */}
+              <motion.div
+                className="absolute w-2 h-2 rounded-full bg-primary"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                }}
+              />
+            </motion.div>
+          );
+        })}
+
+        {/* Animated background glow */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-radial from-primary/10 via-secondary/5 to-transparent rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+        />
       </div>
     </section>
   );
