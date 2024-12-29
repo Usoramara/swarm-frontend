@@ -1,5 +1,5 @@
-import { Hexagon } from "lucide-react";
 import { motion } from "framer-motion";
+import { LucideIcon } from "lucide-react";
 
 interface NetworkNodeProps {
   position: { x: number; y: number };
@@ -9,6 +9,7 @@ interface NetworkNodeProps {
   rotate?: boolean;
   duration?: number;
   pulse?: boolean;
+  icon?: LucideIcon;
 }
 
 export const NetworkNode = ({ 
@@ -18,7 +19,8 @@ export const NetworkNode = ({
   delay, 
   rotate = false,
   duration = 20,
-  pulse = false 
+  pulse = false,
+  icon: Icon
 }: NetworkNodeProps) => {
   return (
     <motion.div
@@ -38,16 +40,22 @@ export const NetworkNode = ({
       }}
     >
       <motion.div
-        animate={rotate ? { rotate: [0, 360] } : {}}
+        animate={rotate ? { 
+          rotate: [0, 360],
+          scale: [1, 1.1, 1]
+        } : {}}
         transition={{ 
           duration, 
           repeat: Infinity, 
           ease: "linear" 
         }}
+        className={`relative ${pulse ? 'animate-pulse' : ''}`}
       >
-        <Hexagon 
-          className={`w-${size} h-${size} ${color} ${pulse ? 'animate-pulse' : ''}`} 
-        />
+        {Icon ? (
+          <Icon className={`w-${size} h-${size} ${color}`} />
+        ) : (
+          <div className={`w-${size} h-${size} rounded-full ${color} bg-current`} />
+        )}
       </motion.div>
     </motion.div>
   );
