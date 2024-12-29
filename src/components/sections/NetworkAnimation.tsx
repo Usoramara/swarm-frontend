@@ -31,23 +31,28 @@ export const NetworkAnimation = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const particles: { x: number; y: number; dx: number; dy: number; size: number }[] = [];
+    const particles: { x: number; y: number; dx: number; dy: number; size: number; color: string }[] = [];
     const particleCount = 50;
     const connectionDistance = 150;
+    
+    // Theme colors
+    const colors = ['#ACFF00', '#00F0FF'];
 
     // Initialize particles
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * dimensions.width,
         y: Math.random() * dimensions.height,
-        dx: (Math.random() - 0.5) * 2,
-        dy: (Math.random() - 0.5) * 2,
+        dx: (Math.random() - 0.5) * 1.5,
+        dy: (Math.random() - 0.5) * 1.5,
         size: Math.random() * 3 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)]
       });
     }
 
     const animate = () => {
-      ctx.clearRect(0, 0, dimensions.width, dimensions.height);
+      ctx.fillStyle = 'rgba(10, 10, 11, 0.1)';
+      ctx.fillRect(0, 0, dimensions.width, dimensions.height);
 
       // Update and draw particles
       particles.forEach((particle, i) => {
@@ -59,12 +64,16 @@ export const NetworkAnimation = () => {
         if (particle.x < 0 || particle.x > dimensions.width) particle.dx *= -1;
         if (particle.y < 0 || particle.y > dimensions.height) particle.dy *= -1;
 
-        // Draw particle
+        // Draw particle with glow effect
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = "#00F0FF";
+        ctx.fillStyle = particle.color;
         ctx.fill();
-
+        
+        // Add glow effect
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = particle.color;
+        
         // Draw connections
         particles.forEach((particle2, j) => {
           if (i !== j) {
@@ -74,7 +83,15 @@ export const NetworkAnimation = () => {
 
             if (distance < connectionDistance) {
               ctx.beginPath();
-              ctx.strokeStyle = `rgba(0, 240, 255, ${1 - distance / connectionDistance})`;
+              const gradient = ctx.createLinearGradient(
+                particle.x, 
+                particle.y, 
+                particle2.x, 
+                particle2.y
+              );
+              gradient.addColorStop(0, `${particle.color}33`);
+              gradient.addColorStop(1, `${particle2.color}33`);
+              ctx.strokeStyle = gradient;
               ctx.lineWidth = 1;
               ctx.moveTo(particle.x, particle.y);
               ctx.lineTo(particle2.x, particle2.y);
