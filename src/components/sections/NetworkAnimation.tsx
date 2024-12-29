@@ -8,10 +8,11 @@ export const NetworkAnimation = () => {
   useEffect(() => {
     const handleResize = () => {
       if (canvasRef.current) {
-        setDimensions({
-          width: canvasRef.current.clientWidth,
-          height: canvasRef.current.clientHeight,
-        });
+        const canvas = canvasRef.current;
+        const { width, height } = canvas.getBoundingClientRect();
+        canvas.width = width;
+        canvas.height = height;
+        setDimensions({ width, height });
       }
     };
 
@@ -30,25 +31,59 @@ export const NetworkAnimation = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const particles: { x: number; y: number; size: number }[] = [];
-    const particleCount = 100;
+    const particles: { x: number; y: number; dx: number; dy: number; size: number }[] = [];
+    const particleCount = 50;
+    const connectionDistance = 150;
 
+    // Initialize particles
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * dimensions.width,
         y: Math.random() * dimensions.height,
-        size: Math.random() * 5 + 1,
+        dx: (Math.random() - 0.5) * 2,
+        dy: (Math.random() - 0.5) * 2,
+        size: Math.random() * 3 + 1,
       });
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, dimensions.width, dimensions.height);
-      ctx.fillStyle = "#00F0FF";
-      particles.forEach((particle) => {
+
+      // Update and draw particles
+      particles.forEach((particle, i) => {
+        // Update position
+        particle.x += particle.dx;
+        particle.y += particle.dy;
+
+        // Bounce off walls
+        if (particle.x < 0 || particle.x > dimensions.width) particle.dx *= -1;
+        if (particle.y < 0 || particle.y > dimensions.height) particle.dy *= -1;
+
+        // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = "#00F0FF";
         ctx.fill();
+
+        // Draw connections
+        particles.forEach((particle2, j) => {
+          if (i !== j) {
+            const dx = particle.x - particle2.x;
+            const dy = particle.y - particle2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < connectionDistance) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(0, 240, 255, ${1 - distance / connectionDistance})`;
+              ctx.lineWidth = 1;
+              ctx.moveTo(particle.x, particle.y);
+              ctx.lineTo(particle2.x, particle2.y);
+              ctx.stroke();
+            }
+          }
+        });
       });
+
       requestAnimationFrame(animate);
     };
 
