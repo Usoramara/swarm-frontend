@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Hexagon } from "lucide-react";
+import { 
+  Hexagon, 
+  Brain, 
+  Bot, 
+  Shield,
+  Cpu,
+  Network,
+  Coins
+} from "lucide-react";
 import NetworkSection from "@/components/sections/NetworkSection";
 
 const Index = () => {
