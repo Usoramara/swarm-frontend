@@ -1,8 +1,14 @@
 import { motion } from "framer-motion";
-import { Brain, Bot, Shield, Cpu, Network, Coins } from "lucide-react";
+import { Brain, Bot, Shield } from "lucide-react";
+
+interface Feature {
+  icon: React.FC<{ className?: string }>;
+  title: string;
+  description: string;
+}
 
 const NetworkSection = () => {
-  const features = [
+  const features: Feature[] = [
     {
       icon: Brain,
       title: "Adaptive Intelligence",
