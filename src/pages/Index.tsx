@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Hexagon, Brain, Bot, Shield } from "lucide-react";
+import StyleGuide from "../components/StyleGuide";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -27,10 +28,10 @@ const Index = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">
+            <h1 className="text-display-large font-display mb-6 gradient-text">
               SWARM
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-body-large text-gray-300 mb-8 max-w-2xl mx-auto">
               Autonomous AI agents working together to maximize value for token holders
             </p>
             
@@ -76,46 +77,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-dark-lighter">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center gradient-text">
-            Powered by Collective Intelligence
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Brain className="w-12 h-12 mb-4 text-primary" />,
-                title: "Autonomous AI",
-                description: "Self-governing agents that operate independently",
-              },
-              {
-                icon: <Bot className="w-12 h-12 mb-4 text-primary" />,
-                title: "Swarm Logic",
-                description: "Coordinated decision-making through collective intelligence",
-              },
-              {
-                icon: <Shield className="w-12 h-12 mb-4 text-primary" />,
-                title: "Secure Execution",
-                description: "Blockchain-powered security and transparency",
-              },
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-dark p-8 rounded-2xl hover:border-primary/50 border-2 border-transparent transition-colors"
-              >
-                {feature.icon}
-                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Style Guide */}
+      <StyleGuide />
     </div>
   );
 };

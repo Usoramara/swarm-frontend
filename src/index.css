@@ -15,13 +15,23 @@
   }
 }
 
-.gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
-}
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
 
-.swarm-grid {
-  background-size: 50px 50px;
-  background-image: 
-    linear-gradient(to right, rgba(172, 255, 0, 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(172, 255, 0, 0.1) 1px, transparent 1px);
+  .swarm-grid {
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, rgba(172, 255, 0, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(172, 255, 0, 0.1) 1px, transparent 1px);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-lg bg-dark-lighter/50 border border-primary/10;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/20;
+  }
 }
