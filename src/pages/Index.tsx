@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Hexagon, Brain, Bot, Shield, Cpu, Network, Coins, ArrowRight, Users, Sparkles, Lock } from "lucide-react";
+import { Hexagon, Brain, Bot, Shield, Cpu, Network, Coins, GitBranch } from "lucide-react";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -16,6 +16,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-dark">
+      {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden swarm-grid">
         <div className="absolute inset-0 bg-gradient-to-b from-dark-lighter/50 to-dark" />
         
@@ -74,7 +75,8 @@ const Index = () => {
           ))}
         </div>
       </section>
-      
+
+      {/* Features Section */}
       <section className="py-20 bg-dark-lighter">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center gradient-text">
@@ -114,7 +116,8 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
+
+      {/* About SWARM Section */}
       <section className="py-24 bg-dark relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-12">
@@ -184,71 +187,144 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Join the SWARM Section */}
+      {/* Network Value Creation Section */}
       <section className="py-24 bg-dark-lighter relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+        <div className="absolute inset-0 swarm-grid opacity-30" />
+        
+        <div className="container mx-auto px-4 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Join the <span className="gradient-text">SWARM</span>
+              A Never Ending Network of <span className="gradient-text">Value Creation</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Become part of a revolutionary ecosystem where AI and blockchain converge to create unprecedented value.
+              Our autonomous AI agents work together in a self-expanding network, continuously generating and distributing value to token holders.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="relative h-[600px]">
+            {/* Network Nodes */}
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.2 }}
+                style={{
+                  left: `${15 + (i % 4) * 25}%`,
+                  top: `${20 + Math.floor(i / 4) * 40}%`,
+                }}
+              >
+                <motion.div
+                  className="relative"
+                  animate={{
+                    x: mousePosition.x / (20 + i * 5),
+                    y: mousePosition.y / (20 + i * 5),
+                  }}
+                  transition={{ type: "spring", stiffness: 50, damping: 20 }}
+                >
+                  <div className="w-24 h-24 rounded-full bg-dark flex items-center justify-center relative group">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 animate-pulse" />
+                    <GitBranch className="w-10 h-10 text-primary relative z-10" />
+                    
+                    {/* Connecting Lines - More Complex Pattern */}
+                    {i < 7 && (
+                      <>
+                        <motion.div
+                          className="absolute top-1/2 left-full h-px bg-gradient-to-r from-primary/50 to-secondary/50 origin-left"
+                          style={{ 
+                            width: "100px",
+                            transform: `rotate(${(i % 2) * 45}deg)`
+                          }}
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          transition={{ delay: i * 0.2 + 0.2 }}
+                        />
+                        {i % 2 === 0 && (
+                          <motion.div
+                            className="absolute top-1/2 left-full h-px bg-gradient-to-r from-primary/30 to-secondary/30 origin-left"
+                            style={{ 
+                              width: "150px",
+                              transform: `rotate(${-30}deg)`
+                            }}
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            transition={{ delay: i * 0.2 + 0.3 }}
+                          />
+                        )}
+                      </>
+                    )}
+                    
+                    {/* Value Indicators with Random Growth */}
+                    <motion.div
+                      className="absolute -top-2 -right-2 bg-primary text-dark text-sm font-bold px-2 py-1 rounded-full"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ delay: i * 0.2 + 0.4 }}
+                    >
+                      +{(Math.random() * 5 + 2).toFixed(1)}%
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+
+            {/* Central Hub */}
+            <motion.div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.2 }}
+            >
+              <div className="w-40 h-40 rounded-full bg-dark flex items-center justify-center relative">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary opacity-20 animate-pulse" />
+                <Hexagon className="w-16 h-16 text-primary relative z-10" />
+                
+                {/* Radiating Lines */}
+                {[...Array(8)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 1.5 + i * 0.1 }}
+                  >
+                    <div
+                      className="absolute top-1/2 left-1/2 h-px w-32 bg-gradient-to-r from-primary/50 to-transparent"
+                      style={{
+                        transform: `rotate(${i * 45}deg) translateX(20px)`,
+                        transformOrigin: "0 50%",
+                      }}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Value Metrics */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
             {[
-              {
-                icon: <Users className="w-12 h-12 mb-4 text-primary" />,
-                title: "Community Driven",
-                description: "Join a thriving community of innovators and visionaries shaping the future of AI.",
-              },
-              {
-                icon: <Sparkles className="w-12 h-12 mb-4 text-primary" />,
-                title: "Earn Rewards",
-                description: "Participate in the ecosystem and earn rewards through various AI-driven initiatives.",
-              },
-              {
-                icon: <Lock className="w-12 h-12 mb-4 text-primary" />,
-                title: "Secure & Transparent",
-                description: "Built on blockchain technology ensuring security and transparency in all operations.",
-              },
-            ].map((feature, index) => (
+              { label: "Total Value Generated", value: "$1.2M" },
+              { label: "Active AI Agents", value: "247" },
+              { label: "Token Holder Returns", value: "+15.8%" },
+            ].map((metric, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
-                className="bg-dark p-8 rounded-2xl text-center hover:border-primary/50 border-2 border-transparent transition-colors"
+                className="bg-dark p-6 rounded-xl border border-primary/20"
               >
-                <div className="flex justify-center">{feature.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <h3 className="text-gray-400 text-sm mb-2">{metric.label}</h3>
+                <p className="text-3xl font-bold gradient-text">{metric.value}</p>
               </motion.div>
             ))}
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="text-center"
-          >
-            <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-4 rounded-full font-display font-bold transition-colors inline-flex items-center gap-2 group">
-              Get Started
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
-          </motion.div>
-
-          {/* Background Elements */}
-          <div className="absolute inset-0 pointer-events-none opacity-10">
-            <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-r from-primary to-secondary rounded-full blur-3xl" />
-            <div className="absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-r from-secondary to-primary rounded-full blur-3xl" />
           </div>
         </div>
       </section>
