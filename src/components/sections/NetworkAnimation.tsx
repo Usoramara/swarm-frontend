@@ -54,6 +54,15 @@ export const NetworkAnimation = () => {
           const nextNode = innerNodes[(idx + 1) % innerNodes.length];
           const nextPos = getNodePosition(nextNode.angle, nextNode.radius);
           
+          // Find closest middle node for additional connection
+          const closestMiddleNode = middleNodes.reduce((closest, middleNode) => {
+            const middlePos = getNodePosition(middleNode.angle, middleNode.radius);
+            const distance = Math.sqrt(
+              Math.pow(middlePos.x - pos.x, 2) + Math.pow(middlePos.y - pos.y, 2)
+            );
+            return distance < closest.distance ? { node: middleNode, distance, pos: middlePos } : closest;
+          }, { node: middleNodes[0], distance: Infinity, pos: getNodePosition(middleNodes[0].angle, middleNodes[0].radius) });
+          
           return (
             <motion.div
               key={node.id}
@@ -84,7 +93,7 @@ export const NetworkAnimation = () => {
 
               {/* Connection to next node */}
               <motion.div
-                className="absolute left-1/2 top-1/2 h-1 bg-gradient-to-r from-secondary/30 to-secondary/30"
+                className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary/40 to-secondary/40"
                 style={{
                   width: Math.sqrt(
                     Math.pow(nextPos.x - pos.x, 2) + Math.pow(nextPos.y - pos.y, 2)
@@ -96,6 +105,19 @@ export const NetworkAnimation = () => {
                 whileInView={{ scaleX: 1, opacity: 1 }}
                 transition={{ delay: node.delay + 0.3, duration: 0.8 }}
               />
+
+              {/* Connection to closest middle node */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-secondary/30 to-primary/30"
+                style={{
+                  width: closestMiddleNode.distance,
+                  transformOrigin: "left center",
+                  rotate: `${Math.atan2(closestMiddleNode.pos.y - pos.y, closestMiddleNode.pos.x - pos.x) * (180 / Math.PI)}deg`,
+                }}
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: node.delay + 0.4, duration: 0.8 }}
+              />
             </motion.div>
           );
         })}
@@ -105,6 +127,15 @@ export const NetworkAnimation = () => {
           const pos = getNodePosition(node.angle, node.radius);
           const nextNode = middleNodes[(idx + 1) % middleNodes.length];
           const nextPos = getNodePosition(nextNode.angle, nextNode.radius);
+          
+          // Find closest outer node for additional connection
+          const closestOuterNode = outerNodes.reduce((closest, outerNode) => {
+            const outerPos = getNodePosition(outerNode.angle, outerNode.radius);
+            const distance = Math.sqrt(
+              Math.pow(outerPos.x - pos.x, 2) + Math.pow(outerPos.y - pos.y, 2)
+            );
+            return distance < closest.distance ? { node: outerNode, distance, pos: outerPos } : closest;
+          }, { node: outerNodes[0], distance: Infinity, pos: getNodePosition(outerNodes[0].angle, outerNodes[0].radius) });
           
           return (
             <motion.div
@@ -123,7 +154,7 @@ export const NetworkAnimation = () => {
 
               {/* Connection to next node */}
               <motion.div
-                className="absolute left-1/2 top-1/2 h-1 bg-gradient-to-r from-primary/30 to-primary/30"
+                className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-primary/40 to-primary/40"
                 style={{
                   width: Math.sqrt(
                     Math.pow(nextPos.x - pos.x, 2) + Math.pow(nextPos.y - pos.y, 2)
@@ -134,6 +165,19 @@ export const NetworkAnimation = () => {
                 initial={{ scaleX: 0, opacity: 0 }}
                 whileInView={{ scaleX: 1, opacity: 1 }}
                 transition={{ delay: node.delay + 0.3, duration: 0.8 }}
+              />
+
+              {/* Connection to closest outer node */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-primary/30 to-primary/30"
+                style={{
+                  width: closestOuterNode.distance,
+                  transformOrigin: "left center",
+                  rotate: `${Math.atan2(closestOuterNode.pos.y - pos.y, closestOuterNode.pos.x - pos.x) * (180 / Math.PI)}deg`,
+                }}
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: node.delay + 0.4, duration: 0.8 }}
               />
             </motion.div>
           );
@@ -162,7 +206,7 @@ export const NetworkAnimation = () => {
 
               {/* Connection to next node */}
               <motion.div
-                className="absolute left-1/2 top-1/2 h-1 bg-gradient-to-r from-primary/20 to-primary/20"
+                className="absolute left-1/2 top-1/2 h-0.5 bg-gradient-to-r from-primary/30 to-primary/30"
                 style={{
                   width: Math.sqrt(
                     Math.pow(nextPos.x - pos.x, 2) + Math.pow(nextPos.y - pos.y, 2)
@@ -183,6 +227,7 @@ export const NetworkAnimation = () => {
           className="absolute inset-0 bg-gradient-radial from-primary/10 via-secondary/5 to-transparent rounded-full"
           animate={{
             scale: [1, 1.2, 1],
+            opacity: [0.5, 0.8, 0.5],
           }}
           transition={{
             duration: 4,
