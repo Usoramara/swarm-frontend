@@ -16,11 +16,11 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-dark">
+    <main className="min-h-screen bg-dark">
       <HeroSection mousePosition={mousePosition} />
       <FeaturesSection />
       <AboutSection />
-    </div>
+    </main>
   );
 };
 

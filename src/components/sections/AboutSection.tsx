@@ -2,11 +2,29 @@ import { motion } from "framer-motion";
 import { Cpu, Network, Bot, Coins, Hexagon } from "lucide-react";
 
 export const AboutSection = () => {
+  const features = [
+    {
+      icon: <Cpu className="w-8 h-8 text-primary mb-2" />,
+      label: "AI Agents",
+    },
+    {
+      icon: <Network className="w-8 h-8 text-primary mb-2" />,
+      label: "On-Chain",
+    },
+    {
+      icon: <Bot className="w-8 h-8 text-primary mb-2" />,
+      label: "Self-Regulating",
+    },
+    {
+      icon: <Coins className="w-8 h-8 text-primary mb-2" />,
+      label: "Token Benefits",
+    },
+  ];
+
   return (
     <section className="py-24 bg-dark relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Left side - Text content */}
           <motion.div 
             className="md:w-1/2"
             initial={{ opacity: 0, x: -20 }}
@@ -20,24 +38,7 @@ export const AboutSection = () => {
               SWARM is a self-regulating, on-chain AI entity. It deploys AI agents to generate autonomous returns or benefits for the holders of its SWARM token.
             </p>
             <div className="grid grid-cols-2 gap-6">
-              {[
-                {
-                  icon: <Cpu className="w-8 h-8 text-primary mb-2" />,
-                  label: "AI Agents",
-                },
-                {
-                  icon: <Network className="w-8 h-8 text-primary mb-2" />,
-                  label: "On-Chain",
-                },
-                {
-                  icon: <Bot className="w-8 h-8 text-primary mb-2" />,
-                  label: "Self-Regulating",
-                },
-                {
-                  icon: <Coins className="w-8 h-8 text-primary mb-2" />,
-                  label: "Token Benefits",
-                },
-              ].map((item, index) => (
+              {features.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -52,7 +53,6 @@ export const AboutSection = () => {
             </div>
           </motion.div>
           
-          {/* Right side - Visual element */}
           <motion.div 
             className="md:w-1/2 relative"
             initial={{ opacity: 0, x: 20 }}

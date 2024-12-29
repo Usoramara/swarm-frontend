@@ -25,7 +25,7 @@ export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
           </p>
           
           <motion.div 
-            className="flex justify-center gap-4"
+            className="flex flex-col sm:flex-row justify-center gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}

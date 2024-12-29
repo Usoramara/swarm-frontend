@@ -2,6 +2,24 @@ import { motion } from "framer-motion";
 import { Brain, Bot, Shield } from "lucide-react";
 
 export const FeaturesSection = () => {
+  const features = [
+    {
+      icon: <Brain className="w-12 h-12 mb-4 text-primary" />,
+      title: "Autonomous AI",
+      description: "Self-governing agents that operate independently",
+    },
+    {
+      icon: <Bot className="w-12 h-12 mb-4 text-primary" />,
+      title: "Swarm Logic",
+      description: "Coordinated decision-making through collective intelligence",
+    },
+    {
+      icon: <Shield className="w-12 h-12 mb-4 text-primary" />,
+      title: "Secure Execution",
+      description: "Blockchain-powered security and transparency",
+    },
+  ];
+
   return (
     <section className="py-20 bg-dark-lighter">
       <div className="container mx-auto px-4">
@@ -10,23 +28,7 @@ export const FeaturesSection = () => {
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: <Brain className="w-12 h-12 mb-4 text-primary" />,
-              title: "Autonomous AI",
-              description: "Self-governing agents that operate independently",
-            },
-            {
-              icon: <Bot className="w-12 h-12 mb-4 text-primary" />,
-              title: "Swarm Logic",
-              description: "Coordinated decision-making through collective intelligence",
-            },
-            {
-              icon: <Shield className="w-12 h-12 mb-4 text-primary" />,
-              title: "Secure Execution",
-              description: "Blockchain-powered security and transparency",
-            },
-          ].map((feature, index) => (
+          {features.map((feature, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
