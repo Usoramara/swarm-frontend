@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Hexagon, Brain, Bot, Shield, Cpu, Network, Coins } from "lucide-react";
+import NetworkSection from "@/components/sections/NetworkSection";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -75,7 +76,7 @@ const Index = () => {
           ))}
         </div>
       </section>
-
+      
       {/* Features Section */}
       <section className="py-20 bg-dark-lighter">
         <div className="container mx-auto px-4">
@@ -116,7 +117,7 @@ const Index = () => {
           </div>
         </div>
       </section>
-
+      
       {/* About SWARM Section */}
       <section className="py-24 bg-dark relative overflow-hidden">
         <div className="container mx-auto px-4">
@@ -186,6 +187,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Network Section */}
+      <NetworkSection />
     </div>
   );
 };
