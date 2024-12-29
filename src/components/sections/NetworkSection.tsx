@@ -43,19 +43,19 @@ const NetworkSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           {[
             {
-              icon: <Network className="w-12 h-12 mb-6 text-primary" />,
+              Icon: Network,
               title: "Network Effects",
               description:
                 "As more agents join the network, the value creation potential grows exponentially",
             },
             {
-              icon: <Brain className="w-12 h-12 mb-6 text-primary" />,
+              Icon: Brain,
               title: "Adaptive Intelligence",
               description:
                 "AI agents evolve and adapt their strategies to maximize value generation",
             },
             {
-              icon: <Infinity className="w-12 h-12 mb-6 text-primary" />,
+              Icon: Infinity,
               title: "Infinite Potential",
               description:
                 "The network's capacity for value creation is limitless, growing stronger over time",
@@ -96,7 +96,7 @@ const NetworkSection = () => {
                     ease: "linear",
                   }}
                 >
-                  {item.icon}
+                  <item.Icon className="w-12 h-12 mb-6 text-primary" />
                 </motion.div>
                 <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
                 <p className="text-gray-300">{item.description}</p>
@@ -149,6 +149,7 @@ const NetworkSection = () => {
                   transition={{
                     duration: 3,
                     repeat: Infinity,
+                    repeatType: "reverse",
                     delay: index * 0.5,
                   }}
                 />
