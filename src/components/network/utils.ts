@@ -3,10 +3,10 @@ export const getNodePosition = (angle: number, radius: number) => ({
   y: Math.sin((angle * Math.PI) / 180) * radius,
 });
 
-export const generateNodes = (count: number, radius: number, delayMultiplier: number) => 
+export const generateNodes = (count: number, radius: number, baseDelay: number) => 
   Array.from({ length: count }, (_, i) => ({
     id: `node-${radius}-${i}`,
     angle: (i * 360) / count,
-    delay: i * delayMultiplier,
+    delay: i * baseDelay,
     radius,
   }));
