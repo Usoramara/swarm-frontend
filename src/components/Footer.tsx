@@ -16,16 +16,14 @@ const Footer = () => {
             Be part of the future of decentralized intelligence. Join our community and help shape the evolution of autonomous AI on the blockchain.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="text-lg">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                Buy SWARM
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-lg">
-              <Link to="/learn">
+            <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
+              Buy SWARM
+            </button>
+            <Link to="/learn">
+              <button className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Learn More
-              </Link>
-            </Button>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
