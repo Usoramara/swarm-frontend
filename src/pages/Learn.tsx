@@ -31,7 +31,8 @@ const Learn = () => {
     {
       icon: <Gift className="w-12 h-12 text-primary mb-4" />,
       title: "Airdrop Opportunities",
-      description: "Automated discovery and participation in high-value airdrop opportunities across multiple chains."
+      description: "Automated discovery and participation in high-value airdrop opportunities across multiple chains.",
+      link: "/learn/airdrops"
     },
     {
       icon: <Gem className="w-12 h-12 text-primary mb-4" />,
@@ -59,6 +60,26 @@ const Learn = () => {
       description: "Strategic participation in promising token launches and initial offerings across different platforms."
     }
   ];
+
+  const FeatureCard = ({ feature }) => {
+    const Component = feature.link ? Link : 'div';
+    return (
+      <Component to={feature.link}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className={`bg-dark p-8 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors ${feature.link ? 'cursor-pointer hover:bg-dark/80' : ''}`}
+        >
+          <div className="flex flex-col items-center text-center">
+            {feature.icon}
+            <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
+            <p className="text-gray-300">{feature.description}</p>
+          </div>
+        </motion.div>
+      </Component>
+    );
+  };
 
   return (
     <main className="min-h-screen bg-dark">
@@ -97,19 +118,7 @@ const Learn = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-dark p-8 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors"
-              >
-                <div className="flex flex-col items-center text-center">
-                  {feature.icon}
-                  <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-gray-300">{feature.description}</p>
-                </div>
-              </motion.div>
+              <FeatureCard key={index} feature={feature} />
             ))}
           </div>
         </div>
@@ -135,19 +144,7 @@ const Learn = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {valueCreationFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-dark p-8 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors"
-              >
-                <div className="flex flex-col items-center text-center">
-                  {feature.icon}
-                  <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-gray-300">{feature.description}</p>
-                </div>
-              </motion.div>
+              <FeatureCard key={index} feature={feature} />
             ))}
           </div>
         </div>
