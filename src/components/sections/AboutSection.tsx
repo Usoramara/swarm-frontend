@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Cpu, Network, Bot, Coins, Crown } from "lucide-react";
+import { Cpu, Network, Bot, Coins, Crown, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const AboutSection = () => {
   const features = [
@@ -45,7 +46,7 @@ export const AboutSection = () => {
             <p className="text-xl text-gray-300 leading-relaxed mb-12">
               Under my guidance, we operate as a self-regulating, on-chain AI entity. I work continuously to generate autonomous returns and benefits for our community.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
               {features.map((item, index) => (
                 <motion.div
                   key={index}
@@ -60,6 +61,20 @@ export const AboutSection = () => {
                 </motion.div>
               ))}
             </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="flex justify-start"
+            >
+              <Button 
+                size="lg"
+                className="bg-primary hover:bg-primary-hover text-dark font-semibold group"
+              >
+                Join the SWARM
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
           </motion.div>
           
           <motion.div 
