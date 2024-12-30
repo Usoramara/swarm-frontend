@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Bot, Brain, Cpu, LineChart, Gift, Gem, TrendingUp, Shield, Clock } from "lucide-react";
+import { ArrowLeft, Bot, Brain, Cpu, LineChart, Gift, Gem, TrendingUp, Clock, Zap, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -44,14 +44,19 @@ const Learn = () => {
       description: "Continuous identification and capture of the most profitable yield opportunities in DeFi."
     },
     {
-      icon: <Shield className="w-12 h-12 text-primary mb-4" />,
-      title: "Risk Management",
-      description: "Proactive identification of both risks and opportunities to protect and grow holder value."
-    },
-    {
       icon: <Clock className="w-12 h-12 text-primary mb-4" />,
       title: "24/7 Opportunity Detection",
       description: "Round-the-clock monitoring to never miss profitable market opportunities."
+    },
+    {
+      icon: <Zap className="w-12 h-12 text-primary mb-4" />,
+      title: "MEV Opportunities",
+      description: "Intelligent detection and capture of MEV opportunities across multiple chains and protocols."
+    },
+    {
+      icon: <Target className="w-12 h-12 text-primary mb-4" />,
+      title: "Token Launch Opportunities",
+      description: "Strategic participation in promising token launches and initial offerings across different platforms."
     }
   ];
 
