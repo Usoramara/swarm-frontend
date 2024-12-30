@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Rocket, Network, DollarSign, Zap, Gift, Key, LineChart } from "lucide-react";
+import { Rocket, Network, Bot, Coins, Gift, Key, LineChart } from "lucide-react";
 
 export const BenefitsSection = () => {
   const benefits = [
@@ -81,7 +81,7 @@ export const BenefitsSection = () => {
           className="text-center mt-16"
         >
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            SWARM is committed to maximizing value for token holders through strategic AI-driven opportunities and continuous innovation
+            SWARM exists to maximize value for token holders through cutting-edge AI technology and decentralized innovation
           </p>
         </motion.div>
       </div>
