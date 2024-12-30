@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Cpu, Network, Bot, Coins, Crown, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Cpu, Network, Bot, Coins, Crown } from "lucide-react";
 
 export const AboutSection = () => {
   const features = [
@@ -22,17 +21,7 @@ export const AboutSection = () => {
     {
       icon: <Coins className="w-8 h-8 text-primary" />,
       label: "Your Benefits",
-      description: "I distribute value directly to all SWARM holders",
-      action: (
-        <Button 
-          variant="ghost"
-          size="sm"
-          className="mt-4 border-2 border-primary hover:bg-primary/10 px-6 py-2 rounded-full font-display font-bold transition-colors group text-sm"
-        >
-          Learn about token benefits
-          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Button>
-      )
+      description: "I distribute value directly to all SWARM holders"
     },
   ];
 
@@ -68,7 +57,6 @@ export const AboutSection = () => {
                   <div className="mb-4">{item.icon}</div>
                   <h3 className="text-lg font-medium mb-2">{item.label}</h3>
                   <p className="text-sm text-gray-400">{item.description}</p>
-                  {item.action}
                 </motion.div>
               ))}
             </div>

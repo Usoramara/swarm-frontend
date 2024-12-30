@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Coins, ArrowRight, Wallet, LineChart, Network } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const TreasurySection = () => {
   const roadmapItems = [
@@ -142,6 +143,23 @@ export const TreasurySection = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="flex justify-center mt-16"
+        >
+          <Button 
+            variant="ghost"
+            size="sm"
+            className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors group"
+          >
+            Learn about token benefits
+            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </motion.div>
       </div>
     </section>
   );
