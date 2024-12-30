@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { UseCasesSection } from "@/components/sections/UseCasesSection";
 import { NetworkAnimation } from "@/components/sections/NetworkAnimation";
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
       <HeroSection mousePosition={mousePosition} />
       <AboutSection />
       <FeaturesSection />
+      <UseCasesSection />
       <NetworkAnimation />
     </main>
   );
