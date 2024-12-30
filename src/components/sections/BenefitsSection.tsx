@@ -51,7 +51,7 @@ export const BenefitsSection = () => {
             The SWARM's mission is to <span className="gradient-text">benefit its holders</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            The SWARM is deployed and on a mission to work 24/7 for its holders and improve their lives in any way possible
+            The SWARM shall be deployed to work 24/7 for its holders and improve their lives and wealth in any way possible
           </p>
         </motion.div>
 
