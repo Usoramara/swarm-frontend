@@ -13,6 +13,8 @@ serve(async (req) => {
   }
 
   try {
+    console.log('Starting RSS feed processing...');
+    
     // Initialize Supabase client
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
@@ -39,9 +41,7 @@ serve(async (req) => {
       }
     ]
 
-    console.log('Starting RSS feed processing...');
-
-    // First, clear existing news items to ensure fresh content
+    // First, clear existing news items
     const { error: deleteError } = await supabaseClient
       .from('news_items')
       .delete()
@@ -49,11 +49,15 @@ serve(async (req) => {
 
     if (deleteError) {
       console.error('Error clearing existing news items:', deleteError);
+      throw deleteError;
     }
 
-    // Fetch and process each feed
+    console.log('Cleared existing news items');
+
+    // Process each feed
     for (const feed of feeds) {
       console.log(`Fetching feed from: ${feed.url}`);
+      
       try {
         const response = await fetch(feed.url)
         if (!response.ok) {
@@ -83,13 +87,13 @@ serve(async (req) => {
 
           console.log(`Processing news item: ${newsItem.title}`);
 
-          // Insert news items
-          const { error } = await supabaseClient
+          const { error: insertError } = await supabaseClient
             .from('news_items')
             .insert(newsItem)
 
-          if (error) {
-            console.error('Error inserting news item:', error)
+          if (insertError) {
+            console.error('Error inserting news item:', insertError);
+            continue;
           }
         }
       } catch (feedError) {
@@ -99,6 +103,8 @@ serve(async (req) => {
       }
     }
 
+    console.log('RSS feed processing completed successfully');
+
     return new Response(
       JSON.stringify({ message: 'RSS feeds processed successfully' }),
       {
@@ -107,7 +113,7 @@ serve(async (req) => {
       }
     )
   } catch (error) {
-    console.error('Error processing RSS feeds:', error)
+    console.error('Error processing RSS feeds:', error);
     return new Response(
       JSON.stringify({ error: error.message }),
       {

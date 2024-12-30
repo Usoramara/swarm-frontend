@@ -20,7 +20,7 @@ const fetchNews = async () => {
     .from('news_items')
     .select('*')
     .order('published_at', { ascending: false })
-    .limit(6);
+    .limit(20);
 
   if (error) {
     console.error("Error fetching news:", error);
@@ -33,19 +33,18 @@ const fetchNews = async () => {
 
 const triggerRSSUpdate = async () => {
   try {
-    const response = await fetch('https://cjsyqfyjrakfemrwcprr.functions.supabase.co/fetch-rss', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.VITE_SUPABASE_ANON_KEY}`
-      }
+    console.log('Triggering RSS update...');
+    const response = await supabase.functions.invoke('fetch-rss', {
+      method: 'POST'
     });
     
-    if (!response.ok) {
-      throw new Error('Failed to update RSS feeds');
+    if (!response.error) {
+      console.log('RSS feeds updated successfully');
+      toast.success("RSS feeds updated successfully");
+    } else {
+      console.error('Error updating RSS feeds:', response.error);
+      toast.error("Failed to update RSS feeds");
     }
-    
-    console.log('RSS feeds updated successfully');
   } catch (error) {
     console.error('Error updating RSS feeds:', error);
     toast.error("Failed to update RSS feeds");
@@ -93,7 +92,7 @@ export const NewsSection = () => {
   // Ensure we always have items for display
   const displayNews = isLoading 
     ? Array(6).fill(null) 
-    : [...news, ...Array(6).fill(null)].slice(0, 6);
+    : news.slice(0, 6);
 
   return (
     <section className="py-20 bg-dark">
