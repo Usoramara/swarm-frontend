@@ -19,27 +19,23 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    // RSS feed URLs from reputable sources
+    // RSS feed URLs from reputable sources with their corresponding tags
     const feeds = [
       {
-        url: 'https://blog.ethereum.org/feed.xml',
+        url: 'https://news.google.com/rss/search?q=artificial+intelligence+swarm&hl=en-US&gl=US&ceid=US:en',
         tag: 'Development'
       },
       {
-        url: 'https://weekinethereumnews.com/feed/',
+        url: 'https://news.google.com/rss/search?q=swarm+intelligence+research&hl=en-US&gl=US&ceid=US:en',
         tag: 'Development'
       },
       {
-        url: 'https://ethereum.foundation/feed.xml',
+        url: 'https://news.google.com/rss/search?q=AI+collective+intelligence&hl=en-US&gl=US&ceid=US:en',
         tag: 'Impact'
       },
       {
-        url: 'https://blog.ethglobal.com/rss/',
+        url: 'https://news.google.com/rss/search?q=decentralized+AI+systems&hl=en-US&gl=US&ceid=US:en',
         tag: 'Community'
-      },
-      {
-        url: 'https://consensys.net/blog/feed/',
-        tag: 'Development'
       }
     ]
 
@@ -58,13 +54,18 @@ serve(async (req) => {
         const xml = await response.text()
         const rss = await parse(xml)
 
-        // Process only the latest 2 items from each feed to avoid overwhelming
+        // Process only the latest 2 items from each feed
         const items = rss.entries.slice(0, 2)
 
         for (const item of items) {
+          // Clean and truncate description (remove HTML tags and limit length)
+          let description = item.description?.value || item.content?.value || 'No description available'
+          description = description.replace(/<[^>]*>/g, '') // Remove HTML tags
+          description = description.substring(0, 200) + (description.length > 200 ? '...' : '')
+
           const newsItem = {
             title: item.title?.value || 'Untitled',
-            description: item.description?.value || item.content?.value || 'No description available',
+            description: description,
             url: item.links[0]?.href || null,
             tag: feed.tag,
             published_at: item.published || new Date().toISOString()
