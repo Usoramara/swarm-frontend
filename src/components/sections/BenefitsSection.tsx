@@ -51,7 +51,7 @@ export const BenefitsSection = () => {
             Token Holder <span className="gradient-text">Benefits</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            SWARM token holders gain access to a suite of powerful benefits powered by our autonomous AI network to drive revenue & utility
+            SWARM token holders will gain access to a suite of powerful benefits powered by our autonomous AI network to drive revenue & utility
           </p>
         </motion.div>
 
