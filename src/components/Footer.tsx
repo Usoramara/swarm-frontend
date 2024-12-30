@@ -5,19 +5,6 @@ const Footer = () => {
   const location = useLocation();
   const isLearnPage = location.pathname.includes('/learn');
 
-  const handleLearnClick = () => {
-    if (isLearnPage) {
-      // Wait for navigation to complete before scrolling
-      setTimeout(() => {
-        const aboutSection = document.querySelector('#about-section');
-        aboutSection?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    } else {
-      const aboutSection = document.querySelector('#about-section');
-      aboutSection?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <footer className="bg-dark-lighter relative overflow-hidden">
       <div className="absolute inset-0 swarm-grid opacity-20" />
@@ -38,19 +25,19 @@ const Footer = () => {
             {isLearnPage ? (
               <Link to="/">
                 <button 
-                  onClick={handleLearnClick}
                   className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
                 >
                   Back to Home
                 </button>
               </Link>
             ) : (
-              <button 
-                onClick={handleLearnClick}
-                className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
-              >
-                Learn More
-              </button>
+              <Link to="/learn">
+                <button 
+                  className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
+                >
+                  Learn More
+                </button>
+              </Link>
             )}
           </div>
         </div>
