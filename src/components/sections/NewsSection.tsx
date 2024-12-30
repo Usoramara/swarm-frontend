@@ -1,69 +1,10 @@
-import { motion } from "framer-motion";
-import { Newspaper, ArrowRight, ExternalLink } from "lucide-react";
+import { Newspaper } from "lucide-react";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-
-interface NewsItem {
-  id: string;
-  published_at: string;
-  title: string;
-  description: string;
-  tag: "Development" | "Impact" | "Community";
-  url?: string;
-}
-
-const fetchNews = async () => {
-  console.log("Fetching news items...");
-  const { data, error } = await supabase
-    .from('news_items')
-    .select('*')
-    .order('published_at', { ascending: false })
-    .limit(20);
-
-  if (error) {
-    console.error("Error fetching news:", error);
-    throw error;
-  }
-
-  if (!data || data.length === 0) {
-    console.log("No news items found in the database");
-    return [];
-  }
-
-  console.log("Successfully fetched news items:", data);
-  return data as NewsItem[];
-};
-
-const triggerRSSUpdate = async () => {
-  try {
-    console.log('Triggering RSS update...');
-    const response = await supabase.functions.invoke('fetch-rss', {
-      method: 'POST'
-    });
-    
-    if (response.error) {
-      console.error('Error updating RSS feeds:', response.error);
-      toast.error("Failed to update RSS feeds");
-      return;
-    }
-
-    const data = response.data;
-    console.log('RSS update response:', data);
-    
-    if (data?.success) {
-      console.log(`Successfully inserted ${data.itemsInserted} news items`);
-      toast.success(`RSS feeds updated with ${data.itemsInserted} new articles`);
-    } else {
-      console.error('RSS update failed:', data);
-      toast.error("Failed to update RSS feeds");
-    }
-  } catch (error) {
-    console.error('Error updating RSS feeds:', error);
-    toast.error("Failed to update RSS feeds");
-  }
-};
+import { NewsCard } from "../news/NewsCard";
+import { fetchNews, triggerRSSUpdate } from "@/utils/rssUtils";
 
 export const NewsSection = () => {
   const { data: news = [], isError, isLoading, refetch } = useQuery({
@@ -72,10 +13,12 @@ export const NewsSection = () => {
   });
 
   useEffect(() => {
-    // Immediately trigger RSS update when component mounts
-    triggerRSSUpdate().then(() => {
-      // After RSS update completes, refetch the news data
-      refetch();
+    console.log('NewsSection mounted, triggering RSS update...');
+    triggerRSSUpdate().then((success) => {
+      if (success) {
+        console.log('RSS update successful, refetching news...');
+        refetch();
+      }
     });
 
     const channel = supabase
@@ -98,6 +41,7 @@ export const NewsSection = () => {
       .subscribe();
 
     return () => {
+      console.log('NewsSection unmounting, cleaning up...');
       supabase.removeChannel(channel);
     };
   }, [refetch]);
@@ -107,7 +51,7 @@ export const NewsSection = () => {
     toast.error("Failed to load news updates");
   }
 
-  // Show loading state or empty state message if no news
+  // Show loading state
   if (isLoading) {
     return (
       <section className="py-20 bg-dark">
@@ -164,53 +108,7 @@ export const NewsSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {news.slice(0, 6).map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className={`
-                bg-dark-lighter p-6 rounded-xl border-2 border-transparent 
-                transition-all duration-300
-                ${item.url ? 'hover:border-primary/50 cursor-pointer' : ''}
-              `}
-              onClick={() => {
-                if (item.url) {
-                  window.open(item.url, '_blank', 'noopener,noreferrer');
-                }
-              }}
-            >
-              <div className="flex justify-between items-start mb-4">
-                <span className={`
-                  px-3 py-1 rounded-full text-sm font-medium
-                  ${item.tag === 'Development' ? 'bg-primary/20 text-primary' : ''}
-                  ${item.tag === 'Impact' ? 'bg-secondary/20 text-secondary' : ''}
-                  ${item.tag === 'Community' ? 'bg-purple-500/20 text-purple-500' : ''}
-                `}>
-                  {item.tag}
-                </span>
-                <span className="text-sm text-gray-400">
-                  {new Date(item.published_at).toLocaleDateString()}
-                </span>
-              </div>
-              
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-gray-400 mb-4">{item.description}</p>
-                </div>
-                {item.url && (
-                  <ExternalLink className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                )}
-              </div>
-              
-              {item.url && (
-                <div className="flex items-center text-primary hover:text-primary-hover transition-colors">
-                  <span className="text-sm">Read full article</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </div>
-              )}
-            </motion.div>
+            <NewsCard key={item.id} item={item} index={index} />
           ))}
         </div>
       </div>
