@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const CallToActionSection = () => {
   return (
@@ -27,13 +28,15 @@ export const CallToActionSection = () => {
             <ArrowRight className="ml-2" />
           </Button>
           
-          <Button 
-            variant="outline" 
-            size="lg"
-            className="border-primary text-primary hover:bg-primary/10 px-8 py-6 h-auto text-lg"
-          >
-            Learn More
-          </Button>
+          <Link to="/learn">
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-primary text-primary hover:bg-primary/10 px-8 py-6 h-auto text-lg"
+            >
+              Learn More
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
