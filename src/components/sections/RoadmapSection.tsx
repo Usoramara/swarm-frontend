@@ -6,27 +6,29 @@ export const RoadmapSection = () => {
     {
       icon: <Milestone className="w-8 h-8 text-primary mb-4" />,
       title: "Phase 1: Automated Airdrop Farming",
-      description: "AI agents monitor and participate in high-value airdrops, automatically executing necessary steps to qualify and maximize token distributions.",
+      description: "SWARM's AI agents monitor and participate in high-value airdrops, automatically executing necessary steps to qualify and maximize token distributions.",
       items: [
         "Early opportunity detection",
         "Automated qualification steps",
         "Multi-wallet coordination",
+        "Airdrop value assessment"
       ]
     },
     {
       icon: <Timer className="w-8 h-8 text-primary mb-4" />,
       title: "Phase 2: Whitelist Acquisition",
-      description: "Advanced systems for securing whitelist spots in exclusive project launches and sales events.",
+      description: "Advanced systems for securing whitelist spots in exclusive project launches and presales through automated engagement.",
       items: [
-        "Automated registration",
+        "Community engagement automation",
+        "Social proof generation",
         "Task completion automation",
-        "Pattern learning for higher success rates",
+        "Whitelist opportunity scoring"
       ]
     },
     {
       icon: <Zap className="w-8 h-8 text-primary mb-4" />,
       title: "Phase 3: Private Sale Participation",
-      description: "Intelligent systems for discovering and participating in early-stage investment opportunities.",
+      description: "SWARM's intelligent systems for discovering and participating in early-stage investment opportunities.",
       items: [
         "Exclusive deal discovery",
         "Due diligence automation",
@@ -36,11 +38,11 @@ export const RoadmapSection = () => {
     {
       icon: <Users className="w-8 h-8 text-primary mb-4" />,
       title: "Phase 4: Dynamic Portfolio Management",
-      description: "Advanced portfolio optimization through collective AI intelligence.",
+      description: "Advanced portfolio optimization through SWARM's collective AI intelligence.",
       items: [
         "Real-time rebalancing",
         "Multi-signal analysis",
-        "Personalized strategies",
+        "Risk assessment automation",
       ]
     },
   ];
@@ -59,7 +61,7 @@ export const RoadmapSection = () => {
             <span className="gradient-text">Development Roadmap</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Our journey to build the next generation of autonomous AI agents for maximizing token holder value.
+            SWARM's journey to build the next generation of autonomous AI agents for maximizing token holder value.
           </p>
         </motion.div>
 
