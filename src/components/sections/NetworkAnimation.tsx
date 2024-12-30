@@ -62,7 +62,7 @@ export const NetworkAnimation = () => {
         // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = "#00F0FF";
+        ctx.fillStyle = "#ACFF00";
         ctx.fill();
 
         // Draw connections
@@ -74,7 +74,7 @@ export const NetworkAnimation = () => {
 
             if (distance < connectionDistance) {
               ctx.beginPath();
-              ctx.strokeStyle = `rgba(0, 240, 255, ${1 - distance / connectionDistance})`;
+              ctx.strokeStyle = `rgba(172, 255, 0, ${1 - distance / connectionDistance})`;
               ctx.lineWidth = 1;
               ctx.moveTo(particle.x, particle.y);
               ctx.lineTo(particle2.x, particle2.y);
@@ -101,25 +101,38 @@ export const NetworkAnimation = () => {
       <div className="relative z-10 container mx-auto px-4 h-screen flex flex-col items-center justify-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            The <span className="gradient-text">Ever Evolving</span> Network
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            The Future of <span className="gradient-text">Autonomous Value</span>
             <br />
-            for <span className="gradient-text">Unprecedented Value</span>
+            Creation Through <span className="gradient-text">AI Networks</span>
           </h2>
           
           <motion.p
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-lg md:text-xl text-gray-300 mt-6 leading-relaxed"
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-lg md:text-xl text-gray-300 mt-6 leading-relaxed max-w-3xl mx-auto"
           >
-            SWARM's network of autonomous AI agents continuously grows and evolves,
-            working together to create maximum value for token holders
+            SWARM's network of AI agents continuously evolves and expands, working in perfect harmony
+            to maximize value for token holders through automated trading, risk management, and market analysis
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="mt-12"
+          >
+            <div className="inline-flex items-center justify-center px-6 py-3 border border-primary/20 rounded-lg bg-dark/60 backdrop-blur-sm">
+              <span className="text-primary font-semibold">24/7 Autonomous Operation</span>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
