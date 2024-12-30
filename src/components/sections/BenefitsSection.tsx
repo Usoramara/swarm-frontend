@@ -48,7 +48,7 @@ export const BenefitsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Token Holder <span className="gradient-text">Benefits</span>
+            The SWARM's mission is to <span className="gradient-text">benefit its holders</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             SWARM token holders will gain access to a suite of powerful benefits powered by our autonomous AI network to drive revenue & utility
