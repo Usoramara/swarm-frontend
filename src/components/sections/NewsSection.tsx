@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Newspaper, ArrowRight } from "lucide-react";
+import { Newspaper, ArrowRight, ExternalLink } from "lucide-react";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -87,7 +87,16 @@ export const NewsSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-dark-lighter p-6 rounded-xl border-2 border-transparent hover:border-primary/50 transition-colors"
+              className={`
+                bg-dark-lighter p-6 rounded-xl border-2 border-transparent 
+                transition-all duration-300
+                ${item?.url ? 'hover:border-primary/50 cursor-pointer' : ''}
+              `}
+              onClick={() => {
+                if (item?.url) {
+                  window.open(item.url, '_blank', 'noopener,noreferrer');
+                }
+              }}
             >
               {isLoading || !item ? (
                 <>
@@ -112,18 +121,21 @@ export const NewsSection = () => {
                     </span>
                   </div>
                   
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-gray-400 mb-4">{item.description}</p>
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                      <p className="text-gray-400 mb-4">{item.description}</p>
+                    </div>
+                    {item.url && (
+                      <ExternalLink className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                    )}
+                  </div>
                   
                   {item.url && (
-                    <a 
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-primary hover:text-primary-hover transition-colors"
-                    >
-                      Read more <ArrowRight className="w-4 h-4 ml-2" />
-                    </a>
+                    <div className="flex items-center text-primary hover:text-primary-hover transition-colors">
+                      <span className="text-sm">Read full article</span>
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </div>
                   )}
                 </>
               )}
