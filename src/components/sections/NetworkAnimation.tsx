@@ -106,9 +106,9 @@ export const NetworkAnimation = () => {
           className="max-w-4xl mx-auto"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            An ever evolving <span className="gradient-text">exponential</span>
+            An ever evolving <span className="gradient-text">exponential network</span>
             <br />
-            <span className="gradient-text">network</span>
+            <span className="gradient-text">of value creation</span>
           </h2>
           
           <motion.p
