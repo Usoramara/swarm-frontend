@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Brain, Bot, Shield } from "lucide-react";
+import { Brain, Bot, Shield, Zap, Target, Network } from "lucide-react";
 
 export const FeaturesSection = () => {
   const features = [
@@ -17,6 +17,21 @@ export const FeaturesSection = () => {
       icon: <Shield className="w-12 h-12 mb-4 text-primary" />,
       title: "Secure Execution",
       description: "Blockchain-powered security and transparency",
+    },
+    {
+      icon: <Zap className="w-12 h-12 mb-4 text-primary" />,
+      title: "Exponential Growth",
+      description: "Self-improving AI capabilities that grow stronger over time",
+    },
+    {
+      icon: <Target className="w-12 h-12 mb-4 text-primary" />,
+      title: "Adaptive Strategy",
+      description: "Evolution of tactics based on market conditions and opportunities",
+    },
+    {
+      icon: <Network className="w-12 h-12 mb-4 text-primary" />,
+      title: "Network Effects",
+      description: "Increasing value creation as the SWARM network expands",
     },
   ];
 
