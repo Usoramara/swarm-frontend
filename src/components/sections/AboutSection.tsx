@@ -70,7 +70,7 @@ export const AboutSection = () => {
               <Button 
                 variant="ghost"
                 size="sm"
-                className="text-primary hover:text-primary-hover hover:bg-primary/5 font-medium group"
+                className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors group"
               >
                 Learn about token benefits
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
