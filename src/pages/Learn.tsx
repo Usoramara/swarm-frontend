@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Brain, Bot, Cpu, LineChart, Network, Rocket, Shield } from "lucide-react";
+import { ArrowLeft, Bot, Brain, Cpu, LineChart, Clock, Zap, Target, GitBranch, Users, Workflow } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -27,59 +27,44 @@ const Learn = () => {
     }
   ];
 
-  const roadmapFeatures = [
+  const roadmapPhases = [
     {
-      icon: <Network className="w-12 h-12 text-primary mb-4" />,
-      title: "Autonomous Network Formation",
-      description: "Development of self-organizing AI agent networks that collaborate to identify and execute opportunities."
+      icon: <Clock className="w-12 h-12 text-primary mb-4" />,
+      title: "Phase 1: Automated Airdrop Farming",
+      description: "Development of AI agents to monitor social media, on-chain data, and project announcements for airdrop opportunities. Automated qualification and participation systems.",
+      status: "In Development"
     },
     {
-      icon: <Brain className="w-12 h-12 text-primary mb-4" />,
-      title: "Advanced Pattern Recognition",
-      description: "Implementation of sophisticated market analysis capabilities across multiple chains and protocols."
+      icon: <Users className="w-12 h-12 text-primary mb-4" />,
+      title: "Phase 2: Whitelist Acquisition System",
+      description: "Building intelligent systems to secure whitelist spots in exclusive sales, automating registration processes and engagement requirements.",
+      status: "Upcoming"
     },
     {
-      icon: <Bot className="w-12 h-12 text-primary mb-4" />,
-      title: "Multi-Agent Coordination",
-      description: "Creation of complex coordination systems enabling agents to work together on sophisticated strategies."
+      icon: <GitBranch className="w-12 h-12 text-primary mb-4" />,
+      title: "Phase 3: Private Sale Participation",
+      description: "Creating infrastructure for discovering and participating in private sales, including automated eligibility verification and collective investment pools.",
+      status: "Planned"
     },
     {
-      icon: <Shield className="w-12 h-12 text-primary mb-4" />,
-      title: "Automated Value Protection",
-      description: "Development of systems to automatically secure and optimize value across market conditions."
+      icon: <Workflow className="w-12 h-12 text-primary mb-4" />,
+      title: "Phase 4: Dynamic Portfolio Management",
+      description: "Implementing advanced portfolio optimization through specialized AI agents for analytics, trend analysis, and automated rebalancing.",
+      status: "Future"
     },
     {
-      icon: <Rocket className="w-12 h-12 text-primary mb-4" />,
-      title: "Opportunity Execution",
-      description: "Implementation of high-speed, efficient execution systems across multiple chains and protocols."
+      icon: <Zap className="w-12 h-12 text-primary mb-4" />,
+      title: "Phase 5: MEV Opportunities",
+      description: "Developing systems for intelligent detection and capture of MEV opportunities across multiple chains and protocols.",
+      status: "Future"
     },
     {
-      icon: <LineChart className="w-12 h-12 text-primary mb-4" />,
-      title: "Portfolio Optimization",
-      description: "Creation of advanced portfolio management systems using collective AI intelligence."
+      icon: <Target className="w-12 h-12 text-primary mb-4" />,
+      title: "Phase 6: Token Launch Optimization",
+      description: "Building infrastructure for strategic participation in promising token launches and initial offerings across different platforms.",
+      status: "Future"
     }
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
 
   return (
     <main className="min-h-screen bg-dark">
@@ -150,30 +135,35 @@ const Learn = () => {
               <span className="gradient-text">Development Roadmap</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              Our vision for building the next generation of autonomous AI agents, working together to maximize value creation.
+              Our comprehensive development plan to build advanced AI swarm capabilities that will revolutionize value creation in the crypto ecosystem.
             </p>
           </motion.div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {roadmapFeatures.map((feature, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {roadmapPhases.map((phase, index) => (
               <motion.div
                 key={index}
-                variants={itemVariants}
-                className="bg-dark p-8 rounded-lg border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:transform hover:scale-105"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+                className="bg-dark p-8 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors"
               >
                 <div className="flex flex-col items-center text-center">
-                  {feature.icon}
-                  <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-gray-300">{feature.description}</p>
+                  {phase.icon}
+                  <h3 className="text-2xl font-bold mb-4">{phase.title}</h3>
+                  <p className="text-gray-300 mb-4">{phase.description}</p>
+                  <span className={`text-sm px-3 py-1 rounded-full ${
+                    phase.status === 'In Development' ? 'bg-green-500/20 text-green-400' :
+                    phase.status === 'Upcoming' ? 'bg-blue-500/20 text-blue-400' :
+                    phase.status === 'Planned' ? 'bg-yellow-500/20 text-yellow-400' :
+                    'bg-gray-500/20 text-gray-400'
+                  }`}>
+                    {phase.status}
+                  </span>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>
