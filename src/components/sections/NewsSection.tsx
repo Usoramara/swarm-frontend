@@ -72,8 +72,11 @@ export const NewsSection = () => {
   });
 
   useEffect(() => {
-    // Trigger RSS update when component mounts
-    triggerRSSUpdate();
+    // Immediately trigger RSS update when component mounts
+    triggerRSSUpdate().then(() => {
+      // After RSS update completes, refetch the news data
+      refetch();
+    });
 
     const channel = supabase
       .channel('news_updates')
