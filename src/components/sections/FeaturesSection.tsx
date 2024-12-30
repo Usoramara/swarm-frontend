@@ -39,7 +39,7 @@ export const FeaturesSection = () => {
     <section className="py-20 bg-dark-lighter">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center gradient-text">
-          Powered by Collective Intelligence and Exponential Technologies
+          Powered by Collective Intelligence
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
