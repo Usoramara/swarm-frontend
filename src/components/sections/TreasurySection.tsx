@@ -113,7 +113,7 @@ export const TreasurySection = () => {
             Our strategic plan for implementing and growing the SWARM Treasury
           </p>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12">
-            This roadmap is dynamically adjusted by SWARM's autonomous agent based on market conditions and community needs
+            SWARM's autonomous agent continuously optimizes this strategic roadmap based on market conditions and community needs, ensuring the most effective implementation and growth of the SWARM Treasury
           </p>
         </motion.div>
 
