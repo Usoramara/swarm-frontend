@@ -81,7 +81,7 @@ export const BenefitsSection = () => {
           className="text-center mt-16"
         >
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            The SWARM's goal is to enrich its holders through any means possible
+            SWARM is committed to maximizing value for token holders through strategic AI-driven opportunities and continuous innovation
           </p>
         </motion.div>
       </div>
