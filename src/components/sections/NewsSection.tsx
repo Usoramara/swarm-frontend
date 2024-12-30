@@ -20,7 +20,7 @@ const fetchNews = async () => {
     .from('news_items')
     .select('*')
     .order('published_at', { ascending: false })
-    .limit(3);
+    .limit(6);
 
   if (error) {
     console.error("Error fetching news:", error);
@@ -31,13 +31,37 @@ const fetchNews = async () => {
   return data as NewsItem[];
 };
 
+const triggerRSSUpdate = async () => {
+  try {
+    const response = await fetch('https://cjsyqfyjrakfemrwcprr.functions.supabase.co/fetch-rss', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.VITE_SUPABASE_ANON_KEY}`
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to update RSS feeds');
+    }
+    
+    console.log('RSS feeds updated successfully');
+  } catch (error) {
+    console.error('Error updating RSS feeds:', error);
+    toast.error("Failed to update RSS feeds");
+  }
+};
+
 export const NewsSection = () => {
-  const { data: news = [], isError, isLoading } = useQuery({
+  const { data: news = [], isError, isLoading, refetch } = useQuery({
     queryKey: ['news'],
     queryFn: fetchNews,
   });
 
   useEffect(() => {
+    // Trigger RSS update when component mounts
+    triggerRSSUpdate();
+
     const channel = supabase
       .channel('news_updates')
       .on(
@@ -49,8 +73,9 @@ export const NewsSection = () => {
         },
         (payload) => {
           console.log('Real-time update received:', payload);
-          toast("New update available!", {
-            description: "Refresh to see the latest news.",
+          refetch();
+          toast.success("News feed updated!", {
+            description: "New content is now available.",
           });
         }
       )
@@ -59,16 +84,16 @@ export const NewsSection = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [refetch]);
 
   if (isError) {
     toast.error("Failed to load news updates");
   }
 
-  // Ensure we always have 3 items for display
+  // Ensure we always have items for display
   const displayNews = isLoading 
-    ? Array(3).fill(null) 
-    : [...news, ...Array(3).fill(null)].slice(0, 3);
+    ? Array(6).fill(null) 
+    : [...news, ...Array(6).fill(null)].slice(0, 6);
 
   return (
     <section className="py-20 bg-dark">
