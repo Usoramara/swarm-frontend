@@ -64,8 +64,8 @@ serve(async (req) => {
         const xml = await response.text()
         const rss = await parse(xml)
 
-        // Process 3 items from each feed to ensure we have enough content
-        const items = rss.entries.slice(0, 3)
+        // Process 5 items from each feed to get a total of 20 articles (4 feeds × 5 items)
+        const items = rss.entries.slice(0, 5)
 
         for (const item of items) {
           // Clean and truncate description (remove HTML tags and limit length)
