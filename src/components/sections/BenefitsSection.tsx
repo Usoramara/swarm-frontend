@@ -51,7 +51,7 @@ export const BenefitsSection = () => {
             The SWARM's mission is to <span className="gradient-text">benefit its holders</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            SWARM token holders will gain access to a suite of powerful benefits powered by our autonomous AI network to drive revenue & utility
+            The SWARM is deployed and on a mission to work 24/7 for its holders and improve their lives in any way possible
           </p>
         </motion.div>
 
