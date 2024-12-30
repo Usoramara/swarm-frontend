@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Bot, Brain, Cpu, LineChart } from "lucide-react";
+import { ArrowLeft, Bot, Brain, Cpu, LineChart, Gift, Gem, ChartLineUp, Shield, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -24,6 +24,34 @@ const Learn = () => {
       icon: <LineChart className="w-12 h-12 text-primary mb-4" />,
       title: "Value Generation",
       description: "Automated strategies focused on maximizing token holder value."
+    }
+  ];
+
+  const valueCreationFeatures = [
+    {
+      icon: <Gift className="w-12 h-12 text-primary mb-4" />,
+      title: "Airdrop Farming",
+      description: "Automated identification and participation in promising airdrops across multiple chains."
+    },
+    {
+      icon: <Gem className="w-12 h-12 text-primary mb-4" />,
+      title: "Early Opportunity Detection",
+      description: "Advanced algorithms to discover emerging projects before they gain mainstream attention."
+    },
+    {
+      icon: <ChartLineUp className="w-12 h-12 text-primary mb-4" />,
+      title: "DeFi Yield Optimization",
+      description: "Dynamic reallocation of assets to maximize yields across DeFi protocols."
+    },
+    {
+      icon: <Shield className="w-12 h-12 text-primary mb-4" />,
+      title: "Risk Management",
+      description: "Real-time monitoring and risk assessment to protect holder value."
+    },
+    {
+      icon: <Clock className="w-12 h-12 text-primary mb-4" />,
+      title: "24/7 Market Presence",
+      description: "Continuous operation and instant response to market opportunities."
     }
   ];
 
@@ -82,7 +110,7 @@ const Learn = () => {
         </div>
       </section>
 
-      {/* Technical Overview */}
+      {/* Value Creation Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 swarm-grid opacity-20" />
         <div className="absolute inset-0 bg-gradient-radial from-dark-lighter via-dark to-dark opacity-90" />
@@ -90,15 +118,33 @@ const Learn = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="max-w-3xl mx-auto text-center"
+            className="max-w-3xl mx-auto text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              <span className="gradient-text">Technical Overview</span>
+              <span className="gradient-text">Value Creation Through AI Swarms</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              SWARM leverages cutting-edge AI technology and blockchain infrastructure to create a self-sustaining ecosystem of autonomous agents. Each agent is programmed to perform specific tasks while collaborating with others to achieve optimal outcomes for token holders.
+              Our autonomous agents work together 24/7 to maximize value for token holders through sophisticated blockchain operations and market analysis.
             </p>
           </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {valueCreationFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+                className="bg-dark p-8 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors"
+              >
+                <div className="flex flex-col items-center text-center">
+                  {feature.icon}
+                  <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
+                  <p className="text-gray-300">{feature.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </main>
