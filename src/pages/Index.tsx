@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { NetworkAnimation } from "@/components/sections/NetworkAnimation";
+import { RoadmapSection } from "@/components/sections/RoadmapSection";
 import { CallToActionSection } from "@/components/sections/CallToActionSection";
 
 const Index = () => {
@@ -23,6 +24,7 @@ const Index = () => {
       <FeaturesSection />
       <AboutSection />
       <NetworkAnimation />
+      <RoadmapSection />
       <CallToActionSection />
     </main>
   );
