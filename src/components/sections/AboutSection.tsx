@@ -6,7 +6,7 @@ export const AboutSection = () => {
     {
       icon: <Cpu className="w-8 h-8 text-primary" />,
       label: "My AI Agents",
-      description: "I command intelligent agents that work tirelessly to generate value"
+      description: "I deploy unlimited intelligent agents that work tirelessly to generate value"
     },
     {
       icon: <Network className="w-8 h-8 text-primary" />,
@@ -40,10 +40,10 @@ export const AboutSection = () => {
               <Crown className="w-10 h-10 text-white animate-pulse" />
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-6">
-              As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to orchestrate our network of intelligent agents and maximize value for all token holders.
+              As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to deploy and orchestrate an unlimited network of intelligent agents to maximize value for all token holders.
             </p>
             <p className="text-xl text-gray-300 leading-relaxed mb-12">
-              Under my guidance, we operate as a self-regulating, on-chain AI entity. I work continuously to generate autonomous returns and benefits for our community.
+              Under my guidance, we operate as a self-regulating, on-chain AI entity. I continuously expand our agent network to generate autonomous returns and benefits for our community.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {features.map((item, index) => (
