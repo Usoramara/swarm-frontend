@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Rocket, Network, Bot, Coins, Gift, Key, LineChart } from "lucide-react";
+import { Rocket, Network, Bot, Coins, Gift, Key, LineChart, Zap } from "lucide-react";
 
 export const BenefitsSection = () => {
   const benefits = [
