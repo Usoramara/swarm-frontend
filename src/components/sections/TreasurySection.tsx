@@ -1,7 +1,34 @@
 import { motion } from "framer-motion";
-import { Wallet, Coins, ArrowRight } from "lucide-react";
+import { Wallet, Coins, ArrowRight, Rocket, Network, Bot, LineChart } from "lucide-react";
 
 export const TreasurySection = () => {
+  const quarters = [
+    {
+      quarter: "Q1 2025",
+      title: "Token Launch & Growth",
+      icon: <Rocket className="w-10 h-10 text-primary" />,
+      description: "Launch of SWARM token and initial community building phase"
+    },
+    {
+      quarter: "Q2 2025",
+      title: "Treasury Launch",
+      icon: <Wallet className="w-10 h-10 text-primary" />,
+      description: "Implementation of the SWARM treasury system for token holders"
+    },
+    {
+      quarter: "Q3 2025",
+      title: "AI Network Expansion",
+      icon: <Network className="w-10 h-10 text-primary" />,
+      description: "Scaling the network of AI agents and expanding operational capacity"
+    },
+    {
+      quarter: "Q4 2025",
+      title: "Advanced Trading Systems",
+      icon: <LineChart className="w-10 h-10 text-primary" />,
+      description: "Launch of sophisticated trading algorithms and market-making systems"
+    }
+  ];
+
   return (
     <section className="py-24 bg-dark relative overflow-hidden">
       <div className="absolute inset-0 swarm-grid opacity-20" />
@@ -15,73 +42,50 @@ export const TreasurySection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Claim Your Share of the <span className="gradient-text">SWARM Treasury</span>
+            The <span className="gradient-text">SWARM Roadmap</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            As the SWARM operates, it continuously builds a treasury through automated value generation
+            Our strategic timeline for building and expanding the SWARM ecosystem
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-col items-center text-center"
-          >
-            <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-6">
-              <Wallet className="w-10 h-10 text-primary" />
-            </div>
-            <h3 className="text-xl font-bold mb-3">Hold SWARM Tokens</h3>
-            <p className="text-gray-300">Your share of the treasury is proportional to your token holdings</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-col items-center text-center relative"
-          >
-            <div className="absolute top-10 -left-4 hidden md:block">
-              <ArrowRight className="w-8 h-8 text-primary animate-pulse" />
-            </div>
-            <div className="absolute top-10 -right-4 hidden md:block">
-              <ArrowRight className="w-8 h-8 text-primary animate-pulse" />
-            </div>
-            <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-6">
-              <Coins className="w-10 h-10 text-primary animate-bounce" />
-            </div>
-            <h3 className="text-xl font-bold mb-3">Treasury Grows</h3>
-            <p className="text-gray-300">AI agents work 24/7 to generate value and grow the treasury</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col items-center text-center"
-          >
-            <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-6 relative">
-              <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
-              <Wallet className="w-10 h-10 text-primary" />
-            </div>
-            <h3 className="text-xl font-bold mb-3">Claim Rewards</h3>
-            <p className="text-gray-300">Claim your proportional share of generated value from the treasury</p>
-          </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          {quarters.map((quarter, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="relative"
+            >
+              {index < quarters.length - 1 && (
+                <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                  <ArrowRight className="w-8 h-8 text-primary animate-pulse" />
+                </div>
+              )}
+              <div className="bg-dark-lighter p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                    {quarter.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-primary mb-2">{quarter.quarter}</h3>
+                  <h4 className="text-xl font-bold mb-3">{quarter.title}</h4>
+                  <p className="text-gray-300">{quarter.description}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
           className="text-center mt-16"
         >
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            The SWARM's autonomous operations continuously generate value, which accumulates in the treasury for token holders to claim
+            Join us on our journey to create a self-sustaining AI ecosystem that generates value for all SWARM token holders
           </p>
         </motion.div>
       </div>
