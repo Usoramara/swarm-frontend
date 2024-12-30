@@ -13,7 +13,7 @@ export const triggerRSSUpdate = async () => {
     if (response.error) {
       console.error('Error from RSS edge function:', response.error);
       toast.error("Failed to update RSS feeds", {
-        description: response.error.message
+        description: response.error.message || "An error occurred while fetching RSS feeds"
       });
       return false;
     }
@@ -27,13 +27,15 @@ export const triggerRSSUpdate = async () => {
       return true;
     } else {
       console.error('RSS update failed:', data);
-      toast.error("Failed to update RSS feeds");
+      toast.error("Failed to update RSS feeds", {
+        description: data?.error || "Unknown error occurred"
+      });
       return false;
     }
   } catch (error) {
     console.error('Exception during RSS update:', error);
     toast.error("Failed to update RSS feeds", {
-      description: error.message
+      description: error.message || "An unexpected error occurred"
     });
     return false;
   }
@@ -41,22 +43,27 @@ export const triggerRSSUpdate = async () => {
 
 export const fetchNews = async () => {
   console.log("Fetching news items from database...");
-  const { data, error } = await supabase
-    .from('news_items')
-    .select('*')
-    .order('published_at', { ascending: false })
-    .limit(20);
+  try {
+    const { data, error } = await supabase
+      .from('news_items')
+      .select('*')
+      .order('published_at', { ascending: false })
+      .limit(20);
 
-  if (error) {
-    console.error("Error fetching news:", error);
+    if (error) {
+      console.error("Error fetching news:", error);
+      throw error;
+    }
+
+    if (!data || data.length === 0) {
+      console.log("No news items found in the database");
+      return [];
+    }
+
+    console.log("Successfully fetched news items:", data);
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch news:", error);
     throw error;
   }
-
-  if (!data || data.length === 0) {
-    console.log("No news items found in the database");
-    return [];
-  }
-
-  console.log("Successfully fetched news items:", data);
-  return data;
 };

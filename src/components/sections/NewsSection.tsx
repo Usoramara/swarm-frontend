@@ -19,6 +19,11 @@ export const NewsSection = () => {
         console.log('RSS update successful, refetching news...');
         refetch();
       }
+    }).catch((error) => {
+      console.error('Failed to trigger RSS update:', error);
+      toast.error("Failed to update RSS feeds", {
+        description: error.message
+      });
     });
 
     const channel = supabase

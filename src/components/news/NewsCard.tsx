@@ -11,11 +11,19 @@ interface NewsItem {
 }
 
 interface NewsCardProps {
-  item: NewsItem;
+  item: Omit<NewsItem, 'tag'> & { tag: string };
   index: number;
 }
 
+// Helper function to validate tag
+const validateTag = (tag: string): NewsItem['tag'] => {
+  const validTags = ['Development', 'Impact', 'Community'] as const;
+  return validTags.includes(tag as any) ? (tag as NewsItem['tag']) : 'Development';
+};
+
 export const NewsCard = ({ item, index }: NewsCardProps) => {
+  const validatedTag = validateTag(item.tag);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -35,11 +43,11 @@ export const NewsCard = ({ item, index }: NewsCardProps) => {
       <div className="flex justify-between items-start mb-4">
         <span className={`
           px-3 py-1 rounded-full text-sm font-medium
-          ${item.tag === 'Development' ? 'bg-primary/20 text-primary' : ''}
-          ${item.tag === 'Impact' ? 'bg-secondary/20 text-secondary' : ''}
-          ${item.tag === 'Community' ? 'bg-purple-500/20 text-purple-500' : ''}
+          ${validatedTag === 'Development' ? 'bg-primary/20 text-primary' : ''}
+          ${validatedTag === 'Impact' ? 'bg-secondary/20 text-secondary' : ''}
+          ${validatedTag === 'Community' ? 'bg-purple-500/20 text-purple-500' : ''}
         `}>
-          {item.tag}
+          {validatedTag}
         </span>
         <span className="text-sm text-gray-400">
           {new Date(item.published_at).toLocaleDateString()}
