@@ -26,7 +26,7 @@ export const AboutSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-dark relative overflow-hidden">
+    <section id="about-section" className="py-24 bg-dark relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-12">
           <motion.div 
