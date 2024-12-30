@@ -45,7 +45,7 @@ export const TreasurySection = () => {
             Claim Your Share of the <span className="gradient-text">SWARM Treasury</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            As the SWARM operates, it continuously builds a treasury through automated value generation
+            As the SWARM operates under the guidance of SWARM MASTER, our autonomous agent, it continuously builds a treasury through automated value generation
           </p>
         </motion.div>
 
@@ -110,7 +110,7 @@ export const TreasurySection = () => {
             2025 <span className="gradient-text">Roadmap</span>
           </h3>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12">
-            SWARM's autonomous agent continuously optimizes the roadmap based on market conditions and community needs
+            SWARM MASTER, our autonomous agent, continuously optimizes the roadmap based on market conditions and community needs
           </p>
         </motion.div>
 
