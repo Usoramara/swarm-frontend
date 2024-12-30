@@ -27,6 +27,7 @@ export default {
         primary: {
           DEFAULT: "#ACFF00",
           hover: "#BDFF33",
+          foreground: "#000000",
         },
         secondary: {
           DEFAULT: "#00F0FF",
