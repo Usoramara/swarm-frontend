@@ -109,8 +109,11 @@ export const TreasurySection = () => {
           <h3 className="text-3xl font-bold mb-6">
             2025 <span className="gradient-text">Roadmap</span>
           </h3>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-4">
             Our strategic plan for implementing and growing the SWARM Treasury
+          </p>
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12">
+            This roadmap is dynamically adjusted by SWARM's autonomous agent based on market conditions and community needs
           </p>
         </motion.div>
 
