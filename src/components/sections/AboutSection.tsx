@@ -22,7 +22,17 @@ export const AboutSection = () => {
     {
       icon: <Coins className="w-8 h-8 text-primary" />,
       label: "Your Benefits",
-      description: "I distribute value directly to all SWARM holders"
+      description: "I distribute value directly to all SWARM holders",
+      action: (
+        <Button 
+          variant="ghost"
+          size="sm"
+          className="mt-4 border-2 border-primary hover:bg-primary/10 px-6 py-2 rounded-full font-display font-bold transition-colors group text-sm"
+        >
+          Learn about token benefits
+          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </Button>
+      )
     },
   ];
 
@@ -46,7 +56,7 @@ export const AboutSection = () => {
             <p className="text-xl text-gray-300 leading-relaxed mb-12">
               Under my guidance, we operate as a self-regulating, on-chain AI entity. I work continuously to generate autonomous returns and benefits for our community.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {features.map((item, index) => (
                 <motion.div
                   key={index}
@@ -58,24 +68,10 @@ export const AboutSection = () => {
                   <div className="mb-4">{item.icon}</div>
                   <h3 className="text-lg font-medium mb-2">{item.label}</h3>
                   <p className="text-sm text-gray-400">{item.description}</p>
+                  {item.action}
                 </motion.div>
               ))}
             </div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex justify-start"
-            >
-              <Button 
-                variant="ghost"
-                size="sm"
-                className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors group"
-              >
-                Learn about token benefits
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
           </motion.div>
           
           <motion.div 
