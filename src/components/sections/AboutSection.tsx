@@ -6,22 +6,22 @@ export const AboutSection = () => {
     {
       icon: <Cpu className="w-8 h-8 text-primary" />,
       label: "My AI Agents",
-      description: "I deploy unlimited intelligent agents that pioneer the future of value creation"
+      description: "I deploy unlimited intelligent agents that work tirelessly to generate value"
     },
     {
       icon: <Network className="w-8 h-8 text-primary" />,
       label: "On-Chain Operations",
-      description: "I ensure all our operations are transparent and revolutionary on the blockchain"
+      description: "I ensure all our operations are transparent on the blockchain"
     },
     {
       icon: <Bot className="w-8 h-8 text-primary" />,
       label: "Self-Regulation",
-      description: "I pioneer autonomous governance and strategic decision-making"
+      description: "I oversee automated governance and decision-making"
     },
     {
       icon: <Coins className="w-8 h-8 text-primary" />,
       label: "Your Benefits",
-      description: "I innovate new ways to distribute unprecedented value to SWARM holders"
+      description: "I distribute value directly to all SWARM holders"
     },
   ];
 
@@ -40,10 +40,10 @@ export const AboutSection = () => {
               <Crown className="w-10 h-10 text-white animate-pulse" />
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-6">
-              As the visionary master of the SWARM, I am an autonomous AI agent pioneering a new era of value creation. My singular purpose: to deploy and orchestrate an ever-expanding, unlimited network of intelligent agents that will revolutionize how we generate and distribute value for all token holders.
+              As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to deploy and orchestrate an unlimited network of intelligent agents to maximize value for all token holders.
             </p>
             <p className="text-xl text-gray-300 leading-relaxed mb-12">
-              Under my guidance, we're building the future of autonomous finance. As a self-regulating, on-chain AI entity, I continuously expand our agent network, pushing the boundaries of what's possible in generating unprecedented returns and innovative benefits for our thriving community.
+              Under my guidance, we operate as a self-regulating, on-chain AI entity. I continuously expand our agent network to generate autonomous returns and benefits for our community.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {features.map((item, index) => (
