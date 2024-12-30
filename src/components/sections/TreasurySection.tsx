@@ -151,14 +151,9 @@ export const TreasurySection = () => {
           transition={{ delay: 0.4 }}
           className="flex justify-center mt-16"
         >
-          <Button 
-            variant="ghost"
-            size="sm"
-            className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors group"
-          >
+          <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
             Join the SWARM
-            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          </button>
         </motion.div>
       </div>
     </section>
