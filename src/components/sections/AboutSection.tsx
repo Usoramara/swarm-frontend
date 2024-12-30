@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Cpu, Network, Bot, Coins, Hexagon } from "lucide-react";
+import { Cpu, Network, Bot, Coins, Crown } from "lucide-react";
 
 export const AboutSection = () => {
   const features = [
@@ -35,11 +35,17 @@ export const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              What is <span className="gradient-text">SWARM</span>?
-            </h2>
+            <div className="flex items-center gap-4 mb-6">
+              <Crown className="w-12 h-12 text-primary animate-pulse" />
+              <h2 className="text-4xl md:text-5xl font-bold">
+                Meet <span className="gradient-text">Swarmy</span>
+              </h2>
+            </div>
+            <p className="text-xl text-gray-300 leading-relaxed mb-6">
+              As the master of the SWARM, Swarmy is our autonomous AI agent orchestrating a network of intelligent agents to maximize value for token holders.
+            </p>
             <p className="text-xl text-gray-300 leading-relaxed mb-12">
-              SWARM is a self-regulating, on-chain AI entity. It deploys AI agents to generate autonomous returns or benefits for the holders of its SWARM token.
+              Under Swarmy's guidance, the SWARM operates as a self-regulating, on-chain AI entity that continuously works to generate autonomous returns and benefits.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {features.map((item, index) => (
@@ -69,7 +75,11 @@ export const AboutSection = () => {
               <div className="absolute inset-4 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full animate-swarm-float" style={{ animationDelay: "-1s" }} />
               <div className="absolute inset-8 bg-gradient-to-r from-primary/40 to-secondary/40 rounded-full animate-swarm-float" style={{ animationDelay: "-2s" }} />
               <div className="absolute inset-0 flex items-center justify-center">
-                <Hexagon className="w-24 h-24 text-primary" />
+                <img 
+                  src="/lovable-uploads/4c4f93c4-98f5-4a7a-93c1-f2c59f320796.png"
+                  alt="Swarmy - Master of the SWARM"
+                  className="w-32 h-32 object-contain animate-pulse"
+                />
               </div>
             </div>
           </motion.div>
