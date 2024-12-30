@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Hexagon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface HeroSectionProps {
   mousePosition: { x: number; y: number };
@@ -33,9 +34,11 @@ export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
             <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
               Buy SWARM
             </button>
-            <button className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
-              Learn More
-            </button>
+            <Link to="/learn">
+              <button className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
+                Learn More
+              </button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
