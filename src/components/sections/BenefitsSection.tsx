@@ -1,37 +1,37 @@
 import { motion } from "framer-motion";
-import { Award, DollarSign, Network, Handshake, Shield, Rocket, Zap } from "lucide-react";
+import { Rocket, Network, DollarSign, Zap, Gift, Key, LineChart } from "lucide-react";
 
 export const BenefitsSection = () => {
   const benefits = [
     {
-      icon: <DollarSign className="w-12 h-12 text-primary mb-4" />,
-      title: "Passive Income",
-      description: "Earn continuous rewards from AI agent operations across multiple blockchain networks"
+      icon: <Gift className="w-12 h-12 text-primary mb-4" />,
+      title: "Airdrop Farming",
+      description: "Access exclusive airdrop opportunities across multiple blockchain networks through our AI-powered tracking system"
     },
     {
-      icon: <Network className="w-12 h-12 text-primary mb-4" />,
-      title: "AI Network Access",
-      description: "Get exclusive access to SWARM's advanced network of AI agents for trading and analytics"
-    },
-    {
-      icon: <Zap className="w-12 h-12 text-primary mb-4" />,
-      title: "First-Mover Advantage",
-      description: "Access new features, strategies, and market opportunities before they go public"
-    },
-    {
-      icon: <Handshake className="w-12 h-12 text-primary mb-4" />,
-      title: "DAO Governance",
-      description: "Shape the future of SWARM by voting on key protocol decisions and upgrades"
-    },
-    {
-      icon: <Shield className="w-12 h-12 text-primary mb-4" />,
-      title: "Risk Management",
-      description: "Benefit from AI-powered security protocols and automated risk mitigation"
+      icon: <Key className="w-12 h-12 text-primary mb-4" />,
+      title: "Whitelist Access",
+      description: "Get priority access to promising new projects and token launches before they go public"
     },
     {
       icon: <Rocket className="w-12 h-12 text-primary mb-4" />,
-      title: "Token Value Growth",
-      description: "Participate in the network's expansion as AI capabilities and adoption grow"
+      title: "Launchpad Access",
+      description: "Participate in carefully vetted token launches and IDOs with preferential allocation"
+    },
+    {
+      icon: <LineChart className="w-12 h-12 text-primary mb-4" />,
+      title: "Arbitrage Trading",
+      description: "Leverage AI-powered arbitrage opportunities across DEXs and chains for optimal returns"
+    },
+    {
+      icon: <Network className="w-12 h-12 text-primary mb-4" />,
+      title: "Network Access",
+      description: "Utilize our advanced network of AI agents for trading, analytics, and market insights"
+    },
+    {
+      icon: <Zap className="w-12 h-12 text-primary mb-4" />,
+      title: "Growth Potential",
+      description: "Benefit from increasing token value as our AI network expands and utility grows"
     }
   ];
 
@@ -48,10 +48,10 @@ export const BenefitsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Unlock <span className="gradient-text">Exclusive Benefits</span>
+            Token Holder <span className="gradient-text">Benefits</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            SWARM token holders gain access to a suite of powerful benefits powered by our autonomous AI network
+            SWARM token holders gain access to a suite of powerful benefits powered by our autonomous AI network to drive revenue & utility
           </p>
         </motion.div>
 
