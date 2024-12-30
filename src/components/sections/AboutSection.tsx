@@ -4,22 +4,22 @@ import { Cpu, Network, Bot, Coins, Hexagon } from "lucide-react";
 export const AboutSection = () => {
   const features = [
     {
-      icon: <Cpu className="w-10 h-10 text-primary" />,
+      icon: <Cpu className="w-8 h-8 text-primary" />,
       label: "AI Agents",
       description: "Intelligent agents working autonomously to generate value"
     },
     {
-      icon: <Network className="w-10 h-10 text-primary" />,
+      icon: <Network className="w-8 h-8 text-primary" />,
       label: "On-Chain",
       description: "Fully transparent operations on the blockchain"
     },
     {
-      icon: <Bot className="w-10 h-10 text-primary" />,
+      icon: <Bot className="w-8 h-8 text-primary" />,
       label: "Self-Regulating",
       description: "Automated governance and decision-making processes"
     },
     {
-      icon: <Coins className="w-10 h-10 text-primary" />,
+      icon: <Coins className="w-8 h-8 text-primary" />,
       label: "Token Benefits",
       description: "Direct value distribution to SWARM holders"
     },
@@ -41,18 +41,18 @@ export const AboutSection = () => {
             <p className="text-xl text-gray-300 leading-relaxed mb-12">
               SWARM is a self-regulating, on-chain AI entity. It deploys AI agents to generate autonomous returns or benefits for the holders of its SWARM token.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {features.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex flex-col items-center p-6 rounded-xl bg-dark-lighter border border-primary/20 hover:border-primary/40 transition-colors"
+                  className="group flex flex-col p-6 rounded-lg hover:bg-dark-lighter transition-colors duration-300"
                 >
                   <div className="mb-4">{item.icon}</div>
-                  <h3 className="text-lg font-bold mb-2">{item.label}</h3>
-                  <p className="text-sm text-gray-400 text-center">{item.description}</p>
+                  <h3 className="text-lg font-medium mb-2">{item.label}</h3>
+                  <p className="text-sm text-gray-400">{item.description}</p>
                 </motion.div>
               ))}
             </div>
