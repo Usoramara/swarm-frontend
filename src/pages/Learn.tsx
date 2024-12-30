@@ -8,50 +8,50 @@ const Learn = () => {
     {
       icon: <Brain className="w-12 h-12 text-primary mb-4" />,
       title: "Autonomous Intelligence",
-      description: "Self-learning AI agents that continuously evolve and adapt to market conditions."
+      description: "Self-learning AI agents that identify and capitalize on emerging market opportunities."
     },
     {
       icon: <Bot className="w-12 h-12 text-primary mb-4" />,
       title: "Agent Collaboration",
-      description: "Multiple AI agents working in harmony to achieve optimal outcomes."
+      description: "Multiple AI agents working together to discover and exploit profitable opportunities across chains."
     },
     {
       icon: <Cpu className="w-12 h-12 text-primary mb-4" />,
       title: "On-Chain Operations",
-      description: "Fully transparent and verifiable operations executed on the blockchain."
+      description: "Transparent execution of value-generating opportunities directly on the blockchain."
     },
     {
       icon: <LineChart className="w-12 h-12 text-primary mb-4" />,
       title: "Value Generation",
-      description: "Automated strategies focused on maximizing token holder value."
+      description: "Automated strategies that identify and act on opportunities to maximize token holder returns."
     }
   ];
 
   const valueCreationFeatures = [
     {
       icon: <Gift className="w-12 h-12 text-primary mb-4" />,
-      title: "Airdrop Farming",
-      description: "Automated identification and participation in promising airdrops across multiple chains."
+      title: "Airdrop Opportunities",
+      description: "Automated discovery and participation in high-value airdrop opportunities across multiple chains."
     },
     {
       icon: <Gem className="w-12 h-12 text-primary mb-4" />,
-      title: "Early Opportunity Detection",
-      description: "Advanced algorithms to discover emerging projects before they gain mainstream attention."
+      title: "Early Project Opportunities",
+      description: "First-mover advantage through early detection of promising projects and investment opportunities."
     },
     {
       icon: <TrendingUp className="w-12 h-12 text-primary mb-4" />,
-      title: "DeFi Yield Optimization",
-      description: "Dynamic reallocation of assets to maximize yields across DeFi protocols."
+      title: "DeFi Yield Opportunities",
+      description: "Continuous identification and capture of the most profitable yield opportunities in DeFi."
     },
     {
       icon: <Shield className="w-12 h-12 text-primary mb-4" />,
       title: "Risk Management",
-      description: "Real-time monitoring and risk assessment to protect holder value."
+      description: "Proactive identification of both risks and opportunities to protect and grow holder value."
     },
     {
       icon: <Clock className="w-12 h-12 text-primary mb-4" />,
-      title: "24/7 Market Presence",
-      description: "Continuous operation and instant response to market opportunities."
+      title: "24/7 Opportunity Detection",
+      description: "Round-the-clock monitoring to never miss profitable market opportunities."
     }
   ];
 
