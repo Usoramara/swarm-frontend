@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
 const Whitelist = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -18,12 +17,11 @@ const Whitelist = () => {
     try {
       const { error } = await supabase
         .from('whitelist_signups')
-        .insert([{ email }]);
+        .insert({ email });
 
       if (error) throw error;
 
-      toast({
-        title: "Success!",
+      toast.success("Success!", {
         description: "You've been added to the whitelist. We'll contact you soon!",
       });
 
@@ -31,13 +29,11 @@ const Whitelist = () => {
       setTimeout(() => navigate('/'), 2000);
     } catch (error: any) {
       console.error('Error signing up for whitelist:', error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error.message === 'duplicate key value violates unique constraint "whitelist_signups_email_key"'
+      toast.error(
+        error.message === 'duplicate key value violates unique constraint "whitelist_signups_email_key"'
           ? "This email is already on the whitelist!"
-          : "Failed to join whitelist. Please try again.",
-      });
+          : "Failed to join whitelist. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
