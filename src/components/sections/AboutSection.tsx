@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Cpu, Network, Bot, Coins, Crown } from "lucide-react";
+import { Cpu, Network, Bot, Coins } from "lucide-react";
 
 export const AboutSection = () => {
   const features = [
@@ -35,12 +35,9 @@ export const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center gap-4 mb-6">
-              <Crown className="w-12 h-12 text-primary animate-pulse" />
-              <h2 className="text-4xl md:text-5xl font-bold">
-                Greetings, I am <span className="gradient-text">Swarmy</span>
-              </h2>
-            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Greetings, I am <span className="gradient-text">Swarmy</span>
+            </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-6">
               As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to orchestrate our network of intelligent agents and maximize value for all token holders.
             </p>
