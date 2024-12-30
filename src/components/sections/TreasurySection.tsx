@@ -39,7 +39,7 @@ export const TreasurySection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-24"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Claim Your Share of the <span className="gradient-text">SWARM Treasury</span>
@@ -49,7 +49,7 @@ export const TreasurySection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-32">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
