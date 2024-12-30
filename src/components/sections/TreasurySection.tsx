@@ -156,7 +156,7 @@ export const TreasurySection = () => {
             size="sm"
             className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors group"
           >
-            Learn about token benefits
+            Join the SWARM
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </motion.div>
