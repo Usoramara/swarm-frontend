@@ -119,7 +119,7 @@ export const NetworkAnimation = () => {
             className="text-lg md:text-xl text-gray-300 mt-6 leading-relaxed max-w-3xl mx-auto"
           >
             SWARM's network of AI agents continuously evolves and expands, working in perfect harmony
-            to grow the treasury that token holders can claim from through automated trading, risk management, and market analysis
+            to maximize value for token holders through automated trading, risk management, and market analysis
           </motion.p>
         </motion.div>
       </div>

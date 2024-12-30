@@ -5,8 +5,8 @@ export const BenefitsSection = () => {
   const benefits = [
     {
       icon: <Gift className="w-12 h-12 text-primary mb-4" />,
-      title: "Treasury Claims",
-      description: "Claim your share of the SWARM treasury based on your token holdings, as value is generated through AI operations"
+      title: "Airdrop Farming",
+      description: "Access exclusive airdrop opportunities across multiple blockchain networks through our AI-powered tracking system"
     },
     {
       icon: <Key className="w-12 h-12 text-primary mb-4" />,
@@ -21,17 +21,17 @@ export const BenefitsSection = () => {
     {
       icon: <LineChart className="w-12 h-12 text-primary mb-4" />,
       title: "Arbitrage Trading",
-      description: "Value generated from AI-powered arbitrage opportunities flows directly to the treasury for holder claims"
+      description: "Leverage AI-powered arbitrage opportunities across DEXs and chains for optimal returns"
     },
     {
       icon: <Network className="w-12 h-12 text-primary mb-4" />,
       title: "Network Access",
-      description: "Utilize our advanced network of AI agents that work to grow the treasury for token holders"
+      description: "Utilize our advanced network of AI agents for trading, analytics, and market insights"
     },
     {
       icon: <Zap className="w-12 h-12 text-primary mb-4" />,
       title: "Growth Potential",
-      description: "Benefit from an expanding treasury as our AI network grows and generates more value"
+      description: "Benefit from increasing token value as our AI network expands and utility grows"
     }
   ];
 
@@ -51,7 +51,7 @@ export const BenefitsSection = () => {
             The SWARM's mission is to <span className="gradient-text">benefit its holders</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            The SWARM builds and grows a treasury that token holders can claim from based on their holdings
+            The SWARM shall be deployed to work 24/7 for its holders and improve their lives and wealth in any way possible
           </p>
         </motion.div>
 
@@ -81,7 +81,7 @@ export const BenefitsSection = () => {
           className="text-center mt-16"
         >
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            SWARM exists to build a sustainable treasury that token holders can claim from through cutting-edge AI technology and decentralized innovation
+            SWARM exists to maximize value for token holders through cutting-edge AI technology and decentralized innovation
           </p>
         </motion.div>
       </div>
