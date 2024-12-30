@@ -4,6 +4,7 @@ import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { NetworkAnimation } from "@/components/sections/NetworkAnimation";
 import { BenefitsSection } from "@/components/sections/BenefitsSection";
+import { TreasurySection } from "@/components/sections/TreasurySection";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -23,6 +24,7 @@ const Index = () => {
       <AboutSection />
       <BenefitsSection />
       <NetworkAnimation />
+      <TreasurySection />
       <FeaturesSection />
     </main>
   );
