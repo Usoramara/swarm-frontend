@@ -9,6 +9,16 @@ const Footer = () => {
     window.scrollTo(0, 0);
   };
 
+  const scrollToAbout = () => {
+    // First wait for navigation to complete
+    setTimeout(() => {
+      const aboutSection = document.getElementById('about-section');
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <footer className="bg-dark-lighter relative overflow-hidden">
       <div className="absolute inset-0 swarm-grid opacity-20" />
@@ -27,7 +37,7 @@ const Footer = () => {
               Buy SWARM
             </button>
             {isLearnPage ? (
-              <Link to="/" onClick={scrollToTop}>
+              <Link to="/" onClick={scrollToAbout}>
                 <button 
                   className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
                 >
