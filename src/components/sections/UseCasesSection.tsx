@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { Robot, Network, ChartBar, Globe } from "lucide-react";
+import { Bot, Network, ChartBar, Globe } from "lucide-react";
 
 export const UseCasesSection = () => {
   const useCases = [
     {
-      icon: <Robot className="w-12 h-12 mb-4 text-primary" />,
+      icon: <Bot className="w-12 h-12 mb-4 text-primary" />,
       title: "DeFi Operations",
       description: "Autonomous trading, yield farming, and liquidity provision across DeFi protocols",
       imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
