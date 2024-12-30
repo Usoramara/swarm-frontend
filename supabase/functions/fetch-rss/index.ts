@@ -8,6 +8,7 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
@@ -21,7 +22,7 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    // RSS feed URLs from reputable sources with their corresponding tags
+    // RSS feed URLs with their corresponding tags
     const feeds = [
       {
         url: 'https://news.google.com/rss/search?q=artificial+intelligence+swarm&hl=en-US&gl=US&ceid=US:en',
@@ -46,7 +47,7 @@ serve(async (req) => {
     const { error: deleteError } = await supabaseClient
       .from('news_items')
       .delete()
-      .neq('id', '00000000-0000-0000-0000-000000000000') // Delete all rows
+      .neq('id', '00000000-0000-0000-0000-000000000000')
 
     if (deleteError) {
       console.error('Error clearing existing news items:', deleteError);
@@ -66,7 +67,12 @@ serve(async (req) => {
       console.log(`Fetching feed from: ${feed.url}`);
       
       try {
-        const response = await fetch(feed.url);
+        const response = await fetch(feed.url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (compatible; SWARM/1.0; +http://swarm.ai)'
+          }
+        });
+        
         if (!response.ok) {
           console.error(`Failed to fetch ${feed.url}: ${response.statusText}`);
           continue;
@@ -127,6 +133,7 @@ serve(async (req) => {
 
     return new Response(
       JSON.stringify({ 
+        success: true,
         message: 'RSS feeds processed successfully',
         itemsInserted: successfulInserts 
       }),
@@ -139,6 +146,7 @@ serve(async (req) => {
     console.error('Error processing RSS feeds:', error);
     return new Response(
       JSON.stringify({ 
+        success: false,
         error: error.message,
         details: error.stack 
       }),
