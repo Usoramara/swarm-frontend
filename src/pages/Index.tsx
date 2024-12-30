@@ -24,8 +24,8 @@ const Index = () => {
       <AboutSection />
       <FeaturesSection />
       <NetworkAnimation />
-      <UseCasesSection />
       <NewsSection />
+      <UseCasesSection />
     </main>
   );
 };
