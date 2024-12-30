@@ -63,9 +63,9 @@ const Learn = () => {
   return (
     <main className="min-h-screen bg-dark">
       {/* Navigation */}
-      <nav className="absolute top-0 left-0 p-6">
+      <nav className="absolute top-0 left-0 p-6 z-50">
         <Link to="/">
-          <Button variant="ghost" className="text-white hover:text-primary">
+          <Button variant="outline" className="hover:bg-primary/20">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
