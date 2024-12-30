@@ -43,7 +43,7 @@ export const AboutSection = () => {
               As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to deploy and orchestrate an unlimited network of intelligent agents.
             </p>
             <p className="text-xl text-gray-300 leading-relaxed mb-12">
-              Under my guidance, we operate as a self-regulating, on-chain AI entity. I continuously expand our agent network to generate autonomous returns and benefits for our community.
+              Under my guidance, we operate as a self-regulating, on-chain AI entity. I continuously expand our agent network to generate autonomous returns and benefits for our token holders.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {features.map((item, index) => (
