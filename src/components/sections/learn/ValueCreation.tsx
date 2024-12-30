@@ -52,7 +52,7 @@ export const ValueCreation = () => {
             <span className="gradient-text">Value Creation Through AI Swarms</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-            The SWARM work together 24/7 to maximize value for token holders through sophisticated blockchain operations and market analysis.
+            The SWARM operates continuously to maximize value for token holders through sophisticated blockchain operations and market analysis.
           </p>
         </motion.div>
 
