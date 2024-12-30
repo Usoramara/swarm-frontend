@@ -121,18 +121,6 @@ export const NetworkAnimation = () => {
             SWARM's network of AI agents continuously evolves and expands, working in perfect harmony
             to maximize value for token holders through automated trading, risk management, and market analysis
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="mt-12"
-          >
-            <div className="inline-flex items-center justify-center px-6 py-3 border border-primary/20 rounded-lg bg-dark/60 backdrop-blur-sm">
-              <span className="text-primary font-semibold">24/7 Autonomous Operation</span>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
