@@ -5,23 +5,23 @@ export const AboutSection = () => {
   const features = [
     {
       icon: <Cpu className="w-8 h-8 text-primary" />,
-      label: "AI Agents",
-      description: "Intelligent agents working autonomously to generate value"
+      label: "My AI Agents",
+      description: "I command intelligent agents that work tirelessly to generate value"
     },
     {
       icon: <Network className="w-8 h-8 text-primary" />,
-      label: "On-Chain",
-      description: "Fully transparent operations on the blockchain"
+      label: "On-Chain Operations",
+      description: "I ensure all our operations are transparent on the blockchain"
     },
     {
       icon: <Bot className="w-8 h-8 text-primary" />,
-      label: "Self-Regulating",
-      description: "Automated governance and decision-making processes"
+      label: "Self-Regulation",
+      description: "I oversee automated governance and decision-making"
     },
     {
       icon: <Coins className="w-8 h-8 text-primary" />,
-      label: "Token Benefits",
-      description: "Direct value distribution to SWARM holders"
+      label: "Your Benefits",
+      description: "I distribute value directly to all SWARM holders"
     },
   ];
 
@@ -38,14 +38,14 @@ export const AboutSection = () => {
             <div className="flex items-center gap-4 mb-6">
               <Crown className="w-12 h-12 text-primary animate-pulse" />
               <h2 className="text-4xl md:text-5xl font-bold">
-                Meet <span className="gradient-text">Swarmy</span>
+                Greetings, I am <span className="gradient-text">Swarmy</span>
               </h2>
             </div>
             <p className="text-xl text-gray-300 leading-relaxed mb-6">
-              As the master of the SWARM, Swarmy is our autonomous AI agent orchestrating a network of intelligent agents to maximize value for token holders.
+              As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to orchestrate our network of intelligent agents and maximize value for all token holders.
             </p>
             <p className="text-xl text-gray-300 leading-relaxed mb-12">
-              Under Swarmy's guidance, the SWARM operates as a self-regulating, on-chain AI entity that continuously works to generate autonomous returns and benefits.
+              Under my guidance, we operate as a self-regulating, on-chain AI entity. I work continuously to generate autonomous returns and benefits for our community.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {features.map((item, index) => (
