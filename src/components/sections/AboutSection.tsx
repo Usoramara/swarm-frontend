@@ -4,20 +4,24 @@ import { Cpu, Network, Bot, Coins, Hexagon } from "lucide-react";
 export const AboutSection = () => {
   const features = [
     {
-      icon: <Cpu className="w-8 h-8 text-primary mb-2" />,
+      icon: <Cpu className="w-10 h-10 text-primary" />,
       label: "AI Agents",
+      description: "Intelligent agents working autonomously to generate value"
     },
     {
-      icon: <Network className="w-8 h-8 text-primary mb-2" />,
+      icon: <Network className="w-10 h-10 text-primary" />,
       label: "On-Chain",
+      description: "Fully transparent operations on the blockchain"
     },
     {
-      icon: <Bot className="w-8 h-8 text-primary mb-2" />,
+      icon: <Bot className="w-10 h-10 text-primary" />,
       label: "Self-Regulating",
+      description: "Automated governance and decision-making processes"
     },
     {
-      icon: <Coins className="w-8 h-8 text-primary mb-2" />,
+      icon: <Coins className="w-10 h-10 text-primary" />,
       label: "Token Benefits",
+      description: "Direct value distribution to SWARM holders"
     },
   ];
 
@@ -34,20 +38,21 @@ export const AboutSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               What is <span className="gradient-text">SWARM</span>?
             </h2>
-            <p className="text-xl text-gray-300 leading-relaxed mb-8">
+            <p className="text-xl text-gray-300 leading-relaxed mb-12">
               SWARM is a self-regulating, on-chain AI entity. It deploys AI agents to generate autonomous returns or benefits for the holders of its SWARM token.
             </p>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {features.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-center p-4 rounded-lg bg-dark-lighter"
+                  className="flex flex-col items-center p-6 rounded-xl bg-dark-lighter border border-primary/20 hover:border-primary/40 transition-colors"
                 >
-                  {item.icon}
-                  <p className="text-sm font-medium">{item.label}</p>
+                  <div className="mb-4">{item.icon}</div>
+                  <h3 className="text-lg font-bold mb-2">{item.label}</h3>
+                  <p className="text-sm text-gray-400 text-center">{item.description}</p>
                 </motion.div>
               ))}
             </div>
