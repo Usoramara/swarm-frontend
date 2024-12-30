@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Bot, Brain, Cpu, LineChart, Gift, Gem, TrendingUp, Clock, Zap, Target } from "lucide-react";
+import { ArrowLeft, Brain, Bot, Cpu, LineChart, Network, Rocket, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -27,38 +27,59 @@ const Learn = () => {
     }
   ];
 
-  const valueCreationFeatures = [
+  const roadmapFeatures = [
     {
-      icon: <Gift className="w-12 h-12 text-primary mb-4" />,
-      title: "Airdrop Opportunities",
-      description: "Automated discovery and participation in high-value airdrop opportunities across multiple chains."
+      icon: <Network className="w-12 h-12 text-primary mb-4" />,
+      title: "Autonomous Network Formation",
+      description: "Development of self-organizing AI agent networks that collaborate to identify and execute opportunities."
     },
     {
-      icon: <Gem className="w-12 h-12 text-primary mb-4" />,
-      title: "Early Project Opportunities",
-      description: "First-mover advantage through early detection of promising projects and investment opportunities."
+      icon: <Brain className="w-12 h-12 text-primary mb-4" />,
+      title: "Advanced Pattern Recognition",
+      description: "Implementation of sophisticated market analysis capabilities across multiple chains and protocols."
     },
     {
-      icon: <TrendingUp className="w-12 h-12 text-primary mb-4" />,
-      title: "DeFi Yield Opportunities",
-      description: "Continuous identification and capture of the most profitable yield opportunities in DeFi."
+      icon: <Bot className="w-12 h-12 text-primary mb-4" />,
+      title: "Multi-Agent Coordination",
+      description: "Creation of complex coordination systems enabling agents to work together on sophisticated strategies."
     },
     {
-      icon: <Clock className="w-12 h-12 text-primary mb-4" />,
-      title: "24/7 Opportunity Detection",
-      description: "Round-the-clock monitoring to never miss profitable market opportunities."
+      icon: <Shield className="w-12 h-12 text-primary mb-4" />,
+      title: "Automated Value Protection",
+      description: "Development of systems to automatically secure and optimize value across market conditions."
     },
     {
-      icon: <Zap className="w-12 h-12 text-primary mb-4" />,
-      title: "MEV Opportunities",
-      description: "Intelligent detection and capture of MEV opportunities across multiple chains and protocols."
+      icon: <Rocket className="w-12 h-12 text-primary mb-4" />,
+      title: "Opportunity Execution",
+      description: "Implementation of high-speed, efficient execution systems across multiple chains and protocols."
     },
     {
-      icon: <Target className="w-12 h-12 text-primary mb-4" />,
-      title: "Token Launch Opportunities",
-      description: "Strategic participation in promising token launches and initial offerings across different platforms."
+      icon: <LineChart className="w-12 h-12 text-primary mb-4" />,
+      title: "Portfolio Optimization",
+      description: "Creation of advanced portfolio management systems using collective AI intelligence."
     }
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
 
   return (
     <main className="min-h-screen bg-dark">
@@ -115,7 +136,7 @@ const Learn = () => {
         </div>
       </section>
 
-      {/* Value Creation Section */}
+      {/* Development Roadmap Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 swarm-grid opacity-20" />
         <div className="absolute inset-0 bg-gradient-radial from-dark-lighter via-dark to-dark opacity-90" />
@@ -126,21 +147,24 @@ const Learn = () => {
             className="max-w-3xl mx-auto text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              <span className="gradient-text">Value Creation Through AI Swarms</span>
+              <span className="gradient-text">Development Roadmap</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              Our autonomous agents work together 24/7 to maximize value for token holders through sophisticated blockchain operations and market analysis.
+              Our vision for building the next generation of autonomous AI agents, working together to maximize value creation.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {valueCreationFeatures.map((feature, index) => (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {roadmapFeatures.map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-dark p-8 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors"
+                variants={itemVariants}
+                className="bg-dark p-8 rounded-lg border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:transform hover:scale-105"
               >
                 <div className="flex flex-col items-center text-center">
                   {feature.icon}
@@ -149,7 +173,7 @@ const Learn = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </main>
