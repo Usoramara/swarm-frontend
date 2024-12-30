@@ -68,11 +68,12 @@ export const AboutSection = () => {
               className="flex justify-start"
             >
               <Button 
-                size="lg"
-                className="bg-primary hover:bg-primary-hover text-dark font-semibold group"
+                variant="ghost"
+                size="sm"
+                className="text-primary hover:text-primary-hover hover:bg-primary/5 font-medium group"
               >
-                Join the SWARM
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                Learn about token benefits
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
           </motion.div>
