@@ -41,6 +41,16 @@ serve(async (req) => {
 
     console.log('Starting RSS feed processing...');
 
+    // First, clear existing news items to ensure fresh content
+    const { error: deleteError } = await supabaseClient
+      .from('news_items')
+      .delete()
+      .neq('id', '00000000-0000-0000-0000-000000000000') // Delete all rows
+
+    if (deleteError) {
+      console.error('Error clearing existing news items:', deleteError);
+    }
+
     // Fetch and process each feed
     for (const feed of feeds) {
       console.log(`Fetching feed from: ${feed.url}`);
@@ -54,8 +64,8 @@ serve(async (req) => {
         const xml = await response.text()
         const rss = await parse(xml)
 
-        // Process only the latest 2 items from each feed
-        const items = rss.entries.slice(0, 2)
+        // Process 3 items from each feed to ensure we have enough content
+        const items = rss.entries.slice(0, 3)
 
         for (const item of items) {
           // Clean and truncate description (remove HTML tags and limit length)
@@ -73,12 +83,10 @@ serve(async (req) => {
 
           console.log(`Processing news item: ${newsItem.title}`);
 
-          // Insert or update news items
+          // Insert news items
           const { error } = await supabaseClient
             .from('news_items')
-            .upsert(newsItem, {
-              onConflict: 'title'
-            })
+            .insert(newsItem)
 
           if (error) {
             console.error('Error inserting news item:', error)
