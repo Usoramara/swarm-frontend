@@ -1,47 +1,139 @@
 import { motion } from "framer-motion";
-import { Network } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export const NetworkAnimation = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (canvasRef.current) {
+        const canvas = canvasRef.current;
+        const { width, height } = canvas.getBoundingClientRect();
+        canvas.width = width;
+        canvas.height = height;
+        setDimensions({ width, height });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const particles: { x: number; y: number; dx: number; dy: number; size: number }[] = [];
+    const particleCount = 50;
+    const connectionDistance = 150;
+
+    // Initialize particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * dimensions.width,
+        y: Math.random() * dimensions.height,
+        dx: (Math.random() - 0.5) * 2,
+        dy: (Math.random() - 0.5) * 2,
+        size: Math.random() * 3 + 1,
+      });
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, dimensions.width, dimensions.height);
+
+      // Update and draw particles
+      particles.forEach((particle, i) => {
+        // Update position
+        particle.x += particle.dx;
+        particle.y += particle.dy;
+
+        // Bounce off walls
+        if (particle.x < 0 || particle.x > dimensions.width) particle.dx *= -1;
+        if (particle.y < 0 || particle.y > dimensions.height) particle.dy *= -1;
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = "#ACFF00";
+        ctx.fill();
+
+        // Draw connections
+        particles.forEach((particle2, j) => {
+          if (i !== j) {
+            const dx = particle.x - particle2.x;
+            const dy = particle.y - particle2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < connectionDistance) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(172, 255, 0, ${1 - distance / connectionDistance})`;
+              ctx.lineWidth = 1;
+              ctx.moveTo(particle.x, particle.y);
+              ctx.lineTo(particle2.x, particle2.y);
+              ctx.stroke();
+            }
+          }
+        });
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+  }, [dimensions]);
+
   return (
-    <section className="py-24 bg-dark relative overflow-hidden">
-      <div className="absolute inset-0 swarm-grid opacity-20" />
-      <div className="absolute inset-0 bg-gradient-radial from-primary/5 to-transparent opacity-90" />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
+    <section className="relative min-h-screen bg-dark overflow-hidden">
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full"
+        style={{ background: "#0A0A0B" }}
+      />
+
+      <div className="relative z-10 container mx-auto px-4 h-screen flex flex-col items-center justify-center text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
+        >
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            The Future of <span className="gradient-text">Autonomous Value</span>
+            <br />
+            Creation Through <span className="gradient-text">AI Networks</span>
+          </h2>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-lg md:text-xl text-gray-300 mt-6 leading-relaxed max-w-3xl mx-auto"
+          >
+            SWARM's network of AI agents continuously evolves and expands, working in perfect harmony
+            to maximize value for token holders through automated trading, risk management, and market analysis
+          </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12"
+            transition={{ delay: 0.6 }}
+            className="mt-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              An Ever Expanding Network of Value Creation
-            </h2>
-            <p className="text-xl text-gray-300">
-              The SWARM is deployed and on a mission to work 24/7 for its holders, continuously expanding its capabilities to create more value and improve their lives in every way possible
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="w-48 h-48 mx-auto bg-dark-lighter rounded-full flex items-center justify-center border border-primary/20">
-              <Network className="w-24 h-24 text-primary animate-swarm-float" />
-            </div>
-            
-            {/* Orbiting circles */}
-            <div className="absolute inset-0 animate-spin-slow">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="w-4 h-4 bg-primary rounded-full" />
-              </div>
-              {/* Add more orbiting elements as needed */}
+            <div className="inline-flex items-center justify-center px-6 py-3 border border-primary/20 rounded-lg bg-dark/60 backdrop-blur-sm">
+              <span className="text-primary font-semibold">24/7 Autonomous Operation</span>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
