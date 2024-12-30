@@ -42,6 +42,7 @@ serve(async (req) => {
     ]
 
     // First, clear existing news items
+    console.log('Clearing existing news items...');
     const { error: deleteError } = await supabaseClient
       .from('news_items')
       .delete()
@@ -49,64 +50,86 @@ serve(async (req) => {
 
     if (deleteError) {
       console.error('Error clearing existing news items:', deleteError);
-      throw deleteError;
+      throw new Error(`Failed to clear existing news items: ${deleteError.message}`);
     }
 
-    console.log('Cleared existing news items');
+    console.log('Successfully cleared existing news items');
+
+    let successfulInserts = 0;
+    const targetArticles = 20;
+    const articlesPerFeed = Math.ceil(targetArticles / feeds.length);
 
     // Process each feed
     for (const feed of feeds) {
+      if (successfulInserts >= targetArticles) break;
+
       console.log(`Fetching feed from: ${feed.url}`);
       
       try {
-        const response = await fetch(feed.url)
+        const response = await fetch(feed.url);
         if (!response.ok) {
           console.error(`Failed to fetch ${feed.url}: ${response.statusText}`);
           continue;
         }
         
-        const xml = await response.text()
-        const rss = await parse(xml)
+        const xml = await response.text();
+        const rss = await parse(xml);
 
-        // Process 5 items from each feed to get a total of 20 articles (4 feeds × 5 items)
-        const items = rss.entries.slice(0, 5)
+        // Process items from this feed
+        const items = rss.entries.slice(0, articlesPerFeed);
 
         for (const item of items) {
-          // Clean and truncate description (remove HTML tags and limit length)
-          let description = item.description?.value || item.content?.value || 'No description available'
-          description = description.replace(/<[^>]*>/g, '') // Remove HTML tags
-          description = description.substring(0, 200) + (description.length > 200 ? '...' : '')
+          if (successfulInserts >= targetArticles) break;
 
-          const newsItem = {
-            title: item.title?.value || 'Untitled',
-            description: description,
-            url: item.links[0]?.href || null,
-            tag: feed.tag,
-            published_at: item.published || new Date().toISOString()
-          }
+          try {
+            // Clean and truncate description
+            let description = item.description?.value || item.content?.value || 'No description available';
+            description = description.replace(/<[^>]*>/g, ''); // Remove HTML tags
+            description = description.substring(0, 200) + (description.length > 200 ? '...' : '');
 
-          console.log(`Processing news item: ${newsItem.title}`);
+            const newsItem = {
+              title: item.title?.value || 'Untitled',
+              description: description,
+              url: item.links[0]?.href || null,
+              tag: feed.tag,
+              published_at: item.published || new Date().toISOString()
+            }
 
-          const { error: insertError } = await supabaseClient
-            .from('news_items')
-            .insert(newsItem)
+            console.log(`Inserting news item: ${newsItem.title}`);
 
-          if (insertError) {
-            console.error('Error inserting news item:', insertError);
+            const { error: insertError } = await supabaseClient
+              .from('news_items')
+              .insert(newsItem);
+
+            if (insertError) {
+              console.error('Error inserting news item:', insertError);
+              continue;
+            }
+
+            successfulInserts++;
+            console.log(`Successfully inserted item ${successfulInserts} of ${targetArticles}`);
+          } catch (itemError) {
+            console.error('Error processing news item:', itemError);
             continue;
           }
         }
       } catch (feedError) {
         console.error(`Error processing feed ${feed.url}:`, feedError);
-        // Continue with other feeds even if one fails
         continue;
       }
     }
 
-    console.log('RSS feed processing completed successfully');
+    if (successfulInserts === 0) {
+      throw new Error('Failed to insert any news items');
+    }
+
+    console.log(`RSS feed processing completed. Inserted ${successfulInserts} items.`);
 
     return new Response(
-      JSON.stringify({ message: 'RSS feeds processed successfully' }),
+      JSON.stringify({ 
+        message: 'RSS feeds processed successfully',
+        itemsInserted: successfulInserts 
+      }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200,
@@ -115,7 +138,10 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error processing RSS feeds:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ 
+        error: error.message,
+        details: error.stack 
+      }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 500,
