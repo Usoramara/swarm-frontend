@@ -5,6 +5,10 @@ const Footer = () => {
   const location = useLocation();
   const isLearnPage = location.pathname.includes('/learn');
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <footer className="bg-dark-lighter relative overflow-hidden">
       <div className="absolute inset-0 swarm-grid opacity-20" />
@@ -23,7 +27,7 @@ const Footer = () => {
               Buy SWARM
             </button>
             {isLearnPage ? (
-              <Link to="/">
+              <Link to="/" onClick={scrollToTop}>
                 <button 
                   className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
                 >
@@ -31,7 +35,7 @@ const Footer = () => {
                 </button>
               </Link>
             ) : (
-              <Link to="/learn">
+              <Link to="/learn" onClick={scrollToTop}>
                 <button 
                   className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
                 >

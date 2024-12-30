@@ -7,6 +7,10 @@ interface HeroSectionProps {
 }
 
 export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden swarm-grid">
       <div className="absolute inset-0 bg-gradient-to-b from-dark-lighter/50 to-dark" />
@@ -34,7 +38,7 @@ export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
             <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
               Buy SWARM
             </button>
-            <Link to="/learn">
+            <Link to="/learn" onClick={scrollToTop}>
               <button className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Learn More
               </button>
