@@ -22,8 +22,8 @@ const Index = () => {
       <HeroSection mousePosition={mousePosition} />
       <AboutSection />
       <FeaturesSection />
-      <NetworkAnimation />
       <BenefitsSection />
+      <NetworkAnimation />
     </main>
   );
 };
