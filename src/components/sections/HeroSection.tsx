@@ -35,9 +35,11 @@ export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
-              Buy SWARM
-            </button>
+            <Link to="/whitelist" onClick={scrollToTop}>
+              <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
+                Buy SWARM
+              </button>
+            </Link>
             <Link to="/learn" onClick={scrollToTop}>
               <button className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Learn More
