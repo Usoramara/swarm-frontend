@@ -21,8 +21,8 @@ const Index = () => {
     <main className="min-h-screen bg-dark">
       <HeroSection mousePosition={mousePosition} />
       <AboutSection />
-      <FeaturesSection />
       <BenefitsSection />
+      <FeaturesSection />
       <NetworkAnimation />
     </main>
   );
