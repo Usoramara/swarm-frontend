@@ -20,13 +20,15 @@ export const CallToActionSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button 
-            size="lg"
-            className="bg-primary hover:bg-primary-hover text-dark font-semibold px-8 py-6 h-auto text-lg"
-          >
-            Buy SWARM
-            <ArrowRight className="ml-2" />
-          </Button>
+          <Link to="/whitelist">
+            <Button 
+              size="lg"
+              className="bg-primary hover:bg-primary-hover text-dark font-semibold px-8 py-6 h-auto text-lg"
+            >
+              Buy SWARM
+              <ArrowRight className="ml-2" />
+            </Button>
+          </Link>
           
           <Link to="/learn">
             <Button 
