@@ -1,22 +1,22 @@
 import { motion } from "framer-motion";
-import { Calendar, ArrowRight, Rocket, Network, LineChart } from "lucide-react";
+import { Coins, ArrowRight, Wallet, LineChart } from "lucide-react";
 
 export const TreasurySection = () => {
   const roadmapItems = [
     {
-      icon: <Rocket className="w-10 h-10 text-primary" />,
+      icon: <Coins className="w-10 h-10 text-primary" />,
       quarter: "Q1 2025",
       title: "Token Launch & Growth",
       description: "Initial token launch and community building phase"
     },
     {
-      icon: <Calendar className="w-10 h-10 text-primary" />,
+      icon: <Wallet className="w-10 h-10 text-primary" />,
       quarter: "Q2 2025",
       title: "Treasury Launch",
       description: "Implementation of the SWARM Treasury system"
     },
     {
-      icon: <Network className="w-10 h-10 text-primary" />,
+      icon: <Coins className="w-10 h-10 text-primary" />,
       quarter: "Q3 2025",
       title: "Network Expansion",
       description: "Scaling the AI agent network and capabilities"
@@ -58,7 +58,7 @@ export const TreasurySection = () => {
             className="flex flex-col items-center text-center"
           >
             <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-6">
-              <Calendar className="w-10 h-10 text-primary" />
+              <Coins className="w-10 h-10 text-primary" />
             </div>
             <h3 className="text-xl font-bold mb-3">Hold SWARM Tokens</h3>
             <p className="text-gray-300">Your share of the treasury is proportional to your token holdings</p>
@@ -78,7 +78,7 @@ export const TreasurySection = () => {
               <ArrowRight className="w-8 h-8 text-primary animate-pulse" />
             </div>
             <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-6">
-              <Calendar className="w-10 h-10 text-primary animate-bounce" />
+              <Wallet className="w-10 h-10 text-primary animate-bounce" />
             </div>
             <h3 className="text-xl font-bold mb-3">Treasury Grows</h3>
             <p className="text-gray-300">AI agents work 24/7 to generate value and grow the treasury</p>
@@ -93,7 +93,7 @@ export const TreasurySection = () => {
           >
             <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-6 relative">
               <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
-              <Calendar className="w-10 h-10 text-primary" />
+              <LineChart className="w-10 h-10 text-primary" />
             </div>
             <h3 className="text-xl font-bold mb-3">Claim Rewards</h3>
             <p className="text-gray-300">Claim your proportional share of generated value from the treasury</p>
