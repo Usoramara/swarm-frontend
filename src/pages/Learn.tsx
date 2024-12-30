@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Bot, Brain, Cpu, LineChart, Gift, Gem, ChartLineUp, Shield, Clock } from "lucide-react";
+import { ArrowLeft, Bot, Brain, Cpu, LineChart, Gift, Gem, TrendingUp, Shield, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -39,7 +39,7 @@ const Learn = () => {
       description: "Advanced algorithms to discover emerging projects before they gain mainstream attention."
     },
     {
-      icon: <ChartLineUp className="w-12 h-12 text-primary mb-4" />,
+      icon: <TrendingUp className="w-12 h-12 text-primary mb-4" />,
       title: "DeFi Yield Optimization",
       description: "Dynamic reallocation of assets to maximize yields across DeFi protocols."
     },
