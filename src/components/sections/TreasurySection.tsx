@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Coins, ArrowRight, Wallet, LineChart } from "lucide-react";
+import { Coins, ArrowRight, Wallet, LineChart, Network } from "lucide-react";
 
 export const TreasurySection = () => {
   const roadmapItems = [
@@ -16,7 +16,7 @@ export const TreasurySection = () => {
       description: "Implementation of the SWARM Treasury system"
     },
     {
-      icon: <Coins className="w-10 h-10 text-primary" />,
+      icon: <Network className="w-10 h-10 text-primary" />,
       quarter: "Q3 2025",
       title: "Network Expansion",
       description: "Scaling the AI agent network and capabilities"
