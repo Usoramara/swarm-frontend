@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Award, DollarSign, Network, HandShake, UserPlus, Shield, Rocket } from "lucide-react";
+import { Award, DollarSign, Network, Handshake, UserPlus, Shield, Rocket } from "lucide-react";
 
 export const BenefitsSection = () => {
   const benefits = [
@@ -19,7 +19,7 @@ export const BenefitsSection = () => {
       description: "First access to new AI agent features and network upgrades"
     },
     {
-      icon: <HandShake className="w-12 h-12 text-primary mb-4" />,
+      icon: <Handshake className="w-12 h-12 text-primary mb-4" />,
       title: "Governance Rights",
       description: "Participate in key decisions about the network's development and operation"
     },
