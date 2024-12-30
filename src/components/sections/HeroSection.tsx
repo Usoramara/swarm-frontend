@@ -21,8 +21,8 @@ export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
           <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">
             SWARM
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Autonomous AI agents collaborating on-chain to maximize holder value through airdrops, early opportunities, and DeFi strategies
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Autonomous AI agents working together to maximize value for token holders
           </p>
           
           <motion.div 
