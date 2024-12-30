@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Bot, Brain, Cpu, TrendingUp, Gift, Gem, Coins, Target, Clock } from "lucide-react";
+import { ArrowLeft, Bot, Brain, Cpu, LineChart, Gift, Gem, TrendingUp, Clock, Zap, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -7,23 +7,23 @@ const Learn = () => {
   const features = [
     {
       icon: <Brain className="w-12 h-12 text-primary mb-4" />,
-      title: "Collective Intelligence",
-      description: "Multiple AI agents working together to analyze market data, social signals, and on-chain activities for high-value opportunities."
+      title: "Autonomous Intelligence",
+      description: "Self-learning AI agents that identify and capitalize on emerging market opportunities."
     },
     {
       icon: <Bot className="w-12 h-12 text-primary mb-4" />,
-      title: "Autonomous Operations",
-      description: "Self-executing agents that handle complex tasks like wallet interactions, governance votes, and qualification requirements."
+      title: "Agent Collaboration",
+      description: "Multiple AI agents working together to discover and exploit profitable opportunities across chains."
     },
     {
       icon: <Cpu className="w-12 h-12 text-primary mb-4" />,
-      title: "Cross-Chain Monitoring",
-      description: "24/7 surveillance across multiple blockchains to identify and capitalize on emerging opportunities."
+      title: "On-Chain Operations",
+      description: "Transparent execution of value-generating opportunities directly on the blockchain."
     },
     {
-      icon: <TrendingUp className="w-12 h-12 text-primary mb-4" />,
-      title: "Value Optimization",
-      description: "Dynamic portfolio management and resource allocation to maximize returns for token holders."
+      icon: <LineChart className="w-12 h-12 text-primary mb-4" />,
+      title: "Value Generation",
+      description: "Automated strategies that identify and act on opportunities to maximize token holder returns."
     }
   ];
 
@@ -31,32 +31,32 @@ const Learn = () => {
     {
       icon: <Gift className="w-12 h-12 text-primary mb-4" />,
       title: "Airdrop Opportunities",
-      description: "Automated detection and participation in high-value airdrops across multiple chains, with optimized wallet strategies."
+      description: "Automated discovery and participation in high-value airdrop opportunities across multiple chains."
     },
     {
       icon: <Gem className="w-12 h-12 text-primary mb-4" />,
-      title: "Private Sale Access",
-      description: "Early access to exclusive token sales and seed rounds through intelligent opportunity detection and qualification."
+      title: "Early Project Opportunities",
+      description: "First-mover advantage through early detection of promising projects and investment opportunities."
     },
     {
-      icon: <Target className="w-12 h-12 text-primary mb-4" />,
-      title: "Whitelist Acquisition",
-      description: "Automated completion of whitelist requirements and registration processes for premium project access."
-    },
-    {
-      icon: <Coins className="w-12 h-12 text-primary mb-4" />,
-      title: "DeFi Yield Optimization",
-      description: "Smart reallocation of assets across DeFi protocols to capture the highest yields and rewards."
+      icon: <TrendingUp className="w-12 h-12 text-primary mb-4" />,
+      title: "DeFi Yield Opportunities",
+      description: "Continuous identification and capture of the most profitable yield opportunities in DeFi."
     },
     {
       icon: <Clock className="w-12 h-12 text-primary mb-4" />,
-      title: "Real-Time Adaptation",
-      description: "Continuous monitoring and instant response to market changes and new opportunities."
+      title: "24/7 Opportunity Detection",
+      description: "Round-the-clock monitoring to never miss profitable market opportunities."
     },
     {
-      icon: <Bot className="w-12 h-12 text-primary mb-4" />,
-      title: "Resource Pooling",
-      description: "Coordinated investment strategies allowing smaller holders to access premium opportunities typically reserved for whales."
+      icon: <Zap className="w-12 h-12 text-primary mb-4" />,
+      title: "MEV Opportunities",
+      description: "Intelligent detection and capture of MEV opportunities across multiple chains and protocols."
+    },
+    {
+      icon: <Target className="w-12 h-12 text-primary mb-4" />,
+      title: "Token Launch Opportunities",
+      description: "Strategic participation in promising token launches and initial offerings across different platforms."
     }
   ];
 
@@ -83,10 +83,10 @@ const Learn = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-8">
-              The Power of <span className="gradient-text">AI Swarms</span>
+              Understanding <span className="gradient-text">SWARM</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-              Harness collective AI intelligence to discover and capitalize on the best opportunities in crypto and DeFi.
+              Discover how our autonomous AI agents work together to create value through decentralized intelligence and blockchain technology.
             </p>
           </motion.div>
         </div>
@@ -126,10 +126,10 @@ const Learn = () => {
             className="max-w-3xl mx-auto text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              <span className="gradient-text">Maximize Your Opportunities</span>
+              <span className="gradient-text">Value Creation Through AI Swarms</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              Our AI swarms work tirelessly to identify, analyze, and execute on the most profitable opportunities across the crypto ecosystem.
+              Our autonomous agents work together 24/7 to maximize value for token holders through sophisticated blockchain operations and market analysis.
             </p>
           </motion.div>
 
