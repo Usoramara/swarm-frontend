@@ -76,7 +76,7 @@ export const AboutSection = () => {
                 <img 
                   src="/lovable-uploads/4c4f93c4-98f5-4a7a-93c1-f2c59f320796.png"
                   alt="Swarmy - Master of the SWARM"
-                  className="w-32 h-32 object-contain animate-pulse"
+                  className="w-48 h-48 object-contain animate-pulse"
                 />
               </div>
             </div>
