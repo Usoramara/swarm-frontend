@@ -45,7 +45,7 @@ export const TreasurySection = () => {
             Claim Your Share of the <span className="gradient-text">SWARM Treasury</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            As the SWARM operates under my guidance as Swarmy, I continuously build a treasury through automated value generation
+            The SWARM continuously builds a treasury through automated value generation
           </p>
         </motion.div>
 
