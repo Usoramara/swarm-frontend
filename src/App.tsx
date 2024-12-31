@@ -27,17 +27,49 @@ const TwitterCallback = () => {
 
   useEffect(() => {
     const handleTwitterCallback = async () => {
+      console.log("Starting Twitter callback handling...");
+      
       try {
-        const { error } = await supabase.auth.getSession();
+        // Get the URL parameters
+        const hashParams = new URLSearchParams(window.location.hash.slice(1));
+        const queryParams = new URLSearchParams(window.location.search);
+        
+        console.log("URL hash parameters:", Object.fromEntries(hashParams));
+        console.log("URL query parameters:", Object.fromEntries(queryParams));
+
+        // Check for error in URL parameters
+        const error = queryParams.get('error');
+        const errorDescription = queryParams.get('error_description');
+        
         if (error) {
-          console.error("Swarmy auth error:", error.message);
+          console.error("Twitter auth error from URL:", error, errorDescription);
           navigate("/");
           return;
         }
-        console.log("Swarmy successfully authenticated");
+
+        // Get session
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError) {
+          console.error("Failed to get session:", sessionError.message);
+          navigate("/");
+          return;
+        }
+
+        if (!session) {
+          console.log("No session found after callback");
+          navigate("/");
+          return;
+        }
+
+        console.log("Swarmy successfully authenticated with session:", {
+          user: session.user.id,
+          provider: session.user.app_metadata.provider
+        });
+        
         navigate("/");
       } catch (error) {
-        console.error("Swarmy callback error:", error);
+        console.error("Unexpected error in Twitter callback:", error);
         navigate("/");
       }
     };
