@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
   },
 });
 
-// Handle Twitter callback
+// Handle Twitter callback for Swarmy bot authentication
 const TwitterCallback = () => {
   const navigate = useNavigate();
 
@@ -30,14 +30,14 @@ const TwitterCallback = () => {
       try {
         const { error } = await supabase.auth.getSession();
         if (error) {
-          console.error("Auth error:", error.message);
+          console.error("Swarmy auth error:", error.message);
           navigate("/");
           return;
         }
-        // Successfully authenticated
+        console.log("Swarmy successfully authenticated");
         navigate("/");
       } catch (error) {
-        console.error("Callback error:", error);
+        console.error("Swarmy callback error:", error);
         navigate("/");
       }
     };

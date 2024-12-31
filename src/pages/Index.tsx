@@ -5,7 +5,6 @@ import { AboutSection } from "@/components/sections/AboutSection";
 import { NetworkAnimation } from "@/components/sections/NetworkAnimation";
 import { BenefitsSection } from "@/components/sections/BenefitsSection";
 import { TreasurySection } from "@/components/sections/TreasurySection";
-import { TwitterLoginButton } from "@/components/TwitterLoginButton";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -21,9 +20,6 @@ const Index = () => {
 
   return (
     <main className="min-h-screen bg-dark">
-      <div className="absolute top-4 right-4 z-50">
-        <TwitterLoginButton />
-      </div>
       <HeroSection mousePosition={mousePosition} />
       <AboutSection />
       <BenefitsSection />
