@@ -24,6 +24,12 @@ export const CallToActionSection = () => {
             href="https://app.virtuals.io/prototypes/0xD20986Cdde01F72C5cDbDDbe8A044Ee37ff57537"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => {
+              if (!navigator.onLine) {
+                e.preventDefault();
+                window.location.href = 'https://aiswarm.ai/';
+              }
+            }}
             className="w-full sm:w-auto"
           >
             <Button 

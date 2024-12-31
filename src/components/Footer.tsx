@@ -37,6 +37,12 @@ const Footer = () => {
               href="https://app.virtuals.io/prototypes/0xD20986Cdde01F72C5cDbDDbe8A044Ee37ff57537"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                if (!navigator.onLine) {
+                  e.preventDefault();
+                  window.location.href = 'https://aiswarm.ai/';
+                }
+              }}
             >
               <button className="w-full bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Buy SWARM
@@ -65,6 +71,12 @@ const Footer = () => {
               href="https://x.com/swarm_agent" 
               target="_blank" 
               rel="noopener noreferrer"
+              onClick={(e) => {
+                if (!navigator.onLine) {
+                  e.preventDefault();
+                  window.location.href = 'https://aiswarm.ai/';
+                }
+              }}
               className="flex items-center gap-2 text-gray-400 hover:text-primary transition-colors"
             >
               <Twitter className="w-5 h-5" />
