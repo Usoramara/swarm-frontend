@@ -33,15 +33,19 @@ const Footer = () => {
             Be part of the future of decentralized intelligence. Join our community and help shape the evolution of autonomous AI on the blockchain.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link to="/whitelist">
-              <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
+            <a 
+              href="https://app.virtuals.io/prototypes/0xD20986Cdde01F72C5cDbDDbe8A044Ee37ff57537"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="w-full bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Buy SWARM
               </button>
-            </Link>
+            </a>
             {isLearnPage ? (
               <Link to="/" onClick={scrollToAbout}>
                 <button 
-                  className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
+                  className="w-full border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
                 >
                   Back to Home
                 </button>
@@ -49,7 +53,7 @@ const Footer = () => {
             ) : (
               <Link to="/learn" onClick={scrollToTop}>
                 <button 
-                  className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
+                  className="w-full border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors"
                 >
                   Learn More
                 </button>
