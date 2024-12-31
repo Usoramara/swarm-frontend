@@ -55,8 +55,10 @@ function App() {
     }
   }, [navigate, searchParams]);
 
+  console.log("App component rendered");
+
   return (
-    <div className="min-h-screen bg-dark text-white">
+    <div className="relative min-h-screen w-full bg-dark text-white overflow-x-hidden">
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/learn" element={<Learn />} />

@@ -21,7 +21,7 @@ const Index = () => {
   console.log("Index page rendered");
 
   return (
-    <main className="min-h-screen bg-dark text-white">
+    <main className="relative w-full min-h-screen bg-dark text-white">
       <HeroSection mousePosition={mousePosition} />
       <AboutSection />
       <BenefitsSection />
