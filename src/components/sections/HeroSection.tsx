@@ -35,13 +35,17 @@ export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <Link to="/whitelist" onClick={scrollToTop}>
-              <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
+            <a 
+              href="https://app.virtuals.io/prototypes/0xD20986Cdde01F72C5cDbDDbe8A044Ee37ff57537"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="w-full bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Buy SWARM
               </button>
-            </Link>
+            </a>
             <Link to="/learn" onClick={scrollToTop}>
-              <button className="border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
+              <button className="w-full border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Learn More
               </button>
             </Link>
