@@ -26,11 +26,11 @@ export const AboutSection = () => {
   ];
 
   return (
-    <section id="about-section" className="py-12 md:py-24 bg-dark relative overflow-hidden">
+    <section id="about-section" className="py-0 md:py-24 bg-dark relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col-reverse md:flex-row items-center md:items-start gap-8 md:gap-12">
+        <div className="flex flex-col-reverse md:flex-row items-center md:items-start gap-4 md:gap-12">
           <motion.div 
-            className="w-full md:w-1/2 space-y-6"
+            className="w-full md:w-1/2 space-y-6 mt-4 md:mt-0"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -71,7 +71,7 @@ export const AboutSection = () => {
           </motion.div>
           
           <motion.div 
-            className="w-full md:w-1/2 relative"
+            className="w-full md:w-1/2 relative -mt-4 md:mt-0"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
