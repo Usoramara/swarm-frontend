@@ -18,10 +18,8 @@ const Index = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  console.log("Index page rendered");
-
   return (
-    <main className="relative w-full min-h-screen bg-dark text-white">
+    <main className="min-h-screen bg-dark">
       <HeroSection mousePosition={mousePosition} />
       <AboutSection />
       <BenefitsSection />
