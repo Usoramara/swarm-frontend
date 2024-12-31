@@ -76,7 +76,7 @@ const TwitterCallback = () => {
           body: JSON.stringify({
             code,
             code_verifier: codeVerifier,
-            redirect_uri: window.location.origin + '/auth/twitter/callback'
+            redirect_uri: 'https://aiswarm.ai/auth/twitter/callback'
           })
         });
 
@@ -140,7 +140,7 @@ export const initiateTwitterAuth = async () => {
 
     // Construct Twitter OAuth URL
     const clientId = 'WTNrQS14bUhpMl83aU5adTd2NWM6MTpjaQ'; // Twitter Client ID
-    const redirectUri = encodeURIComponent(window.location.origin + '/auth/twitter/callback');
+    const redirectUri = encodeURIComponent('https://aiswarm.ai/auth/twitter/callback');
     const scope = encodeURIComponent('tweet.read tweet.write users.read offline.access');
     
     const authUrl = `https://twitter.com/i/oauth2/authorize?` +
