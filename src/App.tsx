@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { generateCodeVerifier, generateCodeChallenge } from "@/utils/pkce";
 import Index from "./pages/Index";
 import Learn from "./pages/Learn";
 import Airdrops from "./pages/Airdrops";
@@ -21,55 +22,91 @@ const queryClient = new QueryClient({
   },
 });
 
-// Handle Twitter callback for Swarmy bot authentication
+// Handle Twitter OAuth2 callback
 const TwitterCallback = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleTwitterCallback = async () => {
-      console.log("Starting Twitter callback handling...");
+      console.log("Starting Twitter OAuth2 callback handling...");
       
       try {
-        // Get the URL parameters
-        const hashParams = new URLSearchParams(window.location.hash.slice(1));
-        const queryParams = new URLSearchParams(window.location.search);
+        // Get the authorization code from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const state = urlParams.get('state');
+        const error = urlParams.get('error');
         
-        console.log("URL hash parameters:", Object.fromEntries(hashParams));
-        console.log("URL query parameters:", Object.fromEntries(queryParams));
+        console.log("URL parameters:", { code, state, error });
 
-        // Check for error in URL parameters
-        const error = queryParams.get('error');
-        const errorDescription = queryParams.get('error_description');
-        
         if (error) {
-          console.error("Twitter auth error from URL:", error, errorDescription);
+          console.error("Twitter auth error:", error);
           navigate("/");
           return;
         }
 
-        // Get session
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        
-        if (sessionError) {
-          console.error("Failed to get session:", sessionError.message);
+        if (!code || !state) {
+          console.error("Missing code or state parameter");
           navigate("/");
           return;
         }
 
-        if (!session) {
-          console.log("No session found after callback");
+        // Verify state matches stored state
+        const storedState = localStorage.getItem('twitter_oauth_state');
+        if (state !== storedState) {
+          console.error("State mismatch");
           navigate("/");
           return;
         }
 
-        console.log("Swarmy successfully authenticated with session:", {
-          user: session.user.id,
-          provider: session.user.app_metadata.provider
+        // Get code verifier from storage
+        const codeVerifier = localStorage.getItem('twitter_code_verifier');
+        if (!codeVerifier) {
+          console.error("No code verifier found");
+          navigate("/");
+          return;
+        }
+
+        // Exchange code for token using Supabase Edge Function
+        const response = await fetch('/.netlify/functions/twitter-token-exchange', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            code,
+            code_verifier: codeVerifier,
+            redirect_uri: window.location.origin + '/auth/twitter/callback'
+          })
         });
-        
+
+        if (!response.ok) {
+          throw new Error('Failed to exchange code for token');
+        }
+
+        const tokenData = await response.json();
+        console.log("Successfully obtained Twitter tokens");
+
+        // Clean up storage
+        localStorage.removeItem('twitter_oauth_state');
+        localStorage.removeItem('twitter_code_verifier');
+
+        // Store tokens securely in Supabase
+        const { error: updateError } = await supabase
+          .from('profiles')
+          .update({
+            twitter_access_token: tokenData.access_token,
+            twitter_refresh_token: tokenData.refresh_token
+          })
+          .eq('id', supabase.auth.user()?.id);
+
+        if (updateError) {
+          console.error("Failed to store tokens:", updateError);
+        }
+
         navigate("/");
       } catch (error) {
-        console.error("Unexpected error in Twitter callback:", error);
+        console.error("Error in Twitter callback:", error);
         navigate("/");
       }
     };
@@ -78,6 +115,39 @@ const TwitterCallback = () => {
   }, [navigate]);
 
   return null;
+};
+
+// Function to initiate Twitter OAuth2 flow
+export const initiateTwitterAuth = async () => {
+  try {
+    // Generate and store PKCE values
+    const codeVerifier = generateCodeVerifier();
+    const codeChallenge = await generateCodeChallenge(codeVerifier);
+    const state = generateCodeVerifier(); // Use same function to generate state
+
+    // Store values in localStorage
+    localStorage.setItem('twitter_code_verifier', codeVerifier);
+    localStorage.setItem('twitter_oauth_state', state);
+
+    // Construct Twitter OAuth URL
+    const clientId = 'YOUR_TWITTER_CLIENT_ID'; // Get this from Twitter Developer Portal
+    const redirectUri = encodeURIComponent(window.location.origin + '/auth/twitter/callback');
+    const scope = encodeURIComponent('tweet.read tweet.write users.read offline.access');
+    
+    const authUrl = `https://twitter.com/i/oauth2/authorize?` +
+      `response_type=code` +
+      `&client_id=${clientId}` +
+      `&redirect_uri=${redirectUri}` +
+      `&scope=${scope}` +
+      `&state=${state}` +
+      `&code_challenge=${codeChallenge}` +
+      `&code_challenge_method=S256`;
+
+    // Redirect to Twitter
+    window.location.href = authUrl;
+  } catch (error) {
+    console.error("Error initiating Twitter auth:", error);
+  }
 };
 
 const App = () => (
