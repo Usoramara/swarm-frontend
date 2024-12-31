@@ -44,18 +44,24 @@ export type Database = {
           avatar_url: string | null
           created_at: string
           id: string
+          twitter_access_token: string | null
+          twitter_refresh_token: string | null
           username: string | null
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string
           id: string
+          twitter_access_token?: string | null
+          twitter_refresh_token?: string | null
           username?: string | null
         }
         Update: {
           avatar_url?: string | null
           created_at?: string
           id?: string
+          twitter_access_token?: string | null
+          twitter_refresh_token?: string | null
           username?: string | null
         }
         Relationships: []

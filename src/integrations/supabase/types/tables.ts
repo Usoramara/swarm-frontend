@@ -13,6 +13,8 @@ export type Profile = {
   created_at: string;
   id: string;
   username: string | null;
+  twitter_access_token: string | null;
+  twitter_refresh_token: string | null;
 }
 
 export type Proposal = {

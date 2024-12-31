@@ -91,6 +91,15 @@ const TwitterCallback = () => {
         localStorage.removeItem('twitter_oauth_state');
         localStorage.removeItem('twitter_code_verifier');
 
+        // Get current user
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (!user) {
+          console.error("No authenticated user found");
+          navigate("/");
+          return;
+        }
+
         // Store tokens securely in Supabase
         const { error: updateError } = await supabase
           .from('profiles')
@@ -98,7 +107,7 @@ const TwitterCallback = () => {
             twitter_access_token: tokenData.access_token,
             twitter_refresh_token: tokenData.refresh_token
           })
-          .eq('id', supabase.auth.user()?.id);
+          .eq('id', user.id);
 
         if (updateError) {
           console.error("Failed to store tokens:", updateError);
