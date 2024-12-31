@@ -28,7 +28,7 @@ export const AboutSection = () => {
   return (
     <section id="about-section" className="py-12 md:py-24 bg-dark relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12">
+        <div className="flex flex-col-reverse md:flex-row items-center md:items-start gap-8 md:gap-12">
           <motion.div 
             className="w-full md:w-1/2 space-y-6"
             initial={{ opacity: 0, x: -20 }}
@@ -36,7 +36,7 @@ export const AboutSection = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-3">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
                   Greetings, I am
                 </h2>
@@ -71,12 +71,12 @@ export const AboutSection = () => {
           </motion.div>
           
           <motion.div 
-            className="w-full md:w-1/2 relative mt-8 md:mt-0"
+            className="w-full md:w-1/2 relative"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative w-full aspect-square max-w-[500px] mx-auto">
+            <div className="relative w-full aspect-square max-w-[300px] md:max-w-[500px] mx-auto">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full animate-swarm-float" />
               <div className="absolute inset-4 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full animate-swarm-float" style={{ animationDelay: "-1s" }} />
               <div className="absolute inset-8 bg-gradient-to-r from-primary/40 to-secondary/40 rounded-full animate-swarm-float" style={{ animationDelay: "-2s" }} />
@@ -84,7 +84,7 @@ export const AboutSection = () => {
                 <img 
                   src="/lovable-uploads/4c4f93c4-98f5-4a7a-93c1-f2c59f320796.png"
                   alt="Swarmy - Master of the SWARM"
-                  className="w-40 h-40 md:w-64 md:h-64 object-contain animate-pulse"
+                  className="w-32 h-32 sm:w-40 sm:h-40 md:w-64 md:h-64 object-contain animate-pulse"
                 />
               </div>
             </div>
