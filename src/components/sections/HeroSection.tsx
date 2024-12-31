@@ -63,11 +63,11 @@ export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
           >
             <Hexagon
               className="text-primary/20"
-              size={100 + i * 50}
+              size={150 + i * 75} // Increased base size from 100 to 150 and scaling factor from 50 to 75
               style={{
                 position: "absolute",
-                left: `${30 + i * 20}%`,
-                top: `${20 + i * 15}%`,
+                left: `${25 + i * 25}%`, // Adjusted positioning for better spread
+                top: `${15 + i * 20}%`,  // Adjusted positioning for better spread
               }}
             />
           </motion.div>
