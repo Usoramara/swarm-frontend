@@ -151,9 +151,16 @@ export const TreasurySection = () => {
           transition={{ delay: 0.4 }}
           className="flex justify-center mt-16"
         >
-          <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
-            Join the SWARM
-          </button>
+          <a 
+            href="https://app.virtuals.io/prototypes/0xD20986Cdde01F72C5cDbDDbe8A044Ee37ff57537"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block"
+          >
+            <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
+              Buy SWARM
+            </button>
+          </a>
         </motion.div>
       </div>
     </section>
