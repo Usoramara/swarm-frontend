@@ -43,7 +43,7 @@ const TwitterCallback = () => {
         
         if (error) {
           console.error("Twitter auth error from URL:", error, errorDescription);
-          navigate("/");
+          window.location.href = 'https://aiagent.ai';
           return;
         }
 
@@ -52,13 +52,13 @@ const TwitterCallback = () => {
         
         if (sessionError) {
           console.error("Failed to get session:", sessionError.message);
-          navigate("/");
+          window.location.href = 'https://aiagent.ai';
           return;
         }
 
         if (!session) {
           console.log("No session found after callback");
-          navigate("/");
+          window.location.href = 'https://aiagent.ai';
           return;
         }
 
@@ -70,7 +70,7 @@ const TwitterCallback = () => {
         navigate("/");
       } catch (error) {
         console.error("Unexpected error in Twitter callback:", error);
-        navigate("/");
+        window.location.href = 'https://aiagent.ai';
       }
     };
 
