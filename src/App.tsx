@@ -1,107 +1,72 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Routes, Route, useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
-import Index from "./pages/Index";
-import Learn from "./pages/Learn";
-import Airdrops from "./pages/Airdrops";
-import Whitelist from "./pages/Whitelist";
-import Footer from "./components/Footer";
+import Index from "@/pages/Index";
+import Learn from "@/pages/Learn";
+import Whitelist from "@/pages/Whitelist";
+import Airdrops from "@/pages/Airdrops";
+import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
-// Handle Twitter callback for Swarmy bot authentication
-const TwitterCallback = () => {
+function App() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
+    // Handle Twitter OAuth callback
     const handleTwitterCallback = async () => {
-      console.log("Starting Twitter callback handling...");
-      
       try {
-        // Get the URL parameters
-        const hashParams = new URLSearchParams(window.location.hash.slice(1));
-        const queryParams = new URLSearchParams(window.location.search);
-        
-        console.log("URL hash parameters:", Object.fromEntries(hashParams));
-        console.log("URL query parameters:", Object.fromEntries(queryParams));
+        const error = searchParams.get("error");
+        const errorDescription = searchParams.get("error_description");
 
-        // Check for error in URL parameters
-        const error = queryParams.get('error');
-        const errorDescription = queryParams.get('error_description');
-        
         if (error) {
           console.error("Twitter auth error from URL:", error, errorDescription);
-          window.location.href = 'https://aiagent.ai';
+          window.location.href = 'https://aiswarm.ai';
           return;
         }
 
-        // Get session
+        // Get the session
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        
+
         if (sessionError) {
           console.error("Failed to get session:", sessionError.message);
-          window.location.href = 'https://aiagent.ai';
+          window.location.href = 'https://aiswarm.ai';
           return;
         }
 
         if (!session) {
           console.log("No session found after callback");
-          window.location.href = 'https://aiagent.ai';
+          window.location.href = 'https://aiswarm.ai';
           return;
         }
 
-        console.log("Swarmy successfully authenticated with session:", {
-          user: session.user.id,
-          provider: session.user.app_metadata.provider
-        });
-        
+        // Successfully authenticated
+        console.log("Successfully authenticated with Twitter");
         navigate("/");
       } catch (error) {
         console.error("Unexpected error in Twitter callback:", error);
-        window.location.href = 'https://aiagent.ai';
+        window.location.href = 'https://aiswarm.ai';
       }
     };
 
-    handleTwitterCallback();
-  }, [navigate]);
+    // Check if we're on the callback URL
+    if (window.location.hash.includes("access_token")) {
+      handleTwitterCallback();
+    }
+  }, [navigate, searchParams]);
 
-  return null;
-};
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
-          <div className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/learn" element={<Learn />} />
-              <Route path="/learn/airdrops" element={<Airdrops />} />
-              <Route path="/whitelist" element={<Whitelist />} />
-              <Route path="/auth/twitter/callback" element={<TwitterCallback />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </div>
-          <Footer />
-        </div>
-        <Toaster />
-        <Sonner />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/learn" element={<Learn />} />
+        <Route path="/whitelist" element={<Whitelist />} />
+        <Route path="/airdrops" element={<Airdrops />} />
+      </Routes>
+      <Footer />
+      <Toaster />
+    </>
+  );
+}
 
 export default App;
