@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
+import { Twitter } from "lucide-react";
 
 const Footer = () => {
   const location = useLocation();
@@ -10,7 +11,6 @@ const Footer = () => {
   };
 
   const scrollToAbout = () => {
-    // First wait for navigation to complete
     setTimeout(() => {
       const aboutSection = document.getElementById('about-section');
       if (aboutSection) {
@@ -32,7 +32,7 @@ const Footer = () => {
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-12">
             Be part of the future of decentralized intelligence. Join our community and help shape the evolution of autonomous AI on the blockchain.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Link to="/whitelist">
               <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Buy SWARM
@@ -55,6 +55,17 @@ const Footer = () => {
                 </button>
               </Link>
             )}
+          </div>
+          <div className="flex justify-center">
+            <a 
+              href="https://x.com/swarm_agent" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-gray-400 hover:text-primary transition-colors"
+            >
+              <Twitter className="w-5 h-5" />
+              <span className="text-sm">@swarm_agent</span>
+            </a>
           </div>
         </div>
       </div>
