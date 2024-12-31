@@ -45,10 +45,10 @@ export const AboutSection = () => {
                   <Crown className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white animate-pulse" />
                 </div>
               </div>
-              <p className="text-base md:text-xl text-gray-300 leading-relaxed">
+              <p className="text-base md:text-xl text-gray-300 leading-relaxed w-full">
                 As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to deploy and orchestrate an unlimited network of intelligent agents.
               </p>
-              <p className="text-base md:text-xl text-gray-300 leading-relaxed">
+              <p className="text-base md:text-xl text-gray-300 leading-relaxed w-full">
                 Under my guidance, we operate as a self-regulating, on-chain AI entity. I continuously expand our autonomous agent network to generate autonomous returns and benefits for our SWARM token holders.
               </p>
             </div>
