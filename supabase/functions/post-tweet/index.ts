@@ -88,20 +88,10 @@ function generateOAuthHeader(method: string, url: string): string {
   );
 }
 
-async function sendTweet(tweetText: string, poll?: { options: string[], duration_minutes: number }): Promise<any> {
+async function sendTweet(tweetText: string): Promise<any> {
   const url = "https://api.twitter.com/2/tweets";
   const method = "POST";
-  
-  const params: any = { 
-    text: tweetText
-  };
-  
-  if (poll) {
-    params.poll = {
-      options: poll.options,
-      duration_minutes: poll.duration_minutes
-    };
-  }
+  const params = { text: tweetText };
 
   const oauthHeader = generateOAuthHeader(method, url);
   console.log("OAuth Header:", oauthHeader);
@@ -137,16 +127,11 @@ Deno.serve(async (req) => {
 
   try {
     validateEnvironmentVariables();
-    const { tweet_text, poll_options, poll_duration_minutes } = await req.json();
+    const { tweet_text } = await req.json();
     
-    console.log("Received request:", { tweet_text, poll_options, poll_duration_minutes });
+    console.log("Received request:", { tweet_text });
     
-    const poll = poll_options ? {
-      options: poll_options,
-      duration_minutes: poll_duration_minutes || 1440 // Default to 24 hours if not specified
-    } : undefined;
-    
-    const result = await sendTweet(tweet_text, poll);
+    const result = await sendTweet(tweet_text);
     
     return new Response(JSON.stringify(result), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
