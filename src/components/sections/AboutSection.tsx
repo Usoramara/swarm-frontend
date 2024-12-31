@@ -36,11 +36,15 @@ export const AboutSection = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-                Greetings, I am{' '}
-                <span className="gradient-text block md:inline">Swarmy</span>
-                <Crown className="inline-block w-8 h-8 md:w-10 md:h-10 text-white animate-pulse ml-2 align-middle" />
-              </h2>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                  Greetings, I am
+                </h2>
+                <div className="flex items-center gap-2">
+                  <span className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold">Swarmy</span>
+                  <Crown className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white animate-pulse" />
+                </div>
+              </div>
               <p className="text-base md:text-xl text-gray-300 leading-relaxed">
                 As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to deploy and orchestrate an unlimited network of intelligent agents.
               </p>
