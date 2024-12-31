@@ -1,8 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const CallToActionSection = () => {
+  const navigate = useNavigate();
+
+  const handleWhitelistClick = () => {
+    console.log("Navigating to whitelist");
+    navigate('/whitelist');
+  };
+
   return (
     <section className="relative py-24 overflow-hidden">
       {/* Background with grid and gradient overlay */}
@@ -20,21 +27,20 @@ export const CallToActionSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link to="/whitelist">
-            <Button 
-              size="lg"
-              className="bg-primary hover:bg-primary-hover text-dark font-semibold px-8 py-6 h-auto text-lg"
-            >
-              Buy SWARM
-              <ArrowRight className="ml-2" />
-            </Button>
-          </Link>
+          <Button 
+            onClick={handleWhitelistClick}
+            size="lg"
+            className="w-full sm:w-auto bg-primary hover:bg-primary-hover text-dark font-semibold px-8 py-6 h-auto text-lg"
+          >
+            Buy SWARM
+            <ArrowRight className="ml-2" />
+          </Button>
           
-          <Link to="/learn">
+          <Link to="/learn" className="w-full sm:w-auto">
             <Button 
               variant="outline" 
               size="lg"
-              className="border-primary text-primary hover:bg-primary/10 px-8 py-6 h-auto text-lg"
+              className="w-full border-primary text-primary hover:bg-primary/10 px-8 py-6 h-auto text-lg"
             >
               Learn More
             </Button>
