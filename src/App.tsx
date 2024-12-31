@@ -84,8 +84,8 @@ const TwitterCallback = () => {
           throw new Error('Failed to exchange code for token');
         }
 
-        const { data: tokenData } = await response.json();
-        console.log("Successfully obtained Twitter tokens:", tokenData);
+        const tokenData = await response.json();
+        console.log("Successfully obtained Twitter tokens");
 
         // Clean up storage
         localStorage.removeItem('twitter_oauth_state');
@@ -111,10 +111,8 @@ const TwitterCallback = () => {
 
         if (updateError) {
           console.error("Failed to store tokens:", updateError);
-          throw updateError;
         }
 
-        console.log("Successfully stored Twitter tokens in Supabase");
         navigate("/");
       } catch (error) {
         console.error("Error in Twitter callback:", error);
