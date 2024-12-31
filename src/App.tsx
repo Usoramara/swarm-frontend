@@ -139,7 +139,7 @@ export const initiateTwitterAuth = async () => {
     localStorage.setItem('twitter_oauth_state', state);
 
     // Construct Twitter OAuth URL
-    const clientId = 'YOUR_TWITTER_CLIENT_ID'; // Get this from Twitter Developer Portal
+    const clientId = 'WTNrQS14bUhpMl83aU5adTd2NWM6MTpjaQ'; // Twitter Client ID
     const redirectUri = encodeURIComponent(window.location.origin + '/auth/twitter/callback');
     const scope = encodeURIComponent('tweet.read tweet.write users.read offline.access');
     
