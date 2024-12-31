@@ -56,7 +56,7 @@ function App() {
   }, [navigate, searchParams]);
 
   return (
-    <>
+    <div className="min-h-screen bg-dark text-white">
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/learn" element={<Learn />} />
@@ -65,7 +65,7 @@ function App() {
       </Routes>
       <Footer />
       <Toaster />
-    </>
+    </div>
   );
 }
 
