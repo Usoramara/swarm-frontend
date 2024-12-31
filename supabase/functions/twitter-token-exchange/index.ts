@@ -11,6 +11,7 @@ Deno.serve(async (req) => {
 
   try {
     const { code, code_verifier, redirect_uri } = await req.json();
+    console.log("Received token exchange request:", { code, redirect_uri });
 
     // Twitter OAuth2 token endpoint
     const tokenUrl = 'https://api.twitter.com/2/oauth2/token';
@@ -18,15 +19,20 @@ Deno.serve(async (req) => {
     const clientSecret = Deno.env.get("TWITTER_CLIENT_SECRET");
 
     if (!clientId || !clientSecret) {
+      console.error("Missing Twitter credentials");
       throw new Error("Missing Twitter credentials");
     }
+
+    // Create Basic Auth header by base64 encoding "client_id:client_secret"
+    const basicAuth = btoa(`${clientId}:${clientSecret}`);
+    console.log("Generated Basic Auth header");
 
     // Exchange code for token
     const response = await fetch(tokenUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+        'Authorization': `Basic ${basicAuth}`,
       },
       body: new URLSearchParams({
         grant_type: 'authorization_code',
@@ -43,6 +49,7 @@ Deno.serve(async (req) => {
     }
 
     const data = await response.json();
+    console.log("Successfully exchanged code for tokens");
     
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
