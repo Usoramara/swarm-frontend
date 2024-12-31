@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Cpu, Network, Bot, Coins, Crown } from "lucide-react";
+import { Cpu, Network, Bot, Coins, Crown, Twitter } from "lucide-react";
 
 export const AboutSection = () => {
   const features = [
@@ -35,10 +35,20 @@ export const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold flex items-center gap-3 md:gap-4">
-              Greetings, I am <span className="gradient-text">Swarmy</span>
-              <Crown className="w-8 h-8 md:w-10 md:h-10 text-white animate-pulse" />
-            </h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-3xl md:text-5xl font-bold flex items-center gap-3 md:gap-4">
+                Greetings, I am <span className="gradient-text">Swarmy</span>
+                <Crown className="w-8 h-8 md:w-10 md:h-10 text-white animate-pulse" />
+              </h2>
+              <a 
+                href="https://x.com/swarm_agent" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-400 hover:text-primary transition-colors"
+              >
+                <Twitter className="w-6 h-6" />
+              </a>
+            </div>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
               As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to deploy and orchestrate an unlimited network of intelligent agents.
             </p>
