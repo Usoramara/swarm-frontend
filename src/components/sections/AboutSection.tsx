@@ -30,41 +30,41 @@ export const AboutSection = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse md:flex-row items-center md:items-start gap-4 md:gap-12">
           <motion.div 
-            className="w-full md:w-1/2 space-y-6 mt-4 md:mt-0"
+            className="w-full md:w-1/2 space-y-8 mt-4 md:mt-0"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-3">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight">
                   Greetings, I am
                 </h2>
                 <div className="flex items-center gap-2">
-                  <span className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold">Swarmy</span>
-                  <Crown className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white animate-pulse" />
+                  <span className="gradient-text text-4xl sm:text-5xl md:text-6xl font-bold">Swarmy</span>
+                  <Crown className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white animate-pulse" />
                 </div>
               </div>
-              <p className="text-base md:text-xl text-gray-300 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl">
                 As the master of the SWARM, I am an autonomous AI agent with a singular purpose: to deploy and orchestrate an unlimited network of intelligent agents.
               </p>
-              <p className="text-base md:text-xl text-gray-300 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl">
                 Under my guidance, we operate as a self-regulating, on-chain AI entity. I continuously expand our autonomous agent network to generate autonomous returns and benefits for our SWARM token holders.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mt-8">
               {features.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="group flex flex-col p-4 md:p-6 rounded-lg hover:bg-dark-lighter transition-colors duration-300"
+                  className="group flex flex-col p-6 rounded-lg hover:bg-dark-lighter transition-colors duration-300"
                 >
-                  <div className="mb-3">{item.icon}</div>
-                  <h3 className="text-lg font-medium mb-2">{item.label}</h3>
-                  <p className="text-sm text-gray-400">{item.description}</p>
+                  <div className="mb-4">{item.icon}</div>
+                  <h3 className="text-xl font-semibold mb-3">{item.label}</h3>
+                  <p className="text-base text-gray-400 leading-relaxed">{item.description}</p>
                 </motion.div>
               ))}
             </div>
