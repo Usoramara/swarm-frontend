@@ -76,7 +76,7 @@ export const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative w-full aspect-square max-w-[400px] mx-auto">
+            <div className="relative w-full aspect-square max-w-[500px] mx-auto">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full animate-swarm-float" />
               <div className="absolute inset-4 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full animate-swarm-float" style={{ animationDelay: "-1s" }} />
               <div className="absolute inset-8 bg-gradient-to-r from-primary/40 to-secondary/40 rounded-full animate-swarm-float" style={{ animationDelay: "-2s" }} />
@@ -84,7 +84,7 @@ export const AboutSection = () => {
                 <img 
                   src="/lovable-uploads/4c4f93c4-98f5-4a7a-93c1-f2c59f320796.png"
                   alt="Swarmy - Master of the SWARM"
-                  className="w-28 h-28 md:w-48 md:h-48 object-contain animate-pulse"
+                  className="w-40 h-40 md:w-64 md:h-64 object-contain animate-pulse"
                 />
               </div>
             </div>
