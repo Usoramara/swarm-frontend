@@ -92,7 +92,9 @@ async function sendTweet(tweetText: string, poll?: { options: string[], duration
   const url = "https://api.twitter.com/2/tweets";
   const method = "POST";
   
-  const params: any = { text: tweetText };
+  const params: any = { 
+    text: tweetText
+  };
   
   if (poll) {
     params.poll = {
