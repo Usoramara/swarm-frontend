@@ -4,7 +4,7 @@ const StickyHeader = () => {
   return (
     <header className="fixed top-0 right-0 left-0 z-50 bg-dark/80 backdrop-blur-sm border-b border-white/10">
       <div className="container mx-auto px-4">
-        <div className="flex justify-end items-center h-16 gap-4">
+        <div className="flex justify-end items-center h-20 gap-4">
           <a
             href="https://twitter.com/aiswarm_ai"
             target="_blank"
