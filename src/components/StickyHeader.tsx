@@ -6,7 +6,7 @@ const StickyHeader = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-end items-center h-20 gap-4">
           <a
-            href="https://twitter.com/aiswarm_ai"
+            href="https://x.com/swarm_agent"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/80 hover:text-primary transition-colors"
