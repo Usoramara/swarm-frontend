@@ -35,21 +35,6 @@ export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <a 
-              href="https://app.virtuals.io/prototypes/0xD20986Cdde01F72C5cDbDDbe8A044Ee37ff57537"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                if (!navigator.onLine) {
-                  e.preventDefault();
-                  window.location.href = 'https://aiswarm.ai/';
-                }
-              }}
-            >
-              <button className="w-full bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
-                Buy SWARM
-              </button>
-            </a>
             <Link to="/learn" onClick={scrollToTop}>
               <button className="w-full border-2 border-primary hover:bg-primary/10 px-8 py-3 rounded-full font-display font-bold transition-colors">
                 Learn More

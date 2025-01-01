@@ -33,21 +33,6 @@ const Footer = () => {
             Be part of the future of decentralized intelligence. Join our community and help shape the evolution of autonomous AI on the blockchain.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <a 
-              href="https://app.virtuals.io/prototypes/0xD20986Cdde01F72C5cDbDDbe8A044Ee37ff57537"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                if (!navigator.onLine) {
-                  e.preventDefault();
-                  window.location.href = 'https://aiswarm.ai/';
-                }
-              }}
-            >
-              <button className="w-full bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
-                Buy SWARM
-              </button>
-            </a>
             {isLearnPage ? (
               <Link to="/" onClick={scrollToAbout}>
                 <button 
