@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { NetworkAnimation } from "@/components/sections/NetworkAnimation";
@@ -20,7 +19,6 @@ const Index = () => {
 
   return (
     <main className="min-h-screen bg-dark">
-      <HeroSection mousePosition={mousePosition} />
       <AboutSection />
       <BenefitsSection />
       <TreasurySection />
