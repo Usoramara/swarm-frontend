@@ -12,6 +12,7 @@ import Learn from "./pages/Learn";
 import Airdrops from "./pages/Airdrops";
 import Whitelist from "./pages/Whitelist";
 import Footer from "./components/Footer";
+import StickyHeader from "./components/StickyHeader";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -164,6 +165,7 @@ const App = () => (
     <TooltipProvider>
       <BrowserRouter>
         <div className="flex flex-col min-h-screen">
+          <StickyHeader />
           <div className="flex-grow">
             <Routes>
               <Route path="/" element={<Index />} />
