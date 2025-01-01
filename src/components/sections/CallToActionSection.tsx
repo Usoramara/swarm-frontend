@@ -21,7 +21,7 @@ export const CallToActionSection = () => {
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a 
-            href="https://app.virtuals.io/prototypes/0xD20986Cdde01F72C5cDbDDbe8A044Ee37ff57537"
+            href="https://pump.fun/coin/DMiSS8Ziz5RCEFrQozWeZAqjTEjuBzrihzgNVtEpFhat"
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => {
