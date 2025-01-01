@@ -34,7 +34,7 @@ export const TreasurySection = () => {
     <section className="py-24 bg-dark relative overflow-hidden">
       <div className="absolute inset-0 swarm-grid opacity-20" />
       <div className="absolute inset-0 bg-gradient-radial from-primary/5 to-transparent opacity-90" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -152,12 +152,12 @@ export const TreasurySection = () => {
           className="flex justify-center mt-16"
         >
           <a 
-            href="https://app.virtuals.io/prototypes/0xD20986Cdde01F72C5cDbDDbe8A044Ee37ff57537"
+            href="https://pump.fun/coin/DMiSS8Ziz5RCEFrQozWeZAqjTEjuBzrihzgNVtEpFhat"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block"
           >
-            <button className="bg-primary hover:bg-primary-hover text-dark px-8 py-3 rounded-full font-display font-bold transition-colors">
+            <button className="bg-[#ACFF00] hover:bg-[#BDFF33] text-black px-8 py-3 rounded-full font-display font-bold transition-colors">
               Buy SWARM
             </button>
           </a>
