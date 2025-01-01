@@ -2,7 +2,7 @@ import { Twitter } from "lucide-react";
 
 const StickyHeader = () => {
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-sm border-b border-white/10">
+    <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <div className="flex justify-end items-center h-20 gap-4">
           <a
