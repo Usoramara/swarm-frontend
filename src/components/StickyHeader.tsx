@@ -15,8 +15,6 @@ const StickyHeader = () => {
                 Buy SWARM
               </button>
             </a>
-          </div>
-          <div className="flex">
             <a
               href="https://x.com/swarm_agent"
               target="_blank"
