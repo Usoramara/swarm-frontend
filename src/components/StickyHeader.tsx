@@ -4,8 +4,18 @@ const StickyHeader = () => {
   return (
     <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-sm">
       <div className="container mx-auto px-4">
-        <div className="flex md:justify-end justify-start items-center h-20 gap-4">
-          <div className="flex md:flex-row flex-row-reverse gap-4 items-center">
+        <div className="flex md:justify-end justify-start items-center h-20">
+          <div className="flex flex-row gap-4 items-center">
+            <div className="flex md:hidden order-last">
+              <a
+                href="https://x.com/swarm_agent"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-primary transition-colors"
+              >
+                <Twitter size={24} />
+              </a>
+            </div>
             <a
               href="https://pump.fun/coin/DMiSS8Ziz5RCEFrQozWeZAqjTEjuBzrihzgNVtEpFhat"
               target="_blank"
@@ -15,14 +25,16 @@ const StickyHeader = () => {
                 Buy SWARM
               </button>
             </a>
-            <a
-              href="https://x.com/swarm_agent"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/80 hover:text-primary transition-colors"
-            >
-              <Twitter size={24} />
-            </a>
+            <div className="hidden md:flex">
+              <a
+                href="https://x.com/swarm_agent"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-primary transition-colors"
+              >
+                <Twitter size={24} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
