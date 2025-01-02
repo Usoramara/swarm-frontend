@@ -1,4 +1,4 @@
-import { Twitter } from "lucide-react";
+import { X } from "lucide-react";
 
 const StickyHeader = () => {
   return (
@@ -21,7 +21,7 @@ const StickyHeader = () => {
               rel="noopener noreferrer"
               className="text-white/80 hover:text-primary transition-colors"
             >
-              <Twitter size={24} />
+              <X size={24} />
             </a>
           </div>
         </div>
