@@ -1,4 +1,4 @@
-import { Twitter } from "lucide-react";
+import { X } from "lucide-react";
 
 const StickyHeader = () => {
   return (
@@ -15,14 +15,28 @@ const StickyHeader = () => {
                 Buy SWARM
               </button>
             </a>
-            <a
-              href="https://x.com/swarm_agent"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/80 hover:text-primary transition-colors"
-            >
-              <Twitter size={24} />
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://dexscreener.com/solana/8kg3pck6xcn328xxa1ahajsmf7vwdghh3vvoorgqtqhz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-primary transition-colors"
+              >
+                <img
+                  src="https://dexscreener.com/favicon.png"
+                  alt="Dexscreener"
+                  className="w-6 h-6"
+                />
+              </a>
+              <a
+                href="https://x.com/swarm_agent"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-primary transition-colors"
+              >
+                <X size={24} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
